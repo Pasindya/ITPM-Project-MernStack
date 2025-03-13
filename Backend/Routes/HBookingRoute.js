@@ -10,5 +10,6 @@ const HBookingController = require("../Controllers/HBookingControl");
 router.get("/",HBookingController.getAllHBookings);
 router.post("/",HBookingController.addHBookings);
 router.get("/:id",HBookingController.getById);
+router.put("/:id",HBookingController.updateHBooking);
 //export
 module.exports = router;
