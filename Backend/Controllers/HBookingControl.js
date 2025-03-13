@@ -1,21 +1,25 @@
-const Hotel = require("../Model/HBookingModel");
+const HBooking = require("../Model/HBookingModel");
 
-const getAllBookings = async (req, res, next) =>{
+const getAllHBookings = async (req, res, next) =>{
 
-    let Bookings;
+    let HBookings;
+
+    //get all bookings
     try{
-        booking = await Booking.find();
+        hbookings = await HBooking.find();
     }catch (err) {
         console.log(err);
     }
 
     //notfound
-    if(!Bookings){
+    if(!hbookings){
         return res.status(404).json({message:"Booking not found"})
     }
     //Display all bookings
-    return res.status(200).json({bookings});
+    return res.status(200).json({hbookings});
 };
+
+
 
 //data insert
 const addBookings  = async (req, res, next) =>{
@@ -31,4 +35,4 @@ const addBookings  = async (req, res, next) =>{
     }
 }
 
-exports.getAllBookings = getAllBookings;
+exports.getAllHBookings = getAllHBookings;

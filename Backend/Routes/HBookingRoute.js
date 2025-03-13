@@ -2,12 +2,12 @@ const express = require("express");
 const router = express.Router();
 
 //Insert model
-const Booking = require("../Model/HBookingModel")
+const HBooking = require("../Model/HBookingModel")
 
 //Insert Controler
-const BookingController = require("../Controllers/HBookingControl");
+const HBookingController = require("../Controllers/HBookingControl");
 
-router.get("/",BookingController.getAllBookings);
+router.get("/",HBookingController.getAllHBookings);
 
 //export
 module.exports = router;
