@@ -42,5 +42,32 @@ const addHBookings  = async (req, res, next) =>{
     return res.status(200).json({hbookings});
 };
 
+
+    //Get by ID
+    const getById = async (req, res, next) => {
+
+        const id = req.params.id;
+
+        let hbookings;
+
+        try {
+            hbookings = await HBooking.findById(id);
+        }catch (err){
+            console.log(err);
+        }
+
+
+        //not available bookings
+    if (!hbookings){
+        return res.status(404).send({message:" bookings not found"});
+
+    }
+    return res.status(200).json({hbookings});
+
+    }
+
+
+
 exports.getAllHBookings = getAllHBookings;
 exports.addHBookings = addHBookings;
+exports.getById = getById;
