@@ -22,17 +22,25 @@ const getAllHBookings = async (req, res, next) =>{
 
 
 //data insert
-const addBookings  = async (req, res, next) =>{
+const addHBookings  = async (req, res, next) =>{
 
-    const {firstName,lastName,streetAddress,streetAddress2,city,state,postalCode,contactNo,gmail,arrivalDate,arrivalTime,departureDate,departureTime,numberAdult,anydetail} = req.body;
-    let bookings;
+    const {firstName,lastName,streetAddress,streetAddress2,city,state,postalCode,contactNo,email,arrivalDate,arrivalTime,departureDate,departureTime,numberAdult,anydetail} = req.body;
+    let hbookings;
 
     try {
-        bookings = new bookings({firstName,lastName,streetAddress,streetAddress2,city,state,postalCode,contactNo,gmail,arrivalDate,arrivalTime,departureDate,departureTime,numberAdult,anydetail});
-        await bookings.save();
+        hbookings = new HBooking({firstName,lastName,streetAddress,streetAddress2,city,state,postalCode,contactNo,email,arrivalDate,arrivalTime,departureDate,departureTime,numberAdult,anydetail});
+        await hbookings.save();
     }catch (err){
         console.log(err);
     }
-}
+
+    //not insert bookings
+    if (!hbookings){
+        return res.status(404).send({message:"unable to add bookings"});
+
+    }
+    return res.status(200).json({hbookings});
+};
 
 exports.getAllHBookings = getAllHBookings;
+exports.addHBookings = addHBookings;

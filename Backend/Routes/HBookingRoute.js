@@ -8,6 +8,6 @@ const HBooking = require("../Model/HBookingModel")
 const HBookingController = require("../Controllers/HBookingControl");
 
 router.get("/",HBookingController.getAllHBookings);
-
+router.post("/",HBookingController.addHBookings);
 //export
 module.exports = router;
