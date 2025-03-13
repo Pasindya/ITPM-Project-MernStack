@@ -94,9 +94,34 @@ const addHBookings  = async (req, res, next) =>{
           
         
     };
+       
 
+    //delete user
+
+    const deleteHBooking = async (req, res, next) => {
+        const id = req.params.id;
+
+        let hbookings;
+
+        try{
+
+            hbookings = await HBooking.findByIdAndDelete(id)
+        }catch (err) {
+            console.log(err);
+        }
+
+        //not available bookings
+        if (!hbookings){
+            return res.status(404).send({message:" Unable to delete"});
+    
+            }
+             return res.status(200).json({hbookings});
+    
+
+    };
 
 exports.getAllHBookings = getAllHBookings;
 exports.addHBookings = addHBookings;
 exports.getById = getById;
 exports.updateHBooking = updateHBooking;
+exports.deleteHBooking = deleteHBooking;
