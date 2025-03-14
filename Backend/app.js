@@ -1,12 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const router = require("./Routes/HBookingRoute")
+const hbookingrouter = require("./Routes/HBookingRoute")
+const packbookingrouter = require("./Routes/PackBookingRoute")
 
 const app = express();
 
 //Middleware
 app.use(express.json());
-app.use("/hbookings",router);
+app.use("/hbookings",hbookingrouter);
+app.use("/packbookings",packbookingrouter);
 
 //database connection
 mongoose.connect("mongodb+srv://travel:1234@cluster0.nitw6zk.mongodb.net/")
