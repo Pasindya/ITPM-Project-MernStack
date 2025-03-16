@@ -14,7 +14,7 @@ app.use("/packbookings",packbookingrouter);
 app.use("/htransports",HTransportRoute);
 
 //database connection
-mongoose.connect("mongodb+srv://travel:1234@cluster0.nitw6zk.mongodb.net/")
+mongoose.connect("mongodb+srv://travel:1234@cluster0.nitw6zk.mongodb.net/traveltrails")
 .then(()=> console.log("Connected to MongoDB Successfully"))
 .then(() => {
     app.listen(5000);
