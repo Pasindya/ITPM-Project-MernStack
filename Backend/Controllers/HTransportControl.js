@@ -19,5 +19,32 @@ const getAllHTransports = async (req, res, next) =>{
     return res.status(200).json({htransports});
 };
 
-exports.getAllHTransports = getAllHTransports;
 
+//data insert
+const addHTransports  = async (req, res, next) =>{
+
+    const {vehicleName,vehicleType,registrationNumber,capacity,isHotelVehicle} = req.body;
+    let htransports;
+
+    try {
+        htransports = new HTransport({vehicleName,vehicleType,registrationNumber,capacity,isHotelVehicle});
+        await htransports.save();
+    }catch (err){
+        console.log(err);
+    }
+
+    //not insert bookings
+    if (!htransports){
+        return res.status(404).send({message:"unable to add vehicle"});
+
+    }
+    return res.status(200).json({htransports});
+};
+
+
+
+
+
+
+exports.getAllHTransports = getAllHTransports;
+exports.addHTransports = addHTransports;
