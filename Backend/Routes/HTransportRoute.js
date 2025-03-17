@@ -8,6 +8,7 @@ const HTransport = require("../Model/HTransportModel");
 const HTransportController= require("../Controllers/HTransportControl");
 
 router.get("/",HTransportController.getAllHTransports);
+router.post("/",HTransportController.addHTransports);
 
 
 //export

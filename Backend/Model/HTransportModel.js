@@ -30,8 +30,7 @@ const HTransportSchema = new Schema({
           required: true 
         }, // True if hotel vehicle, false if self vehicle
 
-    ownerId: 
-       { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // Only for self vehicles
+
 
 });
 
