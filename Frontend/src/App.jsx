@@ -6,6 +6,7 @@ import Home from './Pages/Home';
 import Footer from './Components/Footer';
 import Packages from './Pages/Packages';
 import Weather from './Pages/Weather';
+import Calender from './Pages/Calender';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/packages" element={<Packages />} />
         <Route path="/weather" element={<Weather />} />
+        <Route path="/calender" element={<Calender />} />
       
       </Routes>
       <Footer /> {/* Include the Footer here */}
