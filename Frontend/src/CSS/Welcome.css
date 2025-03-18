@@ -1,0 +1,81 @@
+/* Welcome Page Styles */
+.welcome-container {
+    position: relative;
+    height: 80vh; /* Reduced height */
+    overflow: hidden;
+  }
+  
+  .image-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover; /* Ensures the image covers the container */
+    background-position: center; /* Centers the image */
+    transition: background-image 1s ease-in-out; /* Smooth transition */
+    z-index: -1; /* Place image behind the content */
+  }
+  
+  .welcome-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 1; /* Place content above the image */
+    width: 90%; /* Ensure content fits on smaller screens */
+  }
+  
+  .welcome-overlay h1 {
+    font-size: 3rem; /* Increased font size */
+    font-family: 'Playfair Display', serif; /* Elegant serif font */
+    font-weight: 700;
+    margin-bottom: 1rem; /* Adjusted margin */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
+  }
+  
+  .welcome-overlay p {
+    font-size: 1.5rem; /* Increased font size */
+    font-family: 'Poppins', sans-serif; /* Modern sans-serif font */
+    margin-bottom: 2rem; /* Adjusted margin */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
+  }
+  
+  .explore-button {
+    padding: 1rem 2rem; /* Adjusted padding */
+    font-size: 1.2rem; /* Increased font size */
+    font-family: 'Poppins', sans-serif; /* Modern sans-serif font */
+    font-weight: 600;
+    color: white;
+    background-color: #1e90ff; /* Blue button color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .explore-button:hover {
+    background-color: #0077cc; /* Darker blue on hover */
+  }
+  
+  /* Responsive Design for Mobile */
+  @media (max-width: 768px) {
+    .welcome-container {
+      height: 70vh; /* Further reduced height for mobile */
+    }
+  
+    .welcome-overlay h1 {
+      font-size: 2rem; /* Adjusted font size for mobile */
+    }
+  
+    .welcome-overlay p {
+      font-size: 1rem; /* Adjusted font size for mobile */
+    }
+  
+    .explore-button {
+      padding: 0.8rem 1.5rem; /* Adjusted padding for mobile */
+      font-size: 1rem; /* Adjusted font size for mobile */
+    }
+  }
