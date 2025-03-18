@@ -1,0 +1,95 @@
+/* Footer Styles */
+.footer {
+    background-color: white; /* White background */
+    color: #333; /* Dark text for contrast */
+    padding: 1rem 0; /* Reduced padding */
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow at the top */
+  }
+  
+  .footer-logo {
+    text-align: center;
+    margin-bottom: 1rem; /* Reduced margin */
+  }
+  
+  .footer-logo h2 {
+    font-size: 1.5rem; /* Reduced font size */
+    font-weight: 700;
+    color: #333; /* Dark text for logo */
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-logo p {
+    font-size: 0.9rem; /* Reduced font size */
+    color: #666; /* Subtle text color for tagline */
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .footer-section {
+    margin: 0.5rem 0; /* Reduced margin */
+    flex: 1;
+    min-width: 150px; /* Adjusted minimum width */
+  }
+  
+  .footer-section h3 {
+    font-size: 1rem; /* Reduced font size */
+    margin-bottom: 0.5rem; /* Reduced margin */
+    color: #333; /* Dark text for headings */
+    font-weight: 600; /* Bold headings */
+  }
+  
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-section ul li {
+    margin: 0.3rem 0; /* Reduced margin */
+  }
+  
+  .footer-section ul li a {
+    color: #333; /* Dark text for links */
+    text-decoration: none;
+    font-size: 0.9rem; /* Reduced font size */
+    transition: color 0.3s ease;
+  }
+  
+  .footer-section ul li a:hover {
+    color: #1e90ff; /* Blue hover color */
+  }
+  
+  .social-icons {
+    display: flex;
+    gap: 0.8rem; /* Reduced gap between icons */
+  }
+  
+  .social-icons a {
+    color: #333; /* Dark color for icons */
+    font-size: 1.2rem; /* Reduced icon size */
+    transition: color 0.3s ease;
+  }
+  
+  .social-icons a:hover {
+    color: #1e90ff; /* Blue hover color */
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    margin-top: 1rem; /* Reduced margin */
+    padding-top: 0.8rem; /* Reduced padding */
+    border-top: 1px solid #ddd; /* Light border for separation */
+  }
+  
+  .footer-bottom p {
+    margin: 0;
+    font-size: 0.8rem; /* Reduced font size */
+    color: #666; /* Subtle text color */
+  }
