@@ -1,0 +1,196 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .weather-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  h1 {
+    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .search-form {
+    margin-bottom: 20px;
+  }
+  
+  .search-form input {
+    padding: 12px;
+    width: 60%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  
+  .search-form button {
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .search-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .search-form button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .error {
+    color: red;
+    margin-bottom: 20px;
+  }
+  
+  .loading {
+    font-size: 18px;
+    color: #007bff;
+  }
+  
+  .weather-details {
+    margin-top: 20px;
+  }
+  
+  .current-weather {
+    background-color: #e9f5ff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .current-weather p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 1.1rem;
+  }
+  
+  .icon-container {
+    margin-top: 15px;
+  }
+  
+  .weather-icon {
+    font-size: 4rem;
+    color: #ffa500; /* Default color for icons */
+  }
+  
+  .weather-icon.sun {
+    color: #ffa500; /* Sun color */
+    animation: spin 10s linear infinite;
+  }
+  
+  .weather-icon.cloud {
+    color: #87ceeb; /* Cloud color */
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .weather-icon.rain {
+    color: #4682b4; /* Rain color */
+    animation: bounce 2s ease-in-out infinite;
+  }
+  
+  .weather-icon.snow {
+    color: #add8e6; /* Snow color */
+    animation: spin 5s linear infinite;
+  }
+  
+  .weather-icon.thunderstorm {
+    color: #ff4500; /* Thunderstorm color */
+    animation: shake 0.5s ease-in-out infinite;
+  }
+  
+  .weather-icon.fog {
+    color: #a9a9a9; /* Fog color */
+    animation: fade 3s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+  
+  @keyframes shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    75% {
+      transform: translateX(5px);
+    }
+  }
+  
+  @keyframes fade {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  
+  .forecast {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .forecast-day {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px;
+    flex: 1 1 calc(20% - 20px);
+    box-sizing: border-box;
+    text-align: center;
+  }
+  
+  .forecast-day p {
+    margin: 5px 0;
+    color: #333;
+    font-size: 1rem;
+  }
+  
+  .forecast-day .weather-icon {
+    font-size: 2rem;
+    margin-top: 10px;
+  }
