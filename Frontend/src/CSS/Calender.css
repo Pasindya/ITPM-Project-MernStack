@@ -1,0 +1,77 @@
+/* Calendar Container */
+.calendar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Calendar Layout */
+  .calendar-layout {
+    display: flex;
+    gap: 20px; /* Space between calendar and holiday list */
+    justify-content: center;
+    align-items: flex-start; /* Align items to the top */
+  }
+  
+  /* Calendar Wrapper */
+  .calendar-wrapper {
+    flex: 1;
+    max-width: 600px;
+  }
+  
+  /* Calendar Styling */
+  .react-calendar {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .react-calendar__tile {
+    padding: 10px;
+    border-radius: 4px;
+  }
+  
+  .react-calendar__tile--active {
+    background-color: #1e90ff;
+    color: white;
+  }
+  
+  .react-calendar__tile--now {
+    background-color: #ff6b6b;
+    color: white;
+  }
+  
+  /* Holiday List */
+  .holiday-list {
+    flex: 1;
+    max-width: 400px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .holiday-list h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .holiday-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .holiday-list ul li {
+    font-size: 1rem;
+    margin: 10px 0;
+    color: #555;
+    padding: 8px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
