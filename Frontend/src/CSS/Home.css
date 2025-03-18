@@ -1,0 +1,213 @@
+/* Home Page Styles */
+.home {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+  }
+  
+  /* Hero Section */
+  .hero-section {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+  }
+  
+  .hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .hero-content h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    animation: fadeInDown 1.5s ease-in-out;
+  }
+  
+  .hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    animation: fadeInUp 1.5s ease-in-out;
+  }
+  
+  .cta-button {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    background-color: #1e90ff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    animation: fadeIn 2s ease-in-out;
+  }
+  
+  .cta-button:hover {
+    background-color: #0077cc;
+  }
+  
+  /* Animations */
+  @keyframes fadeInDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  /* Section Styles */
+  .section {
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  
+  .section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: #333;
+  }
+  
+  /* Grid Layouts */
+  .destination-grid,
+  .culture-grid,
+  .cuisine-grid,
+  .adventure-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  
+  .destination-card,
+  .culture-card,
+  .cuisine-card,
+  .adventure-card {
+    width: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .destination-card:hover,
+  .culture-card:hover,
+  .cuisine-card:hover,
+  .adventure-card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .destination-card img,
+  .culture-card img,
+  .cuisine-card img,
+  .adventure-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .destination-card h3,
+  .culture-card h3,
+  .cuisine-card h3,
+  .adventure-card h3 {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    color: #333;
+  }
+  
+  .destination-card p,
+  .culture-card p,
+  .cuisine-card p,
+  .adventure-card p {
+    font-size: 1rem;
+    padding: 0 1rem 1rem;
+    color: #666;
+  }
+  
+  /* Call-to-Action Section */
+  .cta-section {
+    background-color: #f8f9fa;
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  
+  .cta-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #333;
+  }
+  
+  .cta-section p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #666;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-content h1 {
+      font-size: 2.5rem;
+    }
+  
+    .hero-content p {
+      font-size: 1.2rem;
+    }
+  
+    .section h2 {
+      font-size: 2rem;
+    }
+  
+    .destination-grid,
+    .culture-grid,
+    .cuisine-grid,
+    .adventure-grid {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .destination-card,
+    .culture-card,
+    .cuisine-card,
+    .adventure-card {
+      width: 90%;
+    }
+  }

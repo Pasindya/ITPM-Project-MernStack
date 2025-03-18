@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import '../CSS/Welcome.css'; // Import the CSS file for styling
 
 function Welcome() {
@@ -50,6 +51,7 @@ function Welcome() {
   ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -71,7 +73,9 @@ function Welcome() {
       <div className="welcome-overlay">
         <h1>Welcome to Travel Trails</h1>
         <p>{images[currentImageIndex].description}</p>
-        <button className="explore-button">Explore More</button>
+        <button className="explore-button" onClick={() => navigate('/home')}>
+          Explore More
+        </button>
       </div>
     </div>
   );
