@@ -21,7 +21,7 @@ function Footer() {
       <div className="footer-content">
         {/* Links Section */}
         <div className="footer-section">
-          <h3>Links</h3>
+          <h3>Quick Links</h3>
           <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/special-packages">Special Packages</a></li>
@@ -33,10 +33,10 @@ function Footer() {
 
         {/* Contacts Section */}
         <div className="footer-section">
-          <h3>Contacts</h3>
+          <h3>Contact Us</h3>
           <ul>
             <li>Phone: +1 (300) 1234 6543</li>
-            <li>Email: traveltrails@email.Com</li>
+            <li>Email: traveltrails@email.com</li>
             <li>Address: Flowe Park 336/A, Colombo, Sri Lanka</li>
           </ul>
         </div>
@@ -46,7 +46,7 @@ function Footer() {
           <h3>Tourism Hotlines</h3>
           <ul>
             <li>Tourism Hotline: 1912</li>
-            <li>Ambulance:1990 </li>
+            <li>Ambulance: 1990</li>
           </ul>
         </div>
 
