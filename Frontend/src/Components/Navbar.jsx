@@ -57,10 +57,10 @@ function Navbar() {
             <Link to="/travel-essentials">Travel Essentials</Link>
             {essentialsOpen && (
               <div className="dropdown-menu">
-                <Link to="/weather">Weather Tracker</Link>
-                <Link to="/currency-converter">Currency Converter</Link>
-                <Link to="/emergency-services">Emergency Services</Link>
-                <Link to="/holiday-calendar">Calendar with Holidays</Link>
+<Link to="/weather">Weather Tracker</Link>
+<Link to="/currency-converter">Currency Converter</Link>
+<Link to="/emergency-services">Emergency Services</Link>
+<Link to="/holiday-calendar">Calendar with Holidays</Link>
               </div>
             )}
           </div>

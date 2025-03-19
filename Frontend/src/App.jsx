@@ -7,6 +7,7 @@ import Footer from './Components/Footer';
 import Packages from './Pages/Packages';
 import Weather from './Pages/Weather';
 import Event from './Pages/Event';
+import Calender from './Pages/Calender';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/packages" element={<Packages />} />
         <Route path="/weather" element={<Weather />} />
         <Route path="/event" element={<Event />} /> {/* Fixed: Added missing Event route */}
+        <Route path="/calender" element={<Calender />} />
       </Routes>
       <Footer /> {/* Include the Footer here */}
     </div>

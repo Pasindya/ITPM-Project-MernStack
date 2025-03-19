@@ -19,5 +19,113 @@ const getAllHTransports = async (req, res, next) =>{
     return res.status(200).json({htransports});
 };
 
+
+//data insert
+const addHTransports  = async (req, res, next) =>{
+
+    const {vehicleType,capacity,expectedDays,travelLocation,locationKm,pricePerKm,fullPayment} = req.body;
+    let htransports;
+
+    try {
+        htransports = new HTransport({vehicleType,capacity,expectedDays,travelLocation,locationKm,pricePerKm,fullPayment});
+        await htransports.save();
+    }catch (err){
+        console.log(err);
+    }
+
+    //not insert vehicle
+    if (!htransports){
+        return res.status(404).send({message:"unable to add vehicle"});
+
+    }
+    return res.status(200).json({htransports});
+};
+
+
+    //Get by ID
+    const getById = async (req, res, next) => {
+
+        const id = req.params.id;
+
+        let htransports;
+
+        try {
+            htransports= await HTransport.findById(id);
+        }catch (err){
+            console.log(err);
+        }
+
+
+    //not available vehicle
+    if (! htransports){
+        return res.status(404).send({message:" Vehicle not found"});
+
+    }
+    return res.status(200).json({htransports});
+
+    }
+
+  //Update vehicle details
+    const updatedHTransports = async (req, res, next) => {
+
+        const id = req.params.id;
+        const {vehicleType,capacity,expectedDays,travelLocation,locationKm,pricePerKm,fullPayment} = req.body;
+
+        let htransports;
+
+        try {
+          htransports = await HTransport.findByIdAndUpdate(id,
+            {vehicleType:vehicleType,capacity:capacity,expectedDays:expectedDays,travelLocation:travelLocation,locationKm:locationKm,pricePerKm:pricePerKm,fullPayment:fullPayment});
+            htransports = await htransports.save();
+        }catch(err){
+            console.log(err);
+        }
+        
+        //not available bookings
+        if (!htransports){
+        return res.status(404).send({message:" vehicles not found"});
+
+        }
+         return res.status(200).json({htransports});
+
+        };
+
+    
+        //delete user
+    
+        const deleteHtransports = async (req, res, next) => {
+            const id = req.params.id;
+    
+            let htransports;
+    
+            try{
+    
+                htransports = await HTransport.findByIdAndDelete(id)
+            }catch (err) {
+                console.log(err);
+            }
+    
+            //not available bookings
+            if (!htransports){
+                return res.status(404).send({message:" Unable to delete"});
+        
+                }
+                 return res.status(200).json({htransports});
+        
+    
+        };
+        
+         
+          
+        
+    
+       
+
+
+
 exports.getAllHTransports = getAllHTransports;
+exports.addHTransports = addHTransports;
+exports.getById = getById;
+exports.updatedHTransports = updatedHTransports;
+exports.deleteHtransports = deleteHtransports;
 
