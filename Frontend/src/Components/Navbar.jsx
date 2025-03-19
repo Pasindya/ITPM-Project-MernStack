@@ -63,10 +63,7 @@ function Navbar() {
                 <a href="/emergency-services">Emergency Services</a>
                 <a href="/calender">Calendar with Holidays</a>
 
-<Link to="/weather">Weather Tracker</Link>
-<Link to="/currency-converter">Currency Converter</Link>
-<Link to="/emergency-services">Emergency Services</Link>
-<Link to="/holiday-calendar">Calendar with Holidays</Link>
+
 
               </div>
             )}
