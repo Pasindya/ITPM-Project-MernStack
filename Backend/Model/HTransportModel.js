@@ -1,37 +1,76 @@
-
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const HTransportSchema = new Schema({
-   
-    vehicleName: 
-        { type: String, 
-          required: true 
-        },
+    vehicleType: { 
+        type: String, 
+        required: [true, "Vehicle type is required"], 
+        trim: true,
+        enum: ["Hatchback", "Sedan", "Van", "Luxury Van", "Mini Bus", "Tourist Coach Bus", "Jeep", "Motor Bicycle", "Scooter"]
+    },
+    capacity: { 
+        type: Number, 
+        required: [true, "Capacity is required"], 
+        min: [1, "Capacity must be at least 1"] 
+    },
+    expectedDays: { 
+        type: Number, 
+        required: [true, "Expected days is required"], 
+        min: [1, "Expected days must be at least 1"] 
+    },
+    travelLocation: { 
+        type: String, 
+        required: [true, "Travel location is required"], 
+        trim: true 
+    },
+    locationKm: { 
+        type: Number,  
+        required: [true, "Location distance (KM) is required"], 
+        min: [1, "Distance must be at least 1 KM"] 
+    },
+    pricePerKm: { 
+        type: Number,  
+        required: false // Will be auto-filled based on vehicleType
+    },
+    fullPayment: { 
+        type: Number, 
+        required: false, // Will be auto-calculated
+        min: [0, "Full payment cannot be negative"] 
+    }
+});
 
-    vehicleType: 
-        { type: String, 
-          required: true 
-        }, 
+// Auto-assign pricePerKm and calculate fullPayment before saving
+HTransportSchema.pre('save', function (next) {
+    // Convert vehicleType to title case and trim spaces
+    this.vehicleType = this.vehicleType.trim();
 
-    registrationNumber: 
-        { type: String, 
-           required: true, 
-           unique: true 
-        },
+    const vehiclePrices = {
+        "Hatchback": 130,
+        "Sedan": 110,
+        "Van": 100,
+        "Luxury Van": 200,
+        "Mini Bus": 120,
+        "Tourist Coach Bus": 200,
+        "Jeep": 150,
+        "Motor Bicycle": 80,
+        "Scooter": 70
+    };
 
-    capacity: 
-        { type: Number, 
-          required: true 
-        }, 
+    // Assign pricePerKm automatically based on vehicleType
+    if (vehiclePrices[this.vehicleType]) {
+        this.pricePerKm = vehiclePrices[this.vehicleType];
+    } else {
+        return next(new Error(`Invalid vehicle type. Please select a valid type from: ${Object.keys(vehiclePrices).join(", ")}`));
+    }
 
-    isHotelVehicle: 
-        { type: Boolean, 
-          required: true 
-        }, // True if hotel vehicle, false if self vehicle
+    // Ensure locationKm is provided before calculating fullPayment
+    if (this.locationKm) {
+        this.fullPayment =  (this.pricePerKm * this.locationKm);
+    } else {
+        this.fullPayment = 0;
+    }
 
-
-
+    next();
 });
 
 module.exports = mongoose.model("HTransport", HTransportSchema);
