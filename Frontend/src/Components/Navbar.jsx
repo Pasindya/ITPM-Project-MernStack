@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import '../CSS/Navbar.css'; // Import the CSS file for styling
 import logo from '../assets/Travel Trails.png'; // Import your round logo image
 
 function Navbar() {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [essentialsOpen, setEssentialsOpen] = useState(false);
+  const [thingsToDoOpen, setThingsToDoOpen] = useState(false); // State for Things To Do dropdown
 
   return (
     <nav className="navbar">
@@ -13,45 +15,64 @@ function Navbar() {
         <span className="logo-text">TravelTrails</span>
       </div>
       <ul className="navbar-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/places">Places</a></li>
-        <li><a href="/packages">Packages</a></li>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/places">Places</Link></li>
+        <li><Link to="/packages">Packages</Link></li>
         <li>
           <div
             className="dropdown"
             onMouseEnter={() => setServicesOpen(true)}
             onMouseLeave={() => setServicesOpen(false)}
           >
-            <a href="/services">Services</a>
+            <Link to="/services">Services</Link>
             {servicesOpen && (
               <div className="dropdown-menu">
-                <a href="/transport">Transport</a>
-                <a href="/guiders">Guiders</a>
-                <a href="/hotels">Hotels</a>
+                <Link to="/transport">Transport</Link>
+                <Link to="/guiders">Guiders</Link>
+                <Link to="/hotels">Hotels</Link>
               </div>
             )}
           </div>
         </li>
-        <li><a href="/things-to-do">Things To Do</a></li>
-        <li><a href="/contact">Contact</a></li>
+        <li>
+          <div
+            className="dropdown"
+            onMouseEnter={() => setThingsToDoOpen(true)}
+            onMouseLeave={() => setThingsToDoOpen(false)}
+          >
+            <Link to="/things-to-do">Things To Do</Link>
+            {thingsToDoOpen && (
+              <div className="dropdown-menu">
+                <Link to="/event">Event</Link> {/* Only Events link under Things To Do */}
+              </div>
+            )}
+          </div>
+        </li>
         <li>
           <div
             className="dropdown"
             onMouseEnter={() => setEssentialsOpen(true)}
             onMouseLeave={() => setEssentialsOpen(false)}
           >
-            <a href="/travel-essentials">Travel Essentials</a>
+            <Link to="/travel-essentials">Travel Essentials</Link>
             {essentialsOpen && (
               <div className="dropdown-menu">
+
                 <a href="/weather">Weather Tracker</a>
                 <a href="/currency">Currency Converter</a>
                 <a href="/emergency-services">Emergency Services</a>
                 <a href="/calender">Calendar with Holidays</a>
+
+<Link to="/weather">Weather Tracker</Link>
+<Link to="/currency-converter">Currency Converter</Link>
+<Link to="/emergency-services">Emergency Services</Link>
+<Link to="/holiday-calendar">Calendar with Holidays</Link>
+
               </div>
             )}
           </div>
         </li>
-        <li><a href="/translate">Translate</a></li>
+        <li><Link to="/translate">Translate</Link></li>
       </ul>
     </nav>
   );
