@@ -4,6 +4,7 @@ const hbookingrouter = require("./Routes/HBookingRoute")
 const packbookingrouter = require("./Routes/PackBookingRoute")
 const HTransportRoute = require("./Routes/HTransportRoute")
 const EventRoute = require("./Routes/EventRoute");
+const  router = require("./Routes/guidersRoutes");
 
 
 const app = express();
@@ -14,6 +15,7 @@ app.use("/hbookings",hbookingrouter);
 app.use("/packbookings",packbookingrouter);
 app.use("/htransports",HTransportRoute);
 app.use("/events",EventRoute);
+app.use("/guiders", router);
 
 //database connection
 mongoose.connect("mongodb+srv://travel:1234@cluster0.nitw6zk.mongodb.net/traveltrails")
