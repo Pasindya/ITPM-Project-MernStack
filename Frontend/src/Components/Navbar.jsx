@@ -44,7 +44,7 @@ function Navbar() {
             {essentialsOpen && (
               <div className="dropdown-menu">
                 <a href="/weather">Weather Tracker</a>
-                <a href="/currency-converter">Currency Converter</a>
+                <a href="/currency">Currency Converter</a>
                 <a href="/emergency-services">Emergency Services</a>
                 <a href="/calender">Calendar with Holidays</a>
               </div>
