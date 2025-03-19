@@ -13,7 +13,6 @@ import Currency from './Pages/Currency';
 import Beach from './Pages/Beach';
 import Safari from './Pages/Safari';
 
-
 const App = () => {
   return (
     <div>
@@ -29,7 +28,6 @@ const App = () => {
         <Route path="/currency" element={<Currency />} />
         <Route path="/beach" element={<Beach />} />
         <Route path="/safari" element={<Safari />} />
-      
       </Routes>
       <Footer /> {/* Include the Footer here */}
     </div>
