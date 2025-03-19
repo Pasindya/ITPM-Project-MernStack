@@ -1,0 +1,96 @@
+/* Container for the entire component */
+.currency-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-image: url('/Images/currency.jpg'); /* Add your background image */
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay;
+  }
+  
+  /* Heading */
+  .currency-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 32px;
+    font-weight: bold;
+  }
+  
+  /* Form styling */
+  .currency-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .currency-container .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .currency-container label {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .currency-container input[type="number"],
+  .currency-container select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  }
+  
+  /* Submit button */
+  .currency-container .submit-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .currency-container .submit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Result section */
+  .currency-container .result {
+    margin-top: 20px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    padding: 15px;
+    border-radius: 4px;
+  }
+  
+  .currency-container .result h2 {
+    color: #333;
+    font-size: 24px;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 600px) {
+    .currency-container {
+      padding: 15px;
+    }
+  
+    .currency-container h1 {
+      font-size: 24px;
+    }
+  
+    .currency-container h2 {
+      font-size: 20px;
+    }
+  }

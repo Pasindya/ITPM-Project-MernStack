@@ -8,6 +8,10 @@ import Packages from './Pages/Packages';
 import Weather from './Pages/Weather';
 import Event from './Pages/Event';
 import Calender from './Pages/Calender';
+import Cultural from './Pages/Cultural';
+import Currency from './Pages/Currency';
+import Beach from './Pages/Beach';
+import Safari from './Pages/Safari';
 
 const App = () => {
   return (
@@ -20,6 +24,10 @@ const App = () => {
         <Route path="/weather" element={<Weather />} />
         <Route path="/event" element={<Event />} /> {/* Fixed: Added missing Event route */}
         <Route path="/calender" element={<Calender />} />
+        <Route path="/cultural" element={<Cultural />} />
+        <Route path="/currency" element={<Currency />} />
+        <Route path="/beach" element={<Beach />} />
+        <Route path="/safari" element={<Safari />} />
       </Routes>
       <Footer /> {/* Include the Footer here */}
     </div>
