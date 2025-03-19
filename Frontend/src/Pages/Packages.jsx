@@ -29,7 +29,7 @@ function Packages() {
       duration: '4 Days',
       price: '$800',
       image: '/Images/saF.jpg',
-      link: '/wildlife-safari-adventure',
+      link: '/safari',
     },
     {
       id: 4,
@@ -38,7 +38,7 @@ function Packages() {
       duration: '6 Days',
       price: '$1100',
       image: '/Images/mount.jpg',
-      link: '/hill-country-escape',
+      link: '/hill',
     },
     {
       id: 5,

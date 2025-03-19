@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../CSS/Safari.css'; // Import the CSS file
+import '../CSS/Hill.css'; // Import the CSS file
 
-function Safari() {
+function Hill() {
   const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false); // State to control popup visibility
   const [formData, setFormData] = useState({
@@ -10,7 +10,7 @@ function Safari() {
     mobile: '',
     email: '',
     livingCountry: '',
-    package: 'Wildlife Safari Adventure', // Auto-fill package name
+    package: 'Hill Country Escape', // Auto-fill package name
     arrivalDate: ''
   });
   const [errors, setErrors] = useState({}); // State to store validation errors
@@ -109,23 +109,23 @@ function Safari() {
   };
 
   return (
-    <div className="safari-container">
-      <h1>Wildlife Safari Adventure</h1>
+    <div className="hill-container">
+      <h1>Hill Country Escape</h1>
       <div className="tour-details">
         <div className="destination">
-          <h2>Destinations: Yala, Udawalawe, Wilpattu</h2>
+          <h2>Destinations: Nuwara Eliya, Ella, Horton Plains</h2>
           <p>
-            Embark on an exciting wildlife safari adventure across Sri Lanka's most famous national parks. Spot elephants, leopards, and a variety of exotic wildlife.
+            Experience the serene beauty of Sri Lanka's hill country with this 6-day tour. Enjoy cool climates, lush tea plantations, and breathtaking landscapes.
           </p>
         </div>
         <div className="duration">
-          <h2>Duration: 4 Days</h2>
+          <h2>Duration: 6 Days</h2>
           <p>
-            This 4-day tour offers thrilling wildlife experiences and breathtaking natural beauty.
+            This 6-day tour offers a perfect blend of relaxation and adventure in Sri Lanka's picturesque hill country.
           </p>
         </div>
         <div className="price">
-          <h2>Price: $800</h2>
+          <h2>Price: $1100</h2>
           <p>
             The package includes accommodation, transportation, guided tours, and meals.
           </p>
@@ -134,24 +134,24 @@ function Safari() {
 
       <div className="destination-images">
         <div className="destination-card">
-          <img src="/Images/yala.jpg" alt="Yala" />
-          <h3>Yala</h3>
+          <img src="/Images/nuwara-eliya.jpg" alt="Nuwara Eliya" />
+          <h3>Nuwara Eliya</h3>
           <p>
-            Yala National Park is renowned for its leopard population and diverse wildlife. Enjoy thrilling safari rides and stunning landscapes.
+            Known as "Little England," Nuwara Eliya is famous for its tea plantations, colonial architecture, and cool climate.
           </p>
         </div>
         <div className="destination-card">
-          <img src="/Images/udawalawe.jpg" alt="Udawalawe" />
-          <h3>Udawalawe</h3>
+          <img src="/Images/ella.jpg" alt="Ella" />
+          <h3>Ella</h3>
           <p>
-            Udawalawe National Park is famous for its elephant herds and birdlife. Experience close encounters with elephants in their natural habitat.
+            Ella is a small town surrounded by green hills, waterfalls, and tea plantations. It's perfect for hiking and relaxation.
           </p>
         </div>
         <div className="destination-card">
-          <img src="/Images/wilpattu.jpg" alt="Wilpattu" />
-          <h3>Wilpattu</h3>
+          <img src="/Images/horton-plains.jpg" alt="Horton Plains" />
+          <h3>Horton Plains</h3>
           <p>
-            Wilpattu National Park is known for its unique villus (natural lakes) and leopard sightings. Explore the untouched wilderness of Sri Lanka.
+            Horton Plains National Park is known for its scenic trails, World's End viewpoint, and diverse wildlife.
           </p>
         </div>
       </div>
@@ -242,4 +242,4 @@ function Safari() {
   );
 }
 
-export default Safari;
+export default Hill;
