@@ -25,6 +25,10 @@ const App = () => {
         <Route path="/weather" element={<Weather />} />
         <Route path="/event" element={<Event />} /> {/* Fixed: Added missing Event route */}
         <Route path="/calender" element={<Calender />} />
+        <Route path="/cultural" element={<Cultural />} />
+        <Route path="/currency" element={<Currency />} />
+        <Route path="/beach" element={<Beach />} />
+        <Route path="/safari" element={<Safari />} />
       
       </Routes>
       <Footer /> {/* Include the Footer here */}
