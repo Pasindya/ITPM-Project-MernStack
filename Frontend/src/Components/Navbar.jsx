@@ -1,4 +1,3 @@
-// src/Components/Navbar.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import '../CSS/Navbar.css'; // Import the CSS file for styling
@@ -58,10 +57,10 @@ function Navbar() {
             <Link to="/travel-essentials">Travel Essentials</Link>
             {essentialsOpen && (
               <div className="dropdown-menu">
-                <a href="/weather">Weather Tracker</a>
-                <a href="/currency">Currency Converter</a>
-                <a href="/emergency-services">Emergency Services</a>
-                <a href="/calender">Calendar with Holidays</a>
+                <Link to="/weather">Weather Tracker</Link>
+                <Link to="/currency">Currency Converter</Link>
+                <Link to="/emergency-services">Emergency Services</Link>
+                <Link to="/calender">Calendar with Holidays</Link>
               </div>
             )}
           </div>

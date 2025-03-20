@@ -9,12 +9,19 @@ import Packages from './Pages/Packages';
 import Weather from './Pages/Weather';
 import Event from './Pages/Event';
 import Calender from './Pages/Calender';
+
+import Transport from './Pages/Transport';
+import Driver from './Pages/driver';
+
+
+
 import Cultural from './Pages/Cultural';
 import Currency from './Pages/Currency';
 import Beach from './Pages/Beach';
 import Safari from './Pages/Safari';
 import Hill from './Pages/Hill';
 import Adminpkg from './Pages/Adminpkg';
+
 
 
 const App = () => {
@@ -39,6 +46,14 @@ const App = () => {
         <Route path="/weather" element={<Weather />} />
         <Route path="/event" element={<Event />} />
         <Route path="/calender" element={<Calender />} />
+
+        <Route path="/transport" element={<Transport />} />
+        <Route path="/driver" element={<Driver />} />
+
+        
+        
+      
+
         <Route path="/cultural" element={<Cultural />} />
         <Route path="/currency" element={<Currency />} />
         <Route path="/beach" element={<Beach />} />
@@ -47,6 +62,7 @@ const App = () => {
         <Route path="/adminpkg" element={<Adminpkg />} />
         
         
+
       </Routes>
 
       {/* Conditionally render Footer */}
