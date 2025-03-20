@@ -28,6 +28,7 @@ function Navbar() {
                 <a href="/transport">Transport</a>
                 <a href="/guiders">Guiders</a>
                 <a href="/hotels">Hotels</a>
+                <a href="/driver">Drivers</a>
               </div>
             )}
           </div>

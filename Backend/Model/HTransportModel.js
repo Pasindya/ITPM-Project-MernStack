@@ -6,7 +6,18 @@ const HTransportSchema = new Schema({
         type: String, 
         required: [true, "Vehicle type is required"], 
         trim: true,
-        enum: ["Hatchback", "Sedan", "Van", "Luxury Van", "Mini Bus", "Tourist Coach Bus", "Jeep", "Motor Bicycle", "Scooter"]
+        enum: [
+            "Hatchback", 
+            "Sedan", 
+            "Van", 
+            "Luxury Van", 
+            "Mini Bus", 
+            "Tourist Coach Bus", 
+            "Jeep", 
+            "Motor Bicycle", 
+            "Scooter",
+            "Tuk Tuk Wheel" // Add "Tuk Tuk Wheel" to the enum
+        ]
     },
     capacity: { 
         type: Number, 
@@ -52,6 +63,7 @@ HTransportSchema.pre('save', function (next) {
         "Mini Bus": 120,
         "Tourist Coach Bus": 200,
         "Jeep": 150,
+        "Tuk Tuk Wheel": 90, // Add price for "Tuk Tuk Wheel"
         "Motor Bicycle": 80,
         "Scooter": 70
     };
