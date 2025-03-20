@@ -1,3 +1,4 @@
+// src/Components/Footer.js
 import React from 'react';
 import '../CSS/Footer.css'; // Import the CSS file for styling
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
