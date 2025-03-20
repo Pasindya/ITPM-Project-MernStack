@@ -93,4 +93,4 @@ function Adminpkg() {
 
 
 
-export default App;
+export default Adminpkg;
