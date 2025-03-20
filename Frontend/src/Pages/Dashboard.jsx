@@ -26,7 +26,7 @@ function Dashboard() {
             </button>
           </li>
           <li>
-            <button onClick={() => navigate('/adminpkg')}>
+            <button onClick={() => navigate('/packlogin')}>
               Package Booking
             </button>
           </li>

@@ -15,13 +15,13 @@ import Beach from './Pages/Beach';
 import Safari from './Pages/Safari';
 import Hill from './Pages/Hill';
 import Adminpkg from './Pages/Adminpkg';
-
+import Packlogin from './Pages/Packlogin';
 
 const App = () => {
   const location = useLocation(); // Get the current location
 
   // Define routes where Navbar and Footer should be hidden
-  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg'];
+  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg','/packlogin'];
 
   // Check if the current route is in the hideNavbarFooterRoutes array
   const shouldHideNavbarFooter = hideNavbarFooterRoutes.includes(location.pathname);
@@ -45,6 +45,7 @@ const App = () => {
         <Route path="/safari" element={<Safari />} />
         <Route path="/hill" element={<Hill />} />
         <Route path="/adminpkg" element={<Adminpkg />} />
+        <Route path="/packlogin" element={<Packlogin />} />
         
         
       </Routes>
