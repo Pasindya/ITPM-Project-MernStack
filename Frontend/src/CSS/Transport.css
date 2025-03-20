@@ -1,0 +1,309 @@
+.transport-container {
+  padding: 1.5rem;
+  background-color: #f7f7f7; /* Light background for the page */
+}
+
+.transport-title {
+  font-size: 2.5rem; /* Larger title */
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: center; /* Center-align the title */
+  color: #333; /* Dark text color */
+}
+
+.transport-subtitle {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem;
+}
+
+.category-filter label {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.category-filter select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.search-bar input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+  width: 250px;
+}
+
+.vehicle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid with larger cards */
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.vehicle-card {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  text-align: center;
+  padding: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+  background-color: #fff; /* White background for the card */
+}
+
+.vehicle-card:hover {
+  transform: translateY(-5px); /* Lift card on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 aspect ratio (landscape) */
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.vehicle-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure images fit nicely */
+}
+
+.vehicle-card h2 {
+  font-size: 1.5rem; /* Larger heading */
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333; /* Dark text for contrast */
+}
+
+.price-text {
+  font-size: 1.1rem;
+  color: #555; /* Darker text for contrast */
+  margin-bottom: 0.5rem;
+}
+
+.description-text {
+  font-size: 0.9rem;
+  color: #000; /* Black text for description */
+  margin-bottom: 1rem;
+}
+
+.hire-button {
+  background-color: #6B5B95; /* Purple button */
+  color: #fff; /* White text */
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+}
+
+.hire-button:hover {
+  background-color: #4a4063; /* Darker purple on hover */
+}
+
+.no-vehicles-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #555;
+  grid-column: 1 / -1; /* Span across all columns */
+}
+
+/* Form Overlay */
+.form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it appears above other content */
+}
+
+/* Hire Form */
+.hire-form {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  max-width: 90%;
+}
+
+.hire-form h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+  text-align: center;
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ccc;
+}
+
+/* Submit Button */
+.hire-form .hire-button {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* Form Overlay */
+.form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it appears above other content */
+}
+
+/* Hire Form */
+.hire-form {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  max-width: 90%;
+  position: relative; /* For the close button */
+}
+
+.hire-form h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+  text-align: center;
+}
+
+/* Close Button */
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+}
+
+.close-button:hover {
+  color: #000;
+}
+
+/* Form Buttons Container */
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Close Form Button */
+.close-form-button {
+  background-color: #ff4d4d; /* Red color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.close-form-button:hover {
+  background-color: #cc0000; /* Darker red on hover */
+}
+
+/* Submit Button */
+.submit-button {
+  background-color: #4CAF50; /* Green color */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.submit-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.submit-button {
+  background-color: #4CAF50; /* Green */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.close-button {
+  background-color: #f44336; /* Red */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  background-color: #d32f2f; /* Darker red */
+}
+
+.submit-button:hover {
+  background-color: #45a049; /* Darker green */
+}

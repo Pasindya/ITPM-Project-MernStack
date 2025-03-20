@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../CSS/Packages.css'; // Import the CSS file for styling
 
 function Packages() {
@@ -10,6 +11,7 @@ function Packages() {
       duration: '7 Days',
       price: '$1200',
       image: '/Images/Kandy.jpg',
+      link: '/cultural',
     },
     {
       id: 2,
@@ -18,6 +20,7 @@ function Packages() {
       duration: '5 Days',
       price: '$900',
       image: '/Images/galle.jpg',
+      link: '/beach',
     },
     {
       id: 3,
@@ -26,6 +29,7 @@ function Packages() {
       duration: '4 Days',
       price: '$800',
       image: '/Images/saF.jpg',
+      link: '/safari',
     },
     {
       id: 4,
@@ -34,6 +38,7 @@ function Packages() {
       duration: '6 Days',
       price: '$1100',
       image: '/Images/mount.jpg',
+      link: '/hill',
     },
     {
       id: 5,
@@ -42,6 +47,7 @@ function Packages() {
       duration: '5 Days',
       price: '$1000',
       image: '/Images/ayu.jpg',
+      link: '/ayurveda-wellness-retreat',
     },
     {
       id: 6,
@@ -50,6 +56,7 @@ function Packages() {
       duration: '8 Days',
       price: '$1500',
       image: '/Images/adams.jpg',
+      link: '/adventure-trekking-expedition',
     },
   ];
 
@@ -64,7 +71,9 @@ function Packages() {
             <p><strong>Destination:</strong> {pkg.destination}</p>
             <p><strong>Duration:</strong> {pkg.duration}</p>
             <p><strong>Price:</strong> {pkg.price}</p>
-            <button className="book-button">Book Now</button>
+            <Link to={pkg.link}>
+              <button className="book-button">View More</button>
+            </Link>
           </div>
         ))}
       </div>
