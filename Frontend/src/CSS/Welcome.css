@@ -1,8 +1,10 @@
 /* Welcome Page Styles */
 .welcome-container {
   position: relative;
-  height: 80vh; /* Reduced height */
+  height: 100vh; /* Full viewport height */
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .image-background {
@@ -46,25 +48,25 @@
 }
 
 .welcome-overlay h1 {
-  font-size: 3rem; /* Increased font size */
+  font-size: 4rem; /* Increased font size */
   font-family: 'Playfair Display', serif; /* Elegant serif font */
   font-weight: 700;
-  margin-bottom: 1rem; /* Adjusted margin */
+  margin-bottom: 1.5rem; /* Adjusted margin */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
   color: white; /* Explicitly set text color to white */
 }
 
 .welcome-overlay p {
-  font-size: 1.5rem; /* Increased font size */
+  font-size: 2rem; /* Increased font size */
   font-family: 'Poppins', sans-serif; /* Modern sans-serif font */
-  margin-bottom: 2rem; /* Adjusted margin */
+  margin-bottom: 2.5rem; /* Adjusted margin */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Text shadow for better readability */
   color: white; /* Explicitly set text color to white */
 }
 
 .explore-button {
-  padding: 1rem 2rem; /* Adjusted padding */
-  font-size: 1.2rem; /* Increased font size */
+  padding: 1.5rem 3rem; /* Increased padding */
+  font-size: 1.5rem; /* Increased font size */
   font-family: 'Poppins', sans-serif; /* Modern sans-serif font */
   font-weight: 600;
   color: white;
@@ -93,22 +95,31 @@
   }
 }
 
+/* Footer Styles */
+.footer {
+  background-color: #2c3e50;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: auto; /* Push footer to the bottom */
+}
+
 /* Responsive Design for Mobile */
 @media (max-width: 768px) {
   .welcome-container {
-    height: 70vh; /* Further reduced height for mobile */
+    height: 100vh; /* Full height for mobile */
   }
 
   .welcome-overlay h1 {
-    font-size: 2rem; /* Adjusted font size for mobile */
+    font-size: 2.5rem; /* Adjusted font size for mobile */
   }
 
   .welcome-overlay p {
-    font-size: 1rem; /* Adjusted font size for mobile */
+    font-size: 1.25rem; /* Adjusted font size for mobile */
   }
 
   .explore-button {
-    padding: 0.8rem 1.5rem; /* Adjusted padding for mobile */
-    font-size: 1rem; /* Adjusted font size for mobile */
+    padding: 1rem 2rem; /* Adjusted padding for mobile */
+    font-size: 1.25rem; /* Adjusted font size for mobile */
   }
 }
