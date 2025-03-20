@@ -8,6 +8,7 @@ import Dashboard from './Pages/Dashboard';
 import Packages from './Pages/Packages';
 import Weather from './Pages/Weather';
 import Event from './Pages/Event';
+import Eventbooking from './Event/Eventbooking';
 import Calender from './Pages/Calender';
 
 import Transport from './Pages/Transport';
@@ -45,6 +46,7 @@ const App = () => {
         <Route path="/packages" element={<Packages />} />
         <Route path="/weather" element={<Weather />} />
         <Route path="/event" element={<Event />} />
+        <Route path="/book-event" element={<Eventbooking />} />
         <Route path="/calender" element={<Calender />} />
 
         <Route path="/transport" element={<Transport />} />
