@@ -68,6 +68,7 @@ const App = () => {
       {/* Conditionally render Footer */}
       {!shouldHideNavbarFooter && <Footer />}
     </div>
+
   );
 };
 
