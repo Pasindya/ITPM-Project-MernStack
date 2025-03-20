@@ -23,6 +23,7 @@ const App = () => {
       </Routes>
       <Footer /> {/* Include the Footer here */}
     </div>
+
   );
 };
 
