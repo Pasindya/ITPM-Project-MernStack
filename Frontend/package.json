@@ -15,7 +15,10 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@react-google-maps/api": "^2.20.6",
     "@tailwindcss/vite": "^4.0.14",
+
+
     "axios": "^1.8.4",
+
     "leaflet": "^1.9.4",
     "react": "^19.0.0",
     "react-calendar": "^5.1.0",
