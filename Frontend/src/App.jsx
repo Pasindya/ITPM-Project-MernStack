@@ -14,7 +14,7 @@ import Transport from './Pages/Transport';
 import VehicleCategory from './Pages/VehicleCategory';
 import TransportNav from './Pages/transportNav';
 
-import Driver from './Pages/driver';
+
 import DashNav from './Pages/DashNav';
 
 
