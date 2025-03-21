@@ -9,10 +9,13 @@ const  router = require("./Routes/guidersRoutes");
 
 const app = express();
 const cors = require("cors");
+
 app.use(cors());
+
 
 //Middleware
 app.use(express.json());
+app.use(cors());
 app.use("/hbookings",hbookingrouter);
 app.use("/packbookings",packbookingrouter);
 app.use("/htransports",HTransportRoute);

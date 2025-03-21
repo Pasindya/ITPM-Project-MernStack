@@ -1,0 +1,106 @@
+/* Dashboard Layout */
+.dashboard {
+  display: flex;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #1f2d3d;
+  padding: 20px;
+  color: white;
+}
+
+/* Main Content */
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  padding: 30px;
+  background-color: white;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.header h1 {
+  font-size: 26px;
+  color: #2c3e50;
+}
+
+.header p {
+  font-size: 14px;
+  color: #7f8c8d;
+}
+
+/* Description & Image Section */
+.description-container {
+  display: flex;
+  align-items: center; /* Align items in a row */
+  justify-content: space-between; /* Space between text and image */
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  width: 100%;
+  gap: 20px; /* Add spacing between text and image */
+}
+
+/* Description Text */
+.description {
+  width: 50%;
+  text-align: left;
+}
+
+.description h2 {
+  font-size: 22px;
+  color: #34495e;
+}
+
+.description p {
+  font-size: 14px;
+  color: #7f8c8d;
+}
+
+/* Image Container */
+.image-container {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.package-image {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .description-container {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .description {
+    width: 90%;
+  }
+
+  .image-container {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .package-image {
+    width: 80%;
+  }
+}
