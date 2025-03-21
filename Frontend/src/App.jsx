@@ -51,11 +51,9 @@ const App = () => {
         <Route path="/allGuiders" element={<AllGuiders />} />
         <Route path="/packagenav" element={<Packagenav />} />
         <Route path="/dashNav" element={<DashNav />} />
-          
         <Route path="/transport" element={<Transport />} />
         <Route path="/vehicles/:category" element={<VehicleCategory />} />
         <Route path="/transportnav" element={<TransportNav />} />
-          
         <Route path="/cultural" element={<Cultural />} />
         <Route path="/currency" element={<Currency />} />
         <Route path="/beach" element={<Beach />} />
