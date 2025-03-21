@@ -10,8 +10,13 @@ import Weather from './Pages/Weather';
 import Event from './Pages/Event';
 import Calender from './Pages/Calender';
 import Transport from './Pages/Transport';
+
+import VehicleCategory from './Pages/VehicleCategory';
+import TransportNav from './Pages/transportNav';
+
 import Driver from './Pages/driver';
 import DashNav from './Pages/DashNav';
+
 
 
 
@@ -58,7 +63,9 @@ const App = () => {
 
 
         <Route path="/transport" element={<Transport />} />
-        <Route path="/driver" element={<Driver />} />
+        <Route path="/vehicles/:category" element={<VehicleCategory />} />
+        <Route path="/transportnav" element={<TransportNav />} />
+
 
         
         
