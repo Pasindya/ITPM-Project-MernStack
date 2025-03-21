@@ -11,7 +11,8 @@ import Event from './Pages/Event';
 import Calender from './Pages/Calender';
 
 import Transport from './Pages/Transport';
-import Driver from './Pages/driver';
+import VehicleCategory from './Pages/VehicleCategory';
+import TransportNav from './Pages/transportNav';
 
 
 
@@ -48,7 +49,9 @@ const App = () => {
         <Route path="/calender" element={<Calender />} />
 
         <Route path="/transport" element={<Transport />} />
-        <Route path="/driver" element={<Driver />} />
+        <Route path="/vehicles/:category" element={<VehicleCategory />} />
+        <Route path="/transportnav" element={<TransportNav />} />
+
 
         
         
