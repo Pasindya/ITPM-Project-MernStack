@@ -1,96 +1,111 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
-import { FaHome, FaEdit, FaChartLine, FaFileAlt, FaSignOutAlt } from 'react-icons/fa'; // Import icons
-import Home from './Home'; // Import Home component
-import EditPackage from './EditPackage'; // Import EditPackage component
-import ViewReport from './ViewReport'; // Import ViewReport component
-import MainSummary from './MainSummary'; // Import MainSummary component
-import '../CSS/Adminpkg.css'; // Import CSS file
-import Dashboard from './Dashboard';
+import React from "react";
+import DashNav from "./DashNav"; // Import Sidebar
 
 function Adminpkg() {
-  const navigate = useNavigate(); // Hook for navigation
-
-  // Handle logout
-  const handleLogout = () => {
-    alert('Logged out successfully');
-    navigate('/home'); // Navigate to the home page
-  };
-
   return (
-    <div className="dashboard">
+    <div
+      style={{
+        display: "flex",
+        minHeight: "100vh",
+        backgroundColor: "#f8f9fa",
+      }}
+    >
       {/* Sidebar */}
-      <div className="sidebar">
-        <div className="sidebar-header">
-          <h2>Dashboard</h2>
-        </div>
-        <ul className="sidebar-menu">
-          <li>
-            <Link to="/dashboard" className="sidebar-link">
-              <FaHome className="icon" /> Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/edit-package" className="sidebar-link">
-              <FaEdit className="icon" /> Edit Package
-            </Link>
-          </li>
-          <li>
-            <Link to="/view-report" className="sidebar-link">
-              <FaChartLine className="icon" /> View Report
-            </Link>
-          </li>
-          <li>
-            <Link to="/main-summary" className="sidebar-link">
-              <FaFileAlt className="icon" /> Main Summary
-            </Link>
-          </li>
-          <li onClick={handleLogout} className="logout-button">
-            <FaSignOutAlt className="icon" /> Logout
-          </li>
-        </ul>
-      </div>
+      <DashNav />
 
       {/* Main Content */}
-      <div className="main-content">
+      <div
+        style={{
+          flex: 1,
+          padding: "2rem",
+          marginLeft: "250px", // Adjust based on sidebar width
+        }}
+      >
         {/* Header */}
-        <div className="header">
-          <h1>Welcome, Admin</h1>
+        <div
+          style={{
+            marginBottom: "2rem",
+          }}
+        >
+          <h1
+            style={{
+              fontSize: "2rem",
+              fontWeight: "bold",
+              color: "#1e293b",
+              marginBottom: "0.5rem",
+            }}
+          >
+            Welcome, Admin 👋
+          </h1>
+          <p
+            style={{
+              fontSize: "1rem",
+              color: "#64748b",
+            }}
+          >
+            Manage your travel operations efficiently using the options in the sidebar.
+          </p>
         </div>
 
-        {/* Routes */}
-        <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/edit-package" element={<EditPackage />} />
-          <Route path="/view-report" element={<ViewReport />} />
-          <Route path="/main-summary" element={<MainSummary />} />
-          <Route
-            path="/"
-            element={
-              <div className="description-container">
-                <div className="description">
-                  <h2>Package Booking Management</h2>
-                  <p>
-                    Manage your travel packages efficiently. View, edit, and generate reports for
-                    bookings. Keep track of your main summary and make updates as needed.
-                  </p>
-                </div>
-                <div className="image-container">
-                  <img
-                    src="/Images/book.jpg" // Replace with your image URL
-                    alt="Package Booking Management"
-                    className="package-image"
-                  />
-                </div>
-              </div>
-            }
-          />
-        </Routes>
+        {/* Description */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            backgroundColor: "white",
+            borderRadius: "0.5rem",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+            padding: "2rem",
+            gap: "2rem",
+          }}
+        >
+          <div
+            style={{
+              flex: 1,
+            }}
+          >
+            <h2
+              style={{
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+                color: "#1e293b",
+                marginBottom: "1rem",
+              }}
+            >
+              📌 Package Booking Management
+            </h2>
+            <p
+              style={{
+                fontSize: "1rem",
+                color: "#64748b",
+                lineHeight: "1.6",
+              }}
+            >
+              Easily manage travel packages. View, edit, and generate reports for bookings.
+              Track your main summary and make updates effortlessly.
+            </p>
+          </div>
+          <div
+            style={{
+              flex: 1,
+              textAlign: "center",
+            }}
+          >
+            <img
+              src="/Images/book.jpg" // Replace with your image URL
+              alt="Package Booking Management"
+              style={{
+                width: "100%",
+                maxWidth: "400px",
+                borderRadius: "0.5rem",
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              }}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
 }
-
-
 
 export default Adminpkg;
