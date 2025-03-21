@@ -27,7 +27,7 @@ const PackBookingSchema = new Schema({
     },
     package: {
         type: String,
-        required: false,
+        required: true,
         trim: true,
     },
     arrivalDate: {
