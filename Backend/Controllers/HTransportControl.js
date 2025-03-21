@@ -23,11 +23,25 @@ const getAllHTransports = async (req, res, next) =>{
 //data insert
 const addHTransports  = async (req, res, next) =>{
 
-    const {vehicleType,capacity,expectedDays,travelLocation,locationKm,pricePerKm,fullPayment} = req.body;
+    const {vehicleType,
+        name,
+        mobile,
+        passportNumber,
+        expectedDays,
+        bookingdate,
+        handoverDate,
+        pricePerKm} = req.body;
     let htransports;
 
     try {
-        htransports = new HTransport({vehicleType,capacity,expectedDays,travelLocation,locationKm,pricePerKm,fullPayment});
+        htransports = new HTransport({vehicleType,
+            name,
+            mobile,
+            passportNumber,
+            expectedDays,
+            bookingdate,
+            handoverDate,
+            pricePerKm});
         await htransports.save();
     }catch (err){
         console.log(err);
@@ -69,13 +83,27 @@ const addHTransports  = async (req, res, next) =>{
     const updatedHTransports = async (req, res, next) => {
 
         const id = req.params.id;
-        const {vehicleType,capacity,expectedDays,travelLocation,locationKm,pricePerKm,fullPayment} = req.body;
+        const {vehicleType,
+            name,
+            mobile,
+            passportNumber,
+            expectedDays,
+            bookingdate,
+            handoverDate,
+            pricePerKm} = req.body;
 
         let htransports;
 
         try {
           htransports = await HTransport.findByIdAndUpdate(id,
-            {vehicleType:vehicleType,capacity:capacity,expectedDays:expectedDays,travelLocation:travelLocation,locationKm:locationKm,pricePerKm:pricePerKm,fullPayment:fullPayment});
+            {vehicleType:vehicleType,
+                name:name,
+                mobile:mobile,
+                passportNumber:passportNumber,
+                expectedDays:expectedDays,
+                bookingdate:bookingdate,
+                handoverDate:handoverDate,
+                pricePerKm:pricePerKm});
             htransports = await htransports.save();
         }catch(err){
             console.log(err);
@@ -128,4 +156,3 @@ exports.addHTransports = addHTransports;
 exports.getById = getById;
 exports.updatedHTransports = updatedHTransports;
 exports.deleteHtransports = deleteHtransports;
-
