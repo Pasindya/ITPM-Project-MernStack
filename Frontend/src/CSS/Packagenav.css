@@ -1,0 +1,46 @@
+.dashboard {
+    display: flex;
+  }
+  
+  .sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  .sidebar-header {
+    margin-bottom: 20px;
+  }
+  
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar-menu li {
+    margin-bottom: 10px;
+  }
+  
+  .sidebar-link {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+  
+  .sidebar-link .icon {
+    margin-right: 10px;
+  }
+  
+  .logout-button {
+    cursor: pointer;
+    color: #fff;
+    display: flex;
+    align-items: center;
+  }
+  
+  .logout-button .icon {
+    margin-right: 10px;
+  }

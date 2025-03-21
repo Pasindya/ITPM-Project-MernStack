@@ -10,11 +10,21 @@ function Cultural() {
     mobile: '',
     email: '',
     livingCountry: '',
-    package: 'Cultural Heritage Tour', // Auto-fill package name
+    package: 'Cultural Heritage Tour', // Default package
     arrivalDate: ''
   });
   const [errors, setErrors] = useState({}); // State to store validation errors
   const [successMessage, setSuccessMessage] = useState(''); // State to store success message
+
+  // Package options for the dropdown
+  const packageOptions = [
+    'Cultural Heritage Tour',
+    'Beach Paradise Getaway',
+    'Wildlife Safari Adventure',
+    'Hill Country Escape',
+    'Ayurveda & Wellness Retreat',
+    'Adventure & Trekking Expedition'
+  ];
 
   // Open the popup
   const handleBookNow = () => {
@@ -54,7 +64,7 @@ function Cultural() {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validate all fields
@@ -97,15 +107,31 @@ function Cultural() {
     }
 
     // If no errors, proceed with submission
-    console.log('Form Data:', formData);
+    try {
+      // Send form data to the backend
+      const response = await fetch('https://your-backend-api.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    // Simulate successful submission
-    setSuccessMessage('Package successfully booked!');
-    setTimeout(() => {
-      setShowForm(false); // Close the form after 2 seconds
-      setSuccessMessage(''); // Clear success message
-      navigate('/packagebook', { state: { formData } }); // Navigate to the next page
-    }, 2000);
+      if (!response.ok) {
+        throw new Error('Failed to submit form');
+      }
+
+      // Simulate successful submission
+      setSuccessMessage('Package successfully booked!');
+      setTimeout(() => {
+        setShowForm(false); // Close the form after 2 seconds
+        setSuccessMessage(''); // Clear success message
+        navigate('/packagebook', { state: { formData } }); // Navigate to the next page
+      }, 2000);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSuccessMessage('Failed to book the package. Please try again.');
+    }
   };
 
   return (
@@ -213,12 +239,18 @@ function Cultural() {
               </div>
               <div className="form-group">
                 <label>Package:</label>
-                <input
-                  type="text"
+                <select
                   name="package"
                   value={formData.package}
-                  readOnly
-                />
+                  onChange={handleChange}
+                  required
+                >
+                  {packageOptions.map((option, index) => (
+                    <option key={index} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div className="form-group">
                 <label>Arrival Date:</label>

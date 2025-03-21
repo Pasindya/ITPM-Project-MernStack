@@ -9,10 +9,14 @@ import Packages from './Pages/Packages';
 import Weather from './Pages/Weather';
 import Event from './Pages/Event';
 import Calender from './Pages/Calender';
-
 import Transport from './Pages/Transport';
+
 import VehicleCategory from './Pages/VehicleCategory';
 import TransportNav from './Pages/transportNav';
+
+import Driver from './Pages/driver';
+import DashNav from './Pages/DashNav';
+
 
 
 
@@ -24,12 +28,16 @@ import Hill from './Pages/Hill';
 import Adminpkg from './Pages/Adminpkg';
 
 
+import Packagenav from './Pages/Packagenav';
+
+
+
 
 const App = () => {
   const location = useLocation(); // Get the current location
 
   // Define routes where Navbar and Footer should be hidden
-  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg'];
+  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg','/dashNav'];
 
   // Check if the current route is in the hideNavbarFooterRoutes array
   const shouldHideNavbarFooter = hideNavbarFooterRoutes.includes(location.pathname);
@@ -47,6 +55,12 @@ const App = () => {
         <Route path="/weather" element={<Weather />} />
         <Route path="/event" element={<Event />} />
         <Route path="/calender" element={<Calender />} />
+    
+        <Route path="/packagenav" element={<Packagenav />} />
+        <Route path="/dashNav" element={<DashNav />} />
+       
+        
+
 
         <Route path="/transport" element={<Transport />} />
         <Route path="/vehicles/:category" element={<VehicleCategory />} />
@@ -71,6 +85,7 @@ const App = () => {
       {/* Conditionally render Footer */}
       {!shouldHideNavbarFooter && <Footer />}
     </div>
+
   );
 };
 
