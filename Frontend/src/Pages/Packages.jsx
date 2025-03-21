@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../CSS/Packages.css'; // Import the CSS file for styling
+import '../CSS/Packages.css'
 
 function Packages() {
   const packages = [
