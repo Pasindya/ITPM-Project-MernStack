@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const EventPage = () => {
+const Event = () => {
+  const navigate = useNavigate();
+
   // Styles
   const styles = {
     container: {
@@ -22,6 +25,10 @@ const EventPage = () => {
       textAlign: "center",
       color: "white",
       padding: "0 20px",
+      borderRadius: "20px",
+      overflow: "hidden",
+      boxShadow: "0 8px 16px rgba(0, 0, 0, 0.3)",
+      animation: "zoomIn 5s ease-in-out infinite alternate",
     },
     overlay: {
       position: "absolute",
@@ -38,6 +45,7 @@ const EventPage = () => {
       letterSpacing: "2px",
       zIndex: 2,
       textShadow: "2px 2px 8px rgba(0, 0, 0, 0.6)",
+      animation: "fadeInDown 2s ease-in-out",
     },
     subtitle: {
       marginTop: "1rem",
@@ -46,6 +54,7 @@ const EventPage = () => {
       fontWeight: "300",
       letterSpacing: "1px",
       textShadow: "1px 1px 4px rgba(0, 0, 0, 0.5)",
+      animation: "fadeInUp 2.5s ease-in-out",
     },
     sectionTitle: {
       fontSize: "2.75rem",
@@ -55,6 +64,20 @@ const EventPage = () => {
       color: "#333",
       textTransform: "uppercase",
       letterSpacing: "1px",
+      position: "relative",
+      display: "inline-block",
+      animation: "fadeIn 3s ease-in-out",
+      "&::after": {
+        content: '""',
+        position: "absolute",
+        bottom: "-10px",
+        left: "50%",
+        transform: "translateX(-50%)",
+        width: "60%",
+        height: "4px",
+        backgroundColor: "#007bff",
+        borderRadius: "2px",
+      },
     },
     eventSection: {
       display: "grid",
@@ -68,6 +91,7 @@ const EventPage = () => {
       borderRadius: "15px",
       boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
       transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
+      animation: "fadeInUp 1s ease-in-out",
       "&:hover": {
         transform: "translateY(-10px)",
         boxShadow: "0 12px 24px rgba(0, 0, 0, 0.3)",
@@ -102,6 +126,7 @@ const EventPage = () => {
       cursor: "pointer",
       borderRadius: "25px",
       transition: "background-color 0.3s ease, transform 0.3s ease",
+      animation: "pulse 2s infinite",
       "&:hover": {
         backgroundColor: "#0056b3",
         transform: "scale(1.05)",
@@ -139,7 +164,9 @@ const EventPage = () => {
               festivals, featuring vibrant processions, traditional dances, and
               cultural performances.
             </p>
-            <button style={styles.bookButton}>Book Now</button>
+            <button style={styles.bookButton} onClick={() => navigate("/book-event")}>
+              Book Now
+            </button>
           </div>
 
           {/* Event 2 */}
@@ -154,7 +181,9 @@ const EventPage = () => {
               spiritual events, rituals, and cultural celebrations across the
               island.
             </p>
-            <button style={styles.bookButton}>Book Now</button>
+            <button style={styles.bookButton} onClick={() => navigate("/book-event")}>
+              Book Now
+            </button>
           </div>
 
           {/* Event 3 */}
@@ -169,7 +198,9 @@ const EventPage = () => {
               the Buddha. It is a peaceful festival filled with spiritual
               practices and community activities.
             </p>
-            <button style={styles.bookButton}>Book Now</button>
+            <button style={styles.bookButton} onClick={() => navigate("/book-event")}>
+              Book Now
+            </button>
           </div>
 
           {/* Event 4 */}
@@ -183,12 +214,71 @@ const EventPage = () => {
               This festival celebrates the richness of Sri Lankan culture with
               music, food, art, and traditional performances.
             </p>
-            <button style={styles.bookButton}>Book Now</button>
+            <button style={styles.bookButton} onClick={() => navigate("/book-event")}>
+              Book Now
+            </button>
           </div>
         </div>
       </section>
+
+      {/* CSS Animations */}
+      <style>
+        {`
+          @keyframes zoomIn {
+            0% {
+              transform: scale(1);
+            }
+            100% {
+              transform: scale(1.1);
+            }
+          }
+
+          @keyframes fadeInDown {
+            0% {
+              opacity: 0;
+              transform: translateY(-20px);
+            }
+            100% {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          @keyframes fadeInUp {
+            0% {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            100% {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          @keyframes fadeIn {
+            0% {
+              opacity: 0;
+            }
+            100% {
+              opacity: 1;
+            }
+          }
+
+          @keyframes pulse {
+            0% {
+              transform: scale(1);
+            }
+            50% {
+              transform: scale(1.05);
+            }
+            100% {
+              transform: scale(1);
+            }
+          }
+        `}
+      </style>
     </div>
   );
 };
 
-export default EventPage;
+export default Event;
