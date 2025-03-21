@@ -1,0 +1,67 @@
+/* Sidebar Styles */
+.sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebar-header {
+    margin-bottom: 30px;
+  }
+  
+  .sidebar-header h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+  }
+  
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar-menu li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sidebar-menu li:hover {
+    background-color: #34495e;
+  }
+  
+  .sidebar-menu li .icon {
+    margin-right: 10px;
+    font-size: 18px;
+  }
+  
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .sidebar-link:hover {
+    background-color: #34495e;
+  }
+  
+  .logout-button {
+    color: #ff6b6b;
+    margin-top: 30px;
+    cursor: pointer;
+  }
+  
+  .logout-button:hover {
+    color: #ff4757;
+  }
