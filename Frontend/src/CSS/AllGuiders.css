@@ -1,0 +1,31 @@
+.guiders-container {
+    padding: 20px;
+  }
+  
+  .guiders-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .guider-card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .guider-card h3 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .guider-card p {
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  .guider-card strong {
+    color: #333;
+  }
+  

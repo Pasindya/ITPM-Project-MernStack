@@ -7,6 +7,10 @@ import Footer from './Components/Footer';
 import Packages from './Pages/Packages';
 import Weather from './Pages/Weather';
 import Calender from './Pages/Calender';
+import Guider from './Pages/Guider';
+import AllGuiders from './Pages/AllGuiders';
+
+
 
 const App = () => {
   return (
@@ -18,6 +22,10 @@ const App = () => {
         <Route path="/packages" element={<Packages />} />
         <Route path="/weather" element={<Weather />} />
         <Route path="/calender" element={<Calender />} />
+        <Route path="/guider" element={<Guider />} />
+        <Route path="/allGuiders" element={<AllGuiders />} />
+
+
       
       </Routes>
       <Footer /> {/* Include the Footer here */}
