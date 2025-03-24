@@ -1,17 +1,30 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../CSS/Cultural.css'; // Import the CSS file
 
 function Beach() {
+  const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false); // State to control popup visibility
   const [formData, setFormData] = useState({
     name: '',
     mobile: '',
     email: '',
     livingCountry: '',
-    package: 'Beach Paradise Getaway', // Auto-fill package name
+    tpackage: 'Beach Paradise Getaway', // Default package
     arrivalDate: ''
   });
   const [errors, setErrors] = useState({}); // State to store validation errors
   const [successMessage, setSuccessMessage] = useState(''); // State to store success message
+
+  // Package options for the dropdown
+  const packageOptions = [
+    'Cultural Heritage Tour',
+    'Beach Paradise Getaway',
+    'Wildlife Safari Adventure',
+    'Hill Country Escape',
+    'Ayurveda & Wellness Retreat',
+    'Adventure & Trekking Expedition'
+  ];
 
   // Open the popup
   const handleBookNow = () => {
@@ -51,7 +64,7 @@ function Beach() {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validate all fields
@@ -94,550 +107,153 @@ function Beach() {
     }
 
     // If no errors, proceed with submission
-    console.log('Form Data:', formData);
+    try {
+      // Send form data to the backend
+      const response = await fetch('http://localhost:5000/packbookings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    // Simulate successful submission
-    setSuccessMessage('Package successfully booked!');
-    setTimeout(() => {
-      setShowForm(false); // Close the form after 2 seconds
-      setSuccessMessage(''); // Clear success message
-    }, 2000);
+      if (!response.ok) {
+        throw new Error('Failed to submit form');
+      }
+
+      // Simulate successful submission
+      setSuccessMessage('Package successfully booked!');
+      setTimeout(() => {
+        setShowForm(false); // Close the form after 2 seconds
+        setSuccessMessage(''); // Clear success message
+        navigate('/packages', { state: { formData } }); // Navigate to the next page
+      }, 2000);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSuccessMessage('Failed to book the package. Please try again.');
+    }
   };
 
   return (
-    <div
-      style={{
-        padding: '2rem',
-        backgroundColor: '#f8f9fa',
-        minHeight: '100vh',
-        fontFamily: 'Arial, sans-serif',
-      }}
-    >
-      <h1
-        style={{
-          fontSize: '2.5rem',
-          fontWeight: 'bold',
-          color: '#1e293b',
-          textAlign: 'center',
-          marginBottom: '2rem',
-        }}
-      >
-        Beach Paradise Getaway
-      </h1>
-
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1.5rem',
-          marginBottom: '2rem',
-        }}
-      >
-        <div
-          style={{
-            backgroundColor: 'white',
-            borderRadius: '0.5rem',
-            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-            padding: '1.5rem',
-          }}
-        >
-          <h2
-            style={{
-              fontSize: '1.5rem',
-              fontWeight: 'bold',
-              color: '#1e293b',
-              marginBottom: '0.5rem',
-            }}
-          >
-            Destinations: Mirissa, Unawatuna, Bentota
-          </h2>
-          <p
-            style={{
-              fontSize: '1rem',
-              color: '#64748b',
-              lineHeight: '1.6',
-            }}
-          >
+    <div className="cultural-container">
+      <h1>Beach Paradise Getaway</h1>
+      <div className="tour-details">
+        <div className="destination">
+          <h2>Destinations: Mirissa, Unawatuna, Bentota</h2>
+          <p>
             Relax on the pristine beaches of Sri Lanka with this 5-day getaway. Enjoy sun, sand, and sea at some of the most beautiful coastal destinations.
           </p>
         </div>
-
-        <div
-          style={{
-            backgroundColor: 'white',
-            borderRadius: '0.5rem',
-            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-            padding: '1.5rem',
-          }}
-        >
-          <h2
-            style={{
-              fontSize: '1.5rem',
-              fontWeight: 'bold',
-              color: '#1e293b',
-              marginBottom: '0.5rem',
-            }}
-          >
-            Duration: 5 Days
-          </h2>
-          <p
-            style={{
-              fontSize: '1rem',
-              color: '#64748b',
-              lineHeight: '1.6',
-            }}
-          >
+        <div className="duration">
+          <h2>Duration: 5 Days</h2>
+          <p>
             This 5-day tour offers a perfect blend of relaxation and adventure along Sri Lanka's stunning coastline.
           </p>
         </div>
-
-        <div
-          style={{
-            backgroundColor: 'white',
-            borderRadius: '0.5rem',
-            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-            padding: '1.5rem',
-          }}
-        >
-          <h2
-            style={{
-              fontSize: '1.5rem',
-              fontWeight: 'bold',
-              color: '#1e293b',
-              marginBottom: '0.5rem',
-            }}
-          >
-            Price: $900
-          </h2>
-          <p
-            style={{
-              fontSize: '1rem',
-              color: '#64748b',
-              lineHeight: '1.6',
-            }}
-          >
+        <div className="price">
+          <h2>Price: $900</h2>
+          <p>
             The package includes accommodation, transportation, guided tours, and meals.
           </p>
         </div>
       </div>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '1.5rem',
-          marginBottom: '2rem',
-        }}
-      >
-        <div
-          style={{
-            backgroundColor: 'white',
-            borderRadius: '0.5rem',
-            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-            overflow: 'hidden',
-            textAlign: 'center',
-          }}
-        >
-          <img
-            src="/Booking/mirissa.jpg"
-            alt="Mirissa"
-            style={{
-              width: '100%',
-              height: '200px',
-              objectFit: 'cover',
-            }}
-          />
-          <h3
-            style={{
-              fontSize: '1.25rem',
-              fontWeight: 'bold',
-              color: '#1e293b',
-              margin: '1rem 0',
-            }}
-          >
-            Mirissa
-          </h3>
-          <p
-            style={{
-              fontSize: '1rem',
-              color: '#64748b',
-              padding: '0 1rem 1rem',
-            }}
-          >
+      <div className="destination-images">
+        <div className="destination-card">
+          <img src="/Images/thal.jpg" alt="Mirissa" />
+          <h3>Mirissa</h3>
+          <p>
             Mirissa is famous for its golden beaches and whale watching. Enjoy the serene coastline and vibrant nightlife.
           </p>
         </div>
-
-        <div
-          style={{
-            backgroundColor: 'white',
-            borderRadius: '0.5rem',
-            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-            overflow: 'hidden',
-            textAlign: 'center',
-          }}
-        >
-          <img
-            src="/Booking/una.jpg"
-            alt="Unawatuna"
-            style={{
-              width: '100%',
-              height: '200px',
-              objectFit: 'cover',
-            }}
-          />
-          <h3
-            style={{
-              fontSize: '1.25rem',
-              fontWeight: 'bold',
-              color: '#1e293b',
-              margin: '1rem 0',
-            }}
-          >
-            Unawatuna
-          </h3>
-          <p
-            style={{
-              fontSize: '1rem',
-              color: '#64748b',
-              padding: '0 1rem 1rem',
-            }}
-          >
+        <div className="destination-card">
+          <img src="/Images/fort.jpg" alt="Unawatuna" />
+          <h3>Unawatuna</h3>
+          <p>
             Unawatuna is a serene beach with crystal-clear waters, perfect for swimming and snorkeling.
           </p>
         </div>
-
-        <div
-          style={{
-            backgroundColor: 'white',
-            borderRadius: '0.5rem',
-            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-            overflow: 'hidden',
-            textAlign: 'center',
-          }}
-        >
-          <img
-            src="/Booking/ben.jpg"
-            alt="Bentota"
-            style={{
-              width: '100%',
-              height: '200px',
-              objectFit: 'cover',
-            }}
-          />
-          <h3
-            style={{
-              fontSize: '1.25rem',
-              fontWeight: 'bold',
-              color: '#1e293b',
-              margin: '1rem 0',
-            }}
-          >
-            Bentota
-          </h3>
-          <p
-            style={{
-              fontSize: '1rem',
-              color: '#64748b',
-              padding: '0 1rem 1rem',
-            }}
-          >
+        <div className="destination-card">
+          <img src="/Images/coco.jpg" alt="Bentota" />
+          <h3>Bentota</h3>
+          <p>
             Bentota is known for its water sports and luxury resorts. Enjoy activities like jet skiing, windsurfing, and more.
           </p>
         </div>
       </div>
 
-      <div
-        style={{
-          textAlign: 'center',
-          marginBottom: '2rem',
-        }}
-      >
-        <button
-          onClick={handleBookNow}
-          style={{
-            backgroundColor: '#3b82f6',
-            color: 'white',
-            padding: '0.75rem 1.5rem',
-            borderRadius: '0.375rem',
-            border: 'none',
-            fontSize: '1rem',
-            fontWeight: 'bold',
-            cursor: 'pointer',
-            transition: 'background-color 0.2s',
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2563eb')}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#3b82f6')}
-        >
-          Book Now
-        </button>
+      <div className="book-now">
+        <button className="book-now-button" onClick={handleBookNow}>Book Now</button>
       </div>
 
       {/* Popup Form */}
       {showForm && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <div
-            style={{
-              backgroundColor: 'white',
-              borderRadius: '0.5rem',
-              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-              padding: '2rem',
-              width: '100%',
-              maxWidth: '500px',
-              position: 'relative',
-            }}
-          >
-            <h2
-              style={{
-                fontSize: '1.5rem',
-                fontWeight: 'bold',
-                color: '#1e293b',
-                marginBottom: '1.5rem',
-              }}
-            >
-              Package Booking Form
-            </h2>
-            <button
-              onClick={handleCloseForm}
-              style={{
-                position: 'absolute',
-                top: '1rem',
-                right: '1rem',
-                backgroundColor: 'transparent',
-                border: 'none',
-                fontSize: '1.5rem',
-                cursor: 'pointer',
-                color: '#64748b',
-              }}
-            >
-              ×
-            </button>
+        <div className="popup-overlay">
+          <div className="popup-content">
+            <h2>Package Booking Form</h2>
+            <button className="close-button" onClick={handleCloseForm}>×</button>
             <form onSubmit={handleSubmit}>
-              <div
-                style={{
-                  marginBottom: '1rem',
-                }}
-              >
-                <label
-                  style={{
-                    display: 'block',
-                    fontSize: '1rem',
-                    color: '#1e293b',
-                    marginBottom: '0.5rem',
-                  }}
-                >
-                  Name:
-                </label>
+              <div className="form-group">
+                <label>Name:</label>
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  style={{
-                    width: '100%',
-                    padding: '0.5rem',
-                    borderRadius: '0.375rem',
-                    border: '1px solid #cbd5e1',
-                    fontSize: '1rem',
-                  }}
                 />
-                {errors.name && (
-                  <span
-                    style={{
-                      color: '#ef4444',
-                      fontSize: '0.875rem',
-                      marginTop: '0.25rem',
-                      display: 'block',
-                    }}
-                  >
-                    {errors.name}
-                  </span>
-                )}
+                {errors.name && <span className="error">{errors.name}</span>}
               </div>
-              <div
-                style={{
-                  marginBottom: '1rem',
-                }}
-              >
-                <label
-                  style={{
-                    display: 'block',
-                    fontSize: '1rem',
-                    color: '#1e293b',
-                    marginBottom: '0.5rem',
-                  }}
-                >
-                  Mobile:
-                </label>
+              <div className="form-group">
+                <label>Mobile:</label>
                 <input
                   type="text"
                   name="mobile"
                   value={formData.mobile}
                   onChange={handleChange}
                   required
-                  style={{
-                    width: '100%',
-                    padding: '0.5rem',
-                    borderRadius: '0.375rem',
-                    border: '1px solid #cbd5e1',
-                    fontSize: '1rem',
-                  }}
                 />
-                {errors.mobile && (
-                  <span
-                    style={{
-                      color: '#ef4444',
-                      fontSize: '0.875rem',
-                      marginTop: '0.25rem',
-                      display: 'block',
-                    }}
-                  >
-                    {errors.mobile}
-                  </span>
-                )}
+                {errors.mobile && <span className="error">{errors.mobile}</span>}
               </div>
-              <div
-                style={{
-                  marginBottom: '1rem',
-                }}
-              >
-                <label
-                  style={{
-                    display: 'block',
-                    fontSize: '1rem',
-                    color: '#1e293b',
-                    marginBottom: '0.5rem',
-                  }}
-                >
-                  Email:
-                </label>
+              <div className="form-group">
+                <label>Email:</label>
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  style={{
-                    width: '100%',
-                    padding: '0.5rem',
-                    borderRadius: '0.375rem',
-                    border: '1px solid #cbd5e1',
-                    fontSize: '1rem',
-                  }}
                 />
-                {errors.email && (
-                  <span
-                    style={{
-                      color: '#ef4444',
-                      fontSize: '0.875rem',
-                      marginTop: '0.25rem',
-                      display: 'block',
-                    }}
-                  >
-                    {errors.email}
-                  </span>
-                )}
+                {errors.email && <span className="error">{errors.email}</span>}
               </div>
-              <div
-                style={{
-                  marginBottom: '1rem',
-                }}
-              >
-                <label
-                  style={{
-                    display: 'block',
-                    fontSize: '1rem',
-                    color: '#1e293b',
-                    marginBottom: '0.5rem',
-                  }}
-                >
-                  Living Country:
-                </label>
+              <div className="form-group">
+                <label>Living Country:</label>
                 <input
                   type="text"
                   name="livingCountry"
                   value={formData.livingCountry}
                   onChange={handleChange}
                   required
-                  style={{
-                    width: '100%',
-                    padding: '0.5rem',
-                    borderRadius: '0.375rem',
-                    border: '1px solid #cbd5e1',
-                    fontSize: '1rem',
-                  }}
                 />
-                {errors.livingCountry && (
-                  <span
-                    style={{
-                      color: '#ef4444',
-                      fontSize: '0.875rem',
-                      marginTop: '0.25rem',
-                      display: 'block',
-                    }}
-                  >
-                    {errors.livingCountry}
-                  </span>
-                )}
+                {errors.livingCountry && <span className="error">{errors.livingCountry}</span>}
               </div>
-              <div
-                style={{
-                  marginBottom: '1rem',
-                }}
-              >
-                <label
-                  style={{
-                    display: 'block',
-                    fontSize: '1rem',
-                    color: '#1e293b',
-                    marginBottom: '0.5rem',
-                  }}
+              <div className="form-group">
+                <label>Package:</label>
+                <select
+                  name="tpackage"
+                  value={formData.tpackage}
+                  onChange={handleChange}
+                  required
                 >
-                  Package:
-                </label>
-                <input
-                  type="text"
-                  name="package"
-                  value={formData.package}
-                  readOnly
-                  style={{
-                    width: '100%',
-                    padding: '0.5rem',
-                    borderRadius: '0.375rem',
-                    border: '1px solid #cbd5e1',
-                    fontSize: '1rem',
-                    backgroundColor: '#f1f5f9',
-                  }}
-                />
+                  {packageOptions.map((option, index) => (
+                    <option key={index} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
               </div>
-              <div
-                style={{
-                  marginBottom: '1.5rem',
-                }}
-              >
-                <label
-                  style={{
-                    display: 'block',
-                    fontSize: '1rem',
-                    color: '#1e293b',
-                    marginBottom: '0.5rem',
-                  }}
-                >
-                  Arrival Date:
-                </label>
+              <div className="form-group">
+                <label>Arrival Date:</label>
                 <input
                   type="date"
                   name="arrivalDate"
@@ -645,59 +261,12 @@ function Beach() {
                   onChange={handleChange}
                   min={new Date().toISOString().split('T')[0]}
                   required
-                  style={{
-                    width: '100%',
-                    padding: '0.5rem',
-                    borderRadius: '0.375rem',
-                    border: '1px solid #cbd5e1',
-                    fontSize: '1rem',
-                  }}
                 />
-                {errors.arrivalDate && (
-                  <span
-                    style={{
-                      color: '#ef4444',
-                      fontSize: '0.875rem',
-                      marginTop: '0.25rem',
-                      display: 'block',
-                    }}
-                  >
-                    {errors.arrivalDate}
-                  </span>
-                )}
+                {errors.arrivalDate && <span className="error">{errors.arrivalDate}</span>}
               </div>
-              <button
-                type="submit"
-                style={{
-                  backgroundColor: '#3b82f6',
-                  color: 'white',
-                  padding: '0.75rem 1.5rem',
-                  borderRadius: '0.375rem',
-                  border: 'none',
-                  fontSize: '1rem',
-                  fontWeight: 'bold',
-                  cursor: 'pointer',
-                  width: '100%',
-                  transition: 'background-color 0.2s',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#2563eb')}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#3b82f6')}
-              >
-                Submit
-              </button>
+              <button type="submit" className="submit-button">Submit</button>
             </form>
-            {successMessage && (
-              <div
-                style={{
-                  color: '#22c55e',
-                  fontSize: '1rem',
-                  marginTop: '1rem',
-                  textAlign: 'center',
-                }}
-              >
-                {successMessage}
-              </div>
-            )}
+            {successMessage && <div className="success-message">{successMessage}</div>}
           </div>
         </div>
       )}
