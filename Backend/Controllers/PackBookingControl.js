@@ -33,7 +33,7 @@ const getAllPackBookings = async (req, res, next) => {
 
 // Add a new package booking
 const addPackBookings = async (req, res, next) => {
-    const { name, mobile, email, livingCountry, tpackage, arrivalDate, noOfTravellers } = req.body;
+    const { name, mobile, email, livingCountry, tpackage, arrivalDate } = req.body; // Removed noOfTravellers
     let packbookings;
 
     try {
@@ -45,8 +45,7 @@ const addPackBookings = async (req, res, next) => {
             email,
             livingCountry,
             tpackage,
-            arrivalDate,
-            noOfTravellers
+            arrivalDate
         });
         await packbookings.save();
     } catch (err) {
@@ -84,7 +83,7 @@ const getById = async (req, res, next) => {
 // Update a package booking
 const updatePackBooking = async (req, res, next) => {
     const id = req.params.id;
-    const { name, mobile, email, livingCountry, tpackage, arrivalDate, noOfTravellers } = req.body;
+    const { name, mobile, email, livingCountry, tpackage, arrivalDate } = req.body; // Removed noOfTravellers
     let packbookings;
 
     try {
@@ -96,8 +95,7 @@ const updatePackBooking = async (req, res, next) => {
                 email,
                 livingCountry,
                 tpackage,
-                arrivalDate,
-                noOfTravellers
+                arrivalDate
             },
             { new: true } // Return the updated document
         );
