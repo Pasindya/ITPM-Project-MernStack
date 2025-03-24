@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaHome, FaEdit, FaChartLine, FaFileAlt, FaSignOutAlt } from 'react-icons/fa'; // Import icons
+import { FaHome, FaEdit, FaChartLine, FaFileAlt, FaSignOutAlt, FaBars, FaTimes } from 'react-icons/fa'; // Import icons
 
 function DashNav() {
   const navigate = useNavigate(); // Hook for navigation
+  const [isNavVisible, setIsNavVisible] = useState(false); // State to control visibility
 
   // Handle logout
   const handleLogout = () => {
@@ -11,196 +12,232 @@ function DashNav() {
     navigate('/home'); // Navigate to the home page
   };
 
+  // Toggle navigation visibility
+  const toggleNav = () => {
+    setIsNavVisible(!isNavVisible);
+  };
+
   return (
-    <div
-      style={{
-        width: '250px',
-        backgroundColor: '#1e293b',
-        color: 'white',
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        padding: '1rem',
-      }}
-    >
-      {/* Sidebar Header */}
+    <>
+      {/* Toggle Button */}
+      <button
+        onClick={toggleNav}
+        style={{
+          position: 'fixed',
+          top: '1rem',
+          left: '1rem',
+          zIndex: 1000,
+          backgroundColor: '#1e293b',
+          color: 'white',
+          border: 'none',
+          borderRadius: '0.375rem',
+          padding: '0.75rem',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+        }}
+      >
+        {isNavVisible ? <FaTimes size={24} /> : <FaBars size={24} />}
+      </button>
+
+      {/* Navigation Bar */}
       <div
         style={{
+          width: '250px',
+          backgroundColor: '#1e293b',
+          color: 'white',
+          height: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
           padding: '1rem',
-          borderBottom: '1px solid #334155',
-          marginBottom: '1rem',
+          position: 'fixed',
+          top: 0,
+          left: isNavVisible ? 0 : '-250px', // Slide in/out effect
+          transition: 'left 0.3s ease',
+          zIndex: 999,
         }}
       >
-        <h2
+        {/* Sidebar Header */}
+        <div
           style={{
-            fontSize: '1.5rem',
-            fontWeight: 'bold',
-            color: 'white',
-            textAlign: 'center',
+            padding: '1rem',
+            borderBottom: '1px solid #334155',
+            marginBottom: '1rem',
           }}
         >
-          Dashboard
-        </h2>
-      </div>
+          <h2
+            style={{
+              fontSize: '1.5rem',
+              fontWeight: 'bold',
+              color: 'white',
+              textAlign: 'center',
+            }}
+          >
+            Dashboard
+          </h2>
+        </div>
 
-      {/* Sidebar Menu */}
-      <ul
-        style={{
-          listStyle: 'none',
-          padding: 0,
-          margin: 0,
-          flex: 1,
-        }}
-      >
-        <li
+        {/* Sidebar Menu */}
+        <ul
           style={{
-            marginBottom: '0.5rem',
+            listStyle: 'none',
+            padding: 0,
+            margin: 0,
+            flex: 1,
           }}
         >
-          <Link
-            to="/dashboard"
+          <li
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              padding: '0.75rem',
-              borderRadius: '0.375rem',
-              color: 'white',
-              textDecoration: 'none',
-              transition: 'background-color 0.2s',
+              marginBottom: '0.5rem',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#334155')}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
           >
-            <FaHome
+            <Link
+              to="/dashboard"
               style={{
-                marginRight: '0.75rem',
-                fontSize: '1.25rem',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '0.75rem',
+                borderRadius: '0.375rem',
+                color: 'white',
+                textDecoration: 'none',
+                transition: 'background-color 0.2s',
               }}
-            />
-            Home
-          </Link>
-        </li>
-        <li
-          style={{
-            marginBottom: '0.5rem',
-          }}
-        >
-          <Link
-            to="/packbooking"
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#334155')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+            >
+              <FaHome
+                style={{
+                  marginRight: '0.75rem',
+                  fontSize: '1.25rem',
+                }}
+              />
+              Home
+            </Link>
+          </li>
+          <li
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              padding: '0.75rem',
-              borderRadius: '0.375rem',
-              color: 'white',
-              textDecoration: 'none',
-              transition: 'background-color 0.2s',
+              marginBottom: '0.5rem',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#334155')}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
           >
-            <FaEdit
+            <Link
+              to="/packdetails"
               style={{
-                marginRight: '0.75rem',
-                fontSize: '1.25rem',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '0.75rem',
+                borderRadius: '0.375rem',
+                color: 'white',
+                textDecoration: 'none',
+                transition: 'background-color 0.2s',
               }}
-            />
-            Edit Package
-          </Link>
-        </li>
-        <li
-          style={{
-            marginBottom: '0.5rem',
-          }}
-        >
-          <Link
-            to="/view-report"
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#334155')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+            >
+              <FaEdit
+                style={{
+                  marginRight: '0.75rem',
+                  fontSize: '1.25rem',
+                }}
+              />
+              Edit Package
+            </Link>
+          </li>
+          <li
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              padding: '0.75rem',
-              borderRadius: '0.375rem',
-              color: 'white',
-              textDecoration: 'none',
-              transition: 'background-color 0.2s',
+              marginBottom: '0.5rem',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#334155')}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
           >
-            <FaChartLine
+            <Link
+              to="/view-report"
               style={{
-                marginRight: '0.75rem',
-                fontSize: '1.25rem',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '0.75rem',
+                borderRadius: '0.375rem',
+                color: 'white',
+                textDecoration: 'none',
+                transition: 'background-color 0.2s',
               }}
-            />
-            View Report
-          </Link>
-        </li>
-        <li
-          style={{
-            marginBottom: '0.5rem',
-          }}
-        >
-          <Link
-            to="/main-summary"
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#334155')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+            >
+              <FaChartLine
+                style={{
+                  marginRight: '0.75rem',
+                  fontSize: '1.25rem',
+                }}
+              />
+              View Report
+            </Link>
+          </li>
+          <li
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              padding: '0.75rem',
-              borderRadius: '0.375rem',
-              color: 'white',
-              textDecoration: 'none',
-              transition: 'background-color 0.2s',
+              marginBottom: '0.5rem',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#334155')}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
           >
-            <FaFileAlt
+            <Link
+              to="/main-summary"
               style={{
-                marginRight: '0.75rem',
-                fontSize: '1.25rem',
+                display: 'flex',
+                alignItems: 'center',
+                padding: '0.75rem',
+                borderRadius: '0.375rem',
+                color: 'white',
+                textDecoration: 'none',
+                transition: 'background-color 0.2s',
               }}
-            />
-            Main Summary
-          </Link>
-        </li>
-      </ul>
+              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#334155')}
+              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+            >
+              <FaFileAlt
+                style={{
+                  marginRight: '0.75rem',
+                  fontSize: '1.25rem',
+                }}
+              />
+              Main Summary
+            </Link>
+          </li>
+        </ul>
 
-      {/* Logout Button */}
-      <div
-        style={{
-          padding: '1rem',
-          borderTop: '1px solid #334155',
-        }}
-      >
-        <button
-          onClick={handleLogout}
+        {/* Logout Button */}
+        <div
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            width: '100%',
-            padding: '0.75rem',
-            borderRadius: '0.375rem',
-            backgroundColor: 'transparent',
-            border: 'none',
-            color: 'white',
-            fontSize: '1rem',
-            cursor: 'pointer',
-            transition: 'background-color 0.2s',
+            padding: '1rem',
+            borderTop: '1px solid #334155',
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#334155')}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
         >
-          <FaSignOutAlt
+          <button
+            onClick={handleLogout}
             style={{
-              marginRight: '0.75rem',
-              fontSize: '1.25rem',
+              display: 'flex',
+              alignItems: 'center',
+              width: '100%',
+              padding: '0.75rem',
+              borderRadius: '0.375rem',
+              backgroundColor: 'transparent',
+              border: 'none',
+              color: 'white',
+              fontSize: '1rem',
+              cursor: 'pointer',
+              transition: 'background-color 0.2s',
             }}
-          />
-          Logout
-        </button>
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#334155')}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+          >
+            <FaSignOutAlt
+              style={{
+                marginRight: '0.75rem',
+                fontSize: '1.25rem',
+              }}
+            />
+            Logout
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
