@@ -1,7 +1,41 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-function Packbooking({ packbooking }) {
-  const { _id, name, mobile, email, livingCountry, tpackage, arrivalDate, noOfTravellers } = packbooking;
+function Packbooking({ packbooking, onDelete }) {
+  const { _id, name, mobile, email, livingCountry, tpackage, arrivalDate } = packbooking;
+  const navigate = useNavigate();
+
+  // Handle Update button click
+  const handleUpdate = () => {
+    navigate(`/updatepbook/${_id}`); // Navigate to the update page
+  };
+
+  // Handle Delete button click
+  const handleDelete = async () => {
+    // Show confirmation dialog
+    const isConfirmed = window.confirm('Are you sure you want to delete this booking?');
+    
+    if (!isConfirmed) return;
+
+    try {
+      const response = await fetch(`http://localhost:5000/packbookings/${_id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete booking');
+      }
+
+      // Call the onDelete function passed as a prop to update the parent state
+      onDelete(_id);
+      
+      // Refresh the page after successful deletion
+      window.location.reload();
+    } catch (error) {
+      console.error('Error deleting booking:', error);
+    }
+  };
 
   return (
     <div
@@ -161,25 +195,6 @@ function Packbooking({ packbooking }) {
             {new Date(arrivalDate).toLocaleDateString()}
           </div>
         </div>
-        <div>
-          <div
-            style={{
-              fontSize: '0.875rem',
-              color: '#64748b',
-            }}
-          >
-            Travellers
-          </div>
-          <div
-            style={{
-              fontSize: '1rem',
-              fontWeight: '500',
-              color: '#1e293b',
-            }}
-          >
-            {noOfTravellers}
-          </div>
-        </div>
       </div>
 
       {/* Action Buttons */}
@@ -190,6 +205,7 @@ function Packbooking({ packbooking }) {
         }}
       >
         <button
+          onClick={handleUpdate} // Link to update functionality
           style={{
             background: 'linear-gradient(135deg, #10b981, #059669)',
             color: 'white',
@@ -210,6 +226,7 @@ function Packbooking({ packbooking }) {
           Update
         </button>
         <button
+          onClick={handleDelete} // Link to delete functionality
           style={{
             background: 'linear-gradient(135deg, #ef4444, #dc2626)',
             color: 'white',

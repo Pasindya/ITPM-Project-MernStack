@@ -22,13 +22,16 @@ import Beach from './Pages/Beach';
 import Safari from './Pages/Safari';
 import Hill from './Pages/Hill';
 import Adminpkg from './Pages/Adminpkg';
-import Packagenav from './Pages/Packagenav';
+import Packnav from './Packbooking/Packnav';
+
+import Packdetails from './Pages/Packdetails';
+import Updatepbook from './Pages/Updatepbook';
 
 const App = () => {
   const location = useLocation(); // Get the current location
 
   // Define routes where Navbar and Footer should be hidden
-  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav'];
+  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav','/packnav','/viewbooking','/packdetails','/updatepbook/PBK_12837','/updatepbook/PBK_48926','/updatepbook/PBK_54806'];
 
   // Check if the current route is in the hideNavbarFooterRoutes array
   const shouldHideNavbarFooter = hideNavbarFooterRoutes.includes(location.pathname);
@@ -49,7 +52,7 @@ const App = () => {
         <Route path="/calender" element={<Calender />} />
         <Route path="/guider" element={<Guider />} />
         <Route path="/allGuiders" element={<AllGuiders />} />
-        <Route path="/packagenav" element={<Packagenav />} />
+     
         <Route path="/dashNav" element={<DashNav />} />
         <Route path="/transport" element={<Transport />} />
         <Route path="/vehicles/:category" element={<VehicleCategory />} />
@@ -60,6 +63,11 @@ const App = () => {
         <Route path="/safari" element={<Safari />} />
         <Route path="/hill" element={<Hill />} />
         <Route path="/adminpkg" element={<Adminpkg />} />
+        <Route path="/Packnav" element={<Packnav />} />
+        <Route path="/packdetails" element={<Packdetails />} />
+        
+        <Route path="/updatepbook/:id" element={<Updatepbook />} />
+
       </Routes>
 
       {/* Conditionally render Footer */}
