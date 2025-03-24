@@ -35,10 +35,6 @@ const PackBookingSchema = new Schema({
     arrivalDate: {
         type: Date,
         required: true,
-    },
-    noOfTravellers: {
-        type: Number,
-        required: true,
     }
 });
 
