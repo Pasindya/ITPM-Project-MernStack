@@ -134,21 +134,21 @@ function Hill() {
 
       <div className="destination-images">
         <div className="destination-card">
-          <img src="/Images/nuwara-eliya.jpg" alt="Nuwara Eliya" />
+          <img src="/Images/swing.jpg" alt="Nuwara Eliya" />
           <h3>Nuwara Eliya</h3>
           <p>
             Known as "Little England," Nuwara Eliya is famous for its tea plantations, colonial architecture, and cool climate.
           </p>
         </div>
         <div className="destination-card">
-          <img src="/Images/ella.jpg" alt="Ella" />
+          <img src="/Images/rivers.jpg" alt="Ella" />
           <h3>Ella</h3>
           <p>
             Ella is a small town surrounded by green hills, waterfalls, and tea plantations. It's perfect for hiking and relaxation.
           </p>
         </div>
         <div className="destination-card">
-          <img src="/Images/horton-plains.jpg" alt="Horton Plains" />
+          <img src="/Images/mount.jpg" alt="Horton Plains" />
           <h3>Horton Plains</h3>
           <p>
             Horton Plains National Park is known for its scenic trails, World's End viewpoint, and diverse wildlife.
