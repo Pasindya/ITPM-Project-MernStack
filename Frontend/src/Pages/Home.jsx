@@ -55,6 +55,7 @@ const Home = () => {
               fontSize: '4rem',
               fontWeight: 'bold',
               marginBottom: '1rem',
+              color: 'white'
             }}
           >
             Welcome to Sri Lanka
@@ -62,6 +63,7 @@ const Home = () => {
           <p
             style={{
               fontSize: '1.5rem',
+              
             }}
           >
             Discover the pearl of the Indian Ocean.

@@ -143,7 +143,8 @@ function Hill() {
     heroTitle: {
       fontSize: '3rem',
       marginBottom: '20px',
-      textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+      textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+      color: 'white'
     },
     heroSubtitle: {
       fontSize: '1.5rem',
