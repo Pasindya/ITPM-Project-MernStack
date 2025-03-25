@@ -27,7 +27,7 @@ import Safari from './Pages/Safari';
 import Hill from './Pages/Hill';
 import Adminpkg from './Pages/Adminpkg';
 import Packnav from './Packbooking/Packnav';
-
+import Packreport from './Pages/Packreport';
 import Packdetails from './Pages/Packdetails';
 import Updatepbook from './Pages/Updatepbook';
 
@@ -35,7 +35,7 @@ const App = () => {
   const location = useLocation(); // Get the current location
 
   // Define routes where Navbar and Footer should be hidden
-  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav','/packnav','/viewbooking','/packdetails','/updatepbook/PBK_12837','/updatepbook/PBK_48926','/updatepbook/PBK_54806'];
+  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav','/packnav','/viewbooking','/packdetails','/updatepbook/PBK_12837','/updatepbook/PBK_48926','/updatepbook/PBK_54806','/packreport'];
 
   // Check if the current route is in the hideNavbarFooterRoutes array
   const shouldHideNavbarFooter = hideNavbarFooterRoutes.includes(location.pathname);
@@ -73,6 +73,7 @@ const App = () => {
         <Route path="/adminpkg" element={<Adminpkg />} />
         <Route path="/Packnav" element={<Packnav />} />
         <Route path="/packdetails" element={<Packdetails />} />
+        <Route path="/packreport" element={<Packreport />} />
         
         <Route path="/updatepbook/:id" element={<Updatepbook />} />
 
