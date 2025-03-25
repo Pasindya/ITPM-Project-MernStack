@@ -31,6 +31,8 @@ import Packreport from './Pages/Packreport';
 import Packdetails from './Pages/Packdetails';
 import Updatepbook from './Pages/Updatepbook';
 import Packsummary from './Pages/Packsummary';
+import Ayur from './Pages/Ayur';
+import Adwenture from './Pages/Adwenture';
 
 const App = () => {
   const location = useLocation(); // Get the current location
@@ -76,6 +78,8 @@ const App = () => {
         <Route path="/packdetails" element={<Packdetails />} />
         <Route path="/packreport" element={<Packreport />} />
         <Route path="/packsummary" element={<Packsummary />} />
+        <Route path="/ayur" element={<Ayur />} />
+        <Route path="/adwenture" element={<Adwenture />} />
     
         
         <Route path="/updatepbook/:id" element={<Updatepbook />} />
