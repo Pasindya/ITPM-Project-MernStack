@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Safari() {
+function Ayur() {
   const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
@@ -9,16 +9,16 @@ function Safari() {
     mobile: '',
     email: '',
     livingCountry: '',
-    tpackage: 'Wildlife Safari Adventure',
+    tpackage: 'Ayurveda & Wellness Retreat',
     arrivalDate: ''
   });
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
 
   const packageOptions = [
-    'Wildlife Safari Adventure',
     'Cultural Heritage Tour',
     'Beach Paradise Getaway',
+    'Wildlife Safari Adventure',
     'Hill Country Escape',
     'Ayurveda & Wellness Retreat',
     'Adventure & Trekking Expedition'
@@ -126,7 +126,7 @@ function Safari() {
       padding: '0 20px'
     },
     hero: {
-      background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/Images/safari-hero.jpg) center/cover no-repeat',
+      background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/Images/ayurveda-hero.jpg) center/cover no-repeat',
       height: '60vh',
       display: 'flex',
       alignItems: 'center',
@@ -150,7 +150,7 @@ function Safari() {
       marginBottom: '30px'
     },
     ctaButton: {
-      backgroundColor: '#e67e22',
+      backgroundColor: '#27ae60',
       color: 'white',
       border: 'none',
       padding: '12px 30px',
@@ -208,7 +208,13 @@ function Safari() {
       background: '#f9f9f9',
       padding: '20px',
       borderRadius: '8px',
-      borderLeft: '5px solid #e67e22'
+      borderLeft: '5px solid #27ae60'
+    },
+    treatmentCard: {
+      background: '#f9f9f9',
+      padding: '20px',
+      borderRadius: '8px',
+      marginBottom: '20px'
     },
     popupOverlay: {
       position: 'fixed',
@@ -302,29 +308,29 @@ function Safari() {
       {/* Hero Section */}
       <div style={styles.hero}>
         <div style={styles.heroContent}>
-          <h1 style={styles.heroTitle}>Wildlife Safari Adventure</h1>
-          <p style={styles.heroSubtitle}>Experience the thrill of spotting leopards, elephants and exotic wildlife in their natural habitat</p>
+          <h1 style={styles.heroTitle}>Ayurveda & Wellness Retreat</h1>
+          <p style={styles.heroSubtitle}>Rejuvenate your mind, body and soul with ancient healing traditions</p>
           <button 
             style={styles.ctaButton} 
             onClick={handleBookNow}
-            onMouseOver={(e) => e.target.style.backgroundColor = '#d35400'}
-            onMouseOut={(e) => e.target.style.backgroundColor = '#e67e22'}
+            onMouseOver={(e) => e.target.style.backgroundColor = '#219653'}
+            onMouseOut={(e) => e.target.style.backgroundColor = '#27ae60'}
           >
-            Book Your Safari
+            Book Your Wellness Journey
           </button>
         </div>
       </div>
 
-      {/* Tour Highlights */}
+      {/* Retreat Highlights */}
       <div style={styles.highlights}>
         <div 
           style={styles.highlightCard}
           onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-10px)'}
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
-          <div style={styles.highlightIcon}>🦁</div>
+          <div style={styles.highlightIcon}>📍</div>
           <h3>Destinations</h3>
-          <p>Yala, Udawalawe, Wilpattu National Parks</p>
+          <p>Beruwala, Ahungalla, Tangalle</p>
         </div>
         <div 
           style={styles.highlightCard}
@@ -333,7 +339,7 @@ function Safari() {
         >
           <div style={styles.highlightIcon}>⏳</div>
           <h3>Duration</h3>
-          <p>4 Days / 3 Nights</p>
+          <p>5 Days / 4 Nights</p>
         </div>
         <div 
           style={styles.highlightCard}
@@ -342,17 +348,16 @@ function Safari() {
         >
           <div style={styles.highlightIcon}>💰</div>
           <h3>Price</h3>
-          <p>Starting from $800 per person</p>
+          <p>Starting from $1000 per person</p>
         </div>
       </div>
 
       {/* Detailed Description */}
       <section style={{ margin: '40px 0' }}>
-        <h2 style={{ textAlign: 'center', color: '#2c3e50', marginBottom: '20px' }}>About the Safari Adventure</h2>
+        <h2 style={{ textAlign: 'center', color: '#2c3e50', marginBottom: '20px' }}>About the Ayurveda Retreat</h2>
         <p style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
-          Embark on an unforgettable journey through Sri Lanka's most famous wildlife sanctuaries. 
-          Our expert guides will take you through diverse ecosystems where you can spot leopards, 
-          elephants, and hundreds of bird species in their natural habitats.
+          Experience authentic Ayurveda treatments in Sri Lanka's most renowned wellness centers. Our retreat combines 
+          ancient healing practices with modern comforts to restore balance and promote holistic wellbeing.
         </p>
       </section>
 
@@ -364,16 +369,15 @@ function Safari() {
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
           <img 
-            src="/Images/minna.jpg" 
-            alt="Yala National Park" 
+            src="/Images/ayur.jpg" 
+            alt="Beruwala" 
             style={styles.cardImage}
           />
           <div style={styles.cardContent}>
-            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Yala National Park</h3>
+            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Beruwala</h3>
             <p>
-              Renowned for its leopard population, Yala offers one of the highest probabilities 
-              of leopard sightings in the world. The park's varied ecosystems also host elephants, 
-              crocodiles, and numerous bird species.
+              Home to some of Sri Lanka's most prestigious Ayurveda resorts, Beruwala offers beachfront wellness centers 
+              with expert physicians and therapists trained in traditional healing methods.
             </p>
           </div>
         </div>
@@ -384,16 +388,15 @@ function Safari() {
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
           <img 
-            src="/Images/udawa.jpg" 
-            alt="Udawalawe National Park" 
+            src="/Images/shote.jpg" 
+            alt="Ahungalla" 
             style={styles.cardImage}
           />
           <div style={styles.cardContent}>
-            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Udawalawe National Park</h3>
+            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Ahungalla</h3>
             <p>
-              Famous for its large elephant herds, Udawalawe provides excellent viewing opportunities 
-              throughout the year. The park's reservoir attracts many animals, making it a wildlife 
-              photographer's paradise.
+              A serene coastal town with luxury Ayurveda resorts that combine traditional treatments with modern spa 
+              therapies, set amidst lush tropical gardens by the Indian Ocean.
             </p>
           </div>
         </div>
@@ -404,54 +407,95 @@ function Safari() {
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
           <img 
-            src="/Images/ti.jpg" 
-            alt="Wilpattu National Park" 
+            src="/Images/yoga.jpg" 
+            alt="Tangalle" 
             style={styles.cardImage}
           />
           <div style={styles.cardContent}>
-            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Wilpattu National Park</h3>
+            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Tangalle</h3>
             <p>
-              Known for its unique "villus" (natural lakes), Wilpattu is Sri Lanka's largest national park. 
-              Its dense forest cover makes leopard sightings more challenging but equally rewarding.
+              This peaceful southern coastal retreat offers authentic Ayurveda programs in tranquil settings, perfect 
+              for those seeking deep relaxation and rejuvenation away from crowds.
             </p>
           </div>
         </div>
       </div>
 
+      {/* Ayurveda Treatments */}
+      <section style={{ margin: '60px 0' }}>
+        <h2 style={{ textAlign: 'center', marginBottom: '40px', color: '#2c3e50' }}>Ayurveda Treatments</h2>
+        
+        <div style={styles.treatmentCard}>
+          <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Panchakarma Detox</h3>
+          <p>
+            A comprehensive detoxification program including therapeutic massage, herbal steam baths, 
+            and cleansing treatments to eliminate toxins and restore balance to the body.
+          </p>
+        </div>
+        
+        <div style={styles.treatmentCard}>
+          <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Abhyanga Massage</h3>
+          <p>
+            Warm herbal oil massage performed by two therapists simultaneously to improve circulation, 
+            relieve muscle tension, and promote deep relaxation.
+          </p>
+        </div>
+        
+        <div style={styles.treatmentCard}>
+          <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Shirodhara Therapy</h3>
+          <p>
+            A continuous stream of warm herbal oil poured on the forehead to calm the nervous system, 
+            relieve stress, and promote mental clarity.
+          </p>
+        </div>
+        
+        <div style={styles.treatmentCard}>
+          <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Yoga & Meditation</h3>
+          <p>
+            Daily sessions with experienced instructors to complement your Ayurveda treatments, 
+            including asanas, pranayama, and guided meditation.
+          </p>
+        </div>
+      </section>
+
       {/* Itinerary */}
       <section style={styles.itinerary}>
-        <h2 style={{ textAlign: 'center', marginBottom: '40px', color: '#2c3e50' }}>Tour Itinerary</h2>
+        <h2 style={{ textAlign: 'center', marginBottom: '40px', color: '#2c3e50' }}>Retreat Itinerary</h2>
         <div style={styles.itineraryGrid}>
           <div style={styles.dayCard}>
-            <h3 style={{ color: '#e67e22', marginBottom: '15px' }}>Day 1: Arrival & Yala Safari</h3>
+            <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Day 1: Arrival & Consultation</h3>
             <ul style={{ paddingLeft: '20px' }}>
-              <li style={{ marginBottom: '8px' }}>Morning transfer to Yala</li>
-              <li style={{ marginBottom: '8px' }}>Afternoon safari in Yala National Park</li>
-              <li style={{ marginBottom: '8px' }}>Dinner and overnight stay at safari lodge</li>
+              <li style={{ marginBottom: '8px' }}>Arrival at retreat center</li>
+              <li style={{ marginBottom: '8px' }}>Consultation with Ayurveda doctor</li>
+              <li style={{ marginBottom: '8px' }}>Welcome herbal drink & orientation</li>
+              <li style={{ marginBottom: '8px' }}>Gentle yoga session</li>
             </ul>
           </div>
           <div style={styles.dayCard}>
-            <h3 style={{ color: '#e67e22', marginBottom: '15px' }}>Day 2: Yala & Udawalawe</h3>
+            <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Day 2: Full Treatment Day</h3>
             <ul style={{ paddingLeft: '20px' }}>
-              <li style={{ marginBottom: '8px' }}>Early morning safari in Yala</li>
-              <li style={{ marginBottom: '8px' }}>Transfer to Udawalawe</li>
-              <li style={{ marginBottom: '8px' }}>Evening safari in Udawalawe</li>
+              <li style={{ marginBottom: '8px' }}>Morning yoga & meditation</li>
+              <li style={{ marginBottom: '8px' }}>Abhyanga massage</li>
+              <li style={{ marginBottom: '8px' }}>Herbal steam bath</li>
+              <li style={{ marginBottom: '8px' }}>Ayurveda lunch</li>
             </ul>
           </div>
           <div style={styles.dayCard}>
-            <h3 style={{ color: '#e67e22', marginBottom: '15px' }}>Day 3: Udawalawe & Wilpattu</h3>
+            <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Day 3: Deep Healing</h3>
             <ul style={{ paddingLeft: '20px' }}>
-              <li style={{ marginBottom: '8px' }}>Morning safari in Udawalawe</li>
-              <li style={{ marginBottom: '8px' }}>Transfer to Wilpattu</li>
-              <li style={{ marginBottom: '8px' }}>Relax at Wilpattu resort</li>
+              <li style={{ marginBottom: '8px' }}>Sunrise meditation</li>
+              <li style={{ marginBottom: '8px' }}>Shirodhara therapy</li>
+              <li style={{ marginBottom: '8px' }}>Herbal compress massage</li>
+              <li style={{ marginBottom: '8px' }}>Nutrition consultation</li>
             </ul>
           </div>
           <div style={styles.dayCard}>
-            <h3 style={{ color: '#e67e22', marginBottom: '15px' }}>Day 4: Wilpattu & Departure</h3>
+            <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Day 4-5: Wellness & Departure</h3>
             <ul style={{ paddingLeft: '20px' }}>
-              <li style={{ marginBottom: '8px' }}>Early morning safari in Wilpattu</li>
-              <li style={{ marginBottom: '8px' }}>Return to Colombo</li>
-              <li style={{ marginBottom: '8px' }}>Airport transfer for departure</li>
+              <li style={{ marginBottom: '8px' }}>Customized treatments</li>
+              <li style={{ marginBottom: '8px' }}>Follow-up consultation</li>
+              <li style={{ marginBottom: '8px' }}>Wellness plan for home</li>
+              <li style={{ marginBottom: '8px' }}>Departure transfer</li>
             </ul>
           </div>
         </div>
@@ -471,8 +515,8 @@ function Safari() {
             </button>
             
             <div style={styles.popupHeader}>
-              <h2 style={{ color: '#2c3e50', marginBottom: '10px' }}>Book Your Safari Adventure</h2>
-              <p style={{ color: '#7f8c8d' }}>Fill in your details to reserve your spot</p>
+              <h2 style={{ color: '#2c3e50', marginBottom: '10px' }}>Book Your Wellness Retreat</h2>
+              <p style={{ color: '#7f8c8d' }}>Fill in your details to reserve your healing journey</p>
             </div>
             
             <form onSubmit={handleSubmit}>
@@ -579,7 +623,7 @@ function Safari() {
               <button 
                 type="submit" 
                 style={styles.submitButton}
-                onMouseOver={(e) => e.target.style.backgroundColor = '#2ecc71'}
+                onMouseOver={(e) => e.target.style.backgroundColor = '#219653'}
                 onMouseOut={(e) => e.target.style.backgroundColor = '#27ae60'}
               >
                 Confirm Booking
@@ -604,4 +648,4 @@ function Safari() {
   );
 }
 
-export default Safari;
+export default Ayur;
