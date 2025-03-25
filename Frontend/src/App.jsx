@@ -9,6 +9,10 @@ import Packages from './Pages/Packages';
 import Weather from './Pages/Weather';
 import Event from './Pages/Event';
 import Eventbooking from './Event/Eventbooking';
+import Eventm from './Event/Eventm';
+import AddEvent from './Event/AddEvent';
+import Add from './Event/Add';
+import UpdateEvent from './Event/UpdateEvent';
 import Calender from './Pages/Calender';
 import Guider from './Pages/Guider';
 import AllGuiders from './Pages/AllGuiders';
@@ -49,6 +53,10 @@ const App = () => {
         <Route path="/weather" element={<Weather />} />
         <Route path="/event" element={<Event />} />
         <Route path="/book-event" element={<Eventbooking />} />
+        <Route path="/eventm" element={<Eventm />} />
+        <Route path="/addevent" element={<AddEvent />} />
+        <Route path="/add" element={<Add />} />
+        <Route path="/updateevent/:id" element={<UpdateEvent />} />
         <Route path="/calender" element={<Calender />} />
         <Route path="/guider" element={<Guider />} />
         <Route path="/allGuiders" element={<AllGuiders />} />

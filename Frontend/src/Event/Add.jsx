@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Eventbooking() {
+function Add() {
     const navigate = useNavigate();
     const [inputs, setInputs] = useState({
         FirstName: "",
@@ -18,46 +18,36 @@ function Eventbooking() {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [shake, setShake] = useState(false);
-    const [error, setError] = useState(null);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setInputs(prev => ({
-            ...prev,
-            [name]: value
+        setInputs((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value,
         }));
     };
 
     const sendRequest = async () => {
-        try {
-            const response = await axios.post("http://localhost:5000/events", {
-                FirstName: inputs.FirstName,
-                LastName: inputs.LastName,
-                City: inputs.City,
-                Number: inputs.Number,
-                Gmail: inputs.Gmail,
-                NumberAdult: Number(inputs.NumberAdult) || 0,
-                Date: inputs.Date,
-                Time: inputs.Time,
-                Location: inputs.Location,
-                EventCategory: inputs.EventCategory
-            });
-            return response.data;
-        } catch (err) {
-            console.error("API Error:", err.response?.data || err.message);
-            throw err;
-        }
+        return await axios.post("http://localhost:5000/events", {
+            FirstName: inputs.FirstName,
+            LastName: inputs.LastName,
+            City: inputs.City,
+            Number: inputs.Number,
+            Gmail: inputs.Gmail,
+            NumberAdult: Number(inputs.NumberAdult),
+            Date: inputs.Date,
+            Time: inputs.Time,
+            Location: inputs.Location,
+            EventCategory: inputs.EventCategory,
+        });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(null);
         
         // Validate required fields
         if (!inputs.FirstName || !inputs.LastName || !inputs.Date || !inputs.Time) {
             setShake(true);
             setTimeout(() => setShake(false), 500);
-            setError("Please fill in all required fields");
             return;
         }
 
@@ -66,9 +56,7 @@ function Eventbooking() {
             await sendRequest();
             navigate("/eventm");
         } catch (error) {
-            console.error("Submission error:", error);
-            setError("Failed to create event. Please try again.");
-        } finally {
+            console.error("Error adding event:", error);
             setIsSubmitting(false);
         }
     };
@@ -105,25 +93,11 @@ function Eventbooking() {
                     color: 'transparent'
                 }}>Create New Event</h1>
                 
-                {error && (
-                    <div style={{
-                        backgroundColor: '#fee2e2',
-                        color: '#b91c1c',
-                        padding: '1rem',
-                        borderRadius: '0.5rem',
-                        marginBottom: '1.5rem',
-                        textAlign: 'center'
-                    }}>
-                        {error}
-                    </div>
-                )}
-
                 <form onSubmit={handleSubmit} style={{
                     display: 'grid',
                     gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
                     gap: '1.5rem'
                 }}>
-                    {/* First Name */}
                     <div style={{ position: 'relative' }}>
                         <input
                             type="text"
@@ -139,6 +113,11 @@ function Eventbooking() {
                                 borderRadius: '10px',
                                 fontSize: '1rem',
                                 transition: 'all 0.3s ease',
+                                ':focus': {
+                                    borderColor: '#6a11cb',
+                                    outline: 'none',
+                                    boxShadow: '0 0 0 3px rgba(106, 17, 203, 0.2)'
+                                }
                             }}
                         />
                         <label style={{
@@ -153,11 +132,10 @@ function Eventbooking() {
                             pointerEvents: 'none',
                             fontSize: inputs.FirstName ? '0.9rem' : '1rem'
                         }}>
-                            First Name*
+                            First Name
                         </label>
                     </div>
 
-                    {/* Last Name */}
                     <div style={{ position: 'relative' }}>
                         <input
                             type="text"
@@ -173,6 +151,11 @@ function Eventbooking() {
                                 borderRadius: '10px',
                                 fontSize: '1rem',
                                 transition: 'all 0.3s ease',
+                                ':focus': {
+                                    borderColor: '#6a11cb',
+                                    outline: 'none',
+                                    boxShadow: '0 0 0 3px rgba(106, 17, 203, 0.2)'
+                                }
                             }}
                         />
                         <label style={{
@@ -187,11 +170,10 @@ function Eventbooking() {
                             pointerEvents: 'none',
                             fontSize: inputs.LastName ? '0.9rem' : '1rem'
                         }}>
-                            Last Name*
+                            Last Name
                         </label>
                     </div>
 
-                    {/* City */}
                     <div style={{ position: 'relative' }}>
                         <input
                             type="text"
@@ -199,6 +181,7 @@ function Eventbooking() {
                             placeholder=" "
                             value={inputs.City}
                             onChange={handleChange}
+                            required
                             style={{
                                 width: '100%',
                                 padding: '1rem',
@@ -206,6 +189,11 @@ function Eventbooking() {
                                 borderRadius: '10px',
                                 fontSize: '1rem',
                                 transition: 'all 0.3s ease',
+                                ':focus': {
+                                    borderColor: '#6a11cb',
+                                    outline: 'none',
+                                    boxShadow: '0 0 0 3px rgba(106, 17, 203, 0.2)'
+                                }
                             }}
                         />
                         <label style={{
@@ -224,14 +212,14 @@ function Eventbooking() {
                         </label>
                     </div>
 
-                    {/* Phone Number */}
                     <div style={{ position: 'relative' }}>
                         <input
-                            type="tel"
+                            type="text"
                             name="Number"
                             placeholder=" "
                             value={inputs.Number}
                             onChange={handleChange}
+                            required
                             style={{
                                 width: '100%',
                                 padding: '1rem',
@@ -239,6 +227,11 @@ function Eventbooking() {
                                 borderRadius: '10px',
                                 fontSize: '1rem',
                                 transition: 'all 0.3s ease',
+                                ':focus': {
+                                    borderColor: '#6a11cb',
+                                    outline: 'none',
+                                    boxShadow: '0 0 0 3px rgba(106, 17, 203, 0.2)'
+                                }
                             }}
                         />
                         <label style={{
@@ -257,7 +250,6 @@ function Eventbooking() {
                         </label>
                     </div>
 
-                    {/* Email */}
                     <div style={{ position: 'relative' }}>
                         <input
                             type="email"
@@ -265,6 +257,7 @@ function Eventbooking() {
                             placeholder=" "
                             value={inputs.Gmail}
                             onChange={handleChange}
+                            required
                             style={{
                                 width: '100%',
                                 padding: '1rem',
@@ -272,6 +265,11 @@ function Eventbooking() {
                                 borderRadius: '10px',
                                 fontSize: '1rem',
                                 transition: 'all 0.3s ease',
+                                ':focus': {
+                                    borderColor: '#6a11cb',
+                                    outline: 'none',
+                                    boxShadow: '0 0 0 3px rgba(106, 17, 203, 0.2)'
+                                }
                             }}
                         />
                         <label style={{
@@ -290,7 +288,6 @@ function Eventbooking() {
                         </label>
                     </div>
 
-                    {/* Number of Adults */}
                     <div style={{ position: 'relative' }}>
                         <input
                             type="number"
@@ -298,7 +295,7 @@ function Eventbooking() {
                             placeholder=" "
                             value={inputs.NumberAdult}
                             onChange={handleChange}
-                            min="1"
+                            required
                             style={{
                                 width: '100%',
                                 padding: '1rem',
@@ -306,6 +303,11 @@ function Eventbooking() {
                                 borderRadius: '10px',
                                 fontSize: '1rem',
                                 transition: 'all 0.3s ease',
+                                ':focus': {
+                                    borderColor: '#6a11cb',
+                                    outline: 'none',
+                                    boxShadow: '0 0 0 3px rgba(106, 17, 203, 0.2)'
+                                }
                             }}
                         />
                         <label style={{
@@ -324,7 +326,6 @@ function Eventbooking() {
                         </label>
                     </div>
 
-                    {/* Date */}
                     <div style={{ position: 'relative' }}>
                         <input
                             type="date"
@@ -340,6 +341,11 @@ function Eventbooking() {
                                 borderRadius: '10px',
                                 fontSize: '1rem',
                                 transition: 'all 0.3s ease',
+                                ':focus': {
+                                    borderColor: '#6a11cb',
+                                    outline: 'none',
+                                    boxShadow: '0 0 0 3px rgba(106, 17, 203, 0.2)'
+                                }
                             }}
                         />
                         <label style={{
@@ -354,11 +360,10 @@ function Eventbooking() {
                             pointerEvents: 'none',
                             fontSize: inputs.Date ? '0.9rem' : '1rem'
                         }}>
-                            Date*
+                            Date
                         </label>
                     </div>
 
-                    {/* Time */}
                     <div style={{ position: 'relative' }}>
                         <input
                             type="time"
@@ -374,6 +379,11 @@ function Eventbooking() {
                                 borderRadius: '10px',
                                 fontSize: '1rem',
                                 transition: 'all 0.3s ease',
+                                ':focus': {
+                                    borderColor: '#6a11cb',
+                                    outline: 'none',
+                                    boxShadow: '0 0 0 3px rgba(106, 17, 203, 0.2)'
+                                }
                             }}
                         />
                         <label style={{
@@ -388,11 +398,10 @@ function Eventbooking() {
                             pointerEvents: 'none',
                             fontSize: inputs.Time ? '0.9rem' : '1rem'
                         }}>
-                            Time*
+                            Time
                         </label>
                     </div>
 
-                    {/* Location */}
                     <div style={{ position: 'relative' }}>
                         <input
                             type="text"
@@ -400,6 +409,7 @@ function Eventbooking() {
                             placeholder=" "
                             value={inputs.Location}
                             onChange={handleChange}
+                            required
                             style={{
                                 width: '100%',
                                 padding: '1rem',
@@ -407,6 +417,11 @@ function Eventbooking() {
                                 borderRadius: '10px',
                                 fontSize: '1rem',
                                 transition: 'all 0.3s ease',
+                                ':focus': {
+                                    borderColor: '#6a11cb',
+                                    outline: 'none',
+                                    boxShadow: '0 0 0 3px rgba(106, 17, 203, 0.2)'
+                                }
                             }}
                         />
                         <label style={{
@@ -425,12 +440,14 @@ function Eventbooking() {
                         </label>
                     </div>
 
-                    {/* Event Category */}
                     <div style={{ position: 'relative' }}>
-                        <select
+                        <input
+                            type="text"
                             name="EventCategory"
+                            placeholder=" "
                             value={inputs.EventCategory}
                             onChange={handleChange}
+                            required
                             style={{
                                 width: '100%',
                                 padding: '1rem',
@@ -438,17 +455,13 @@ function Eventbooking() {
                                 borderRadius: '10px',
                                 fontSize: '1rem',
                                 transition: 'all 0.3s ease',
-                                appearance: 'none',
-                                background: 'white'
+                                ':focus': {
+                                    borderColor: '#6a11cb',
+                                    outline: 'none',
+                                    boxShadow: '0 0 0 3px rgba(106, 17, 203, 0.2)'
+                                }
                             }}
-                        >
-                            <option value="">Select Event Category</option>
-                            <option value="Wedding">Wedding</option>
-                            <option value="Corporate">Corporate</option>
-                            <option value="Birthday">Birthday</option>
-                            <option value="Conference">Conference</option>
-                            <option value="Other">Other</option>
-                        </select>
+                        />
                         <label style={{
                             position: 'absolute',
                             left: '1rem',
@@ -483,7 +496,11 @@ function Eventbooking() {
                                 boxShadow: '0 4px 15px rgba(106, 17, 203, 0.3)',
                                 transition: 'all 0.3s ease',
                                 position: 'relative',
-                                overflow: 'hidden'
+                                overflow: 'hidden',
+                                ':hover': !isSubmitting && {
+                                    boxShadow: '0 6px 20px rgba(106, 17, 203, 0.4)',
+                                    transform: 'translateY(-2px)'
+                                }
                             }}
                         >
                             {isSubmitting ? (
@@ -505,6 +522,7 @@ function Eventbooking() {
                 </form>
             </div>
 
+            {/* Inline CSS for animations */}
             <style>{`
                 @keyframes fadeInUp {
                     from {
@@ -528,15 +546,9 @@ function Eventbooking() {
                     50% { width: 100%; left: 0; }
                     100% { width: 0%; left: 100%; }
                 }
-
-                select:focus, input:focus {
-                    outline: none;
-                    border-color: #6a11cb !important;
-                    box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.2) !important;
-                }
             `}</style>
         </div>
     );
 }
 
-export default Eventbooking;
+export default Add;
