@@ -178,7 +178,7 @@ function DashNav() {
             }}
           >
             <Link
-              to="/main-summary"
+              to="/packsummary"
               style={{
                 display: 'flex',
                 alignItems: 'center',

@@ -30,12 +30,13 @@ import Packnav from './Packbooking/Packnav';
 import Packreport from './Pages/Packreport';
 import Packdetails from './Pages/Packdetails';
 import Updatepbook from './Pages/Updatepbook';
+import Packsummary from './Pages/Packsummary';
 
 const App = () => {
   const location = useLocation(); // Get the current location
 
   // Define routes where Navbar and Footer should be hidden
-  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav','/packnav','/viewbooking','/packdetails','/updatepbook/PBK_12837','/updatepbook/PBK_48926','/updatepbook/PBK_54806','/packreport'];
+  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav','/packnav','/viewbooking','/packdetails','/updatepbook/PBK_12837','/updatepbook/PBK_48926','/updatepbook/PBK_54806','/packreport','/packsummary'];
 
   // Check if the current route is in the hideNavbarFooterRoutes array
   const shouldHideNavbarFooter = hideNavbarFooterRoutes.includes(location.pathname);
@@ -74,6 +75,8 @@ const App = () => {
         <Route path="/Packnav" element={<Packnav />} />
         <Route path="/packdetails" element={<Packdetails />} />
         <Route path="/packreport" element={<Packreport />} />
+        <Route path="/packsummary" element={<Packsummary />} />
+    
         
         <Route path="/updatepbook/:id" element={<Updatepbook />} />
 
