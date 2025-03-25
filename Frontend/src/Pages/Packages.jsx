@@ -46,7 +46,7 @@ function Packages() {
       duration: '5 Days',
       price: '$1000',
       image: '/Images/ayu.jpg',
-      link: '/ayurveda-wellness-retreat',
+      link: '/ayur',
     },
     {
       id: 6,
@@ -55,7 +55,7 @@ function Packages() {
       duration: '8 Days',
       price: '$1500',
       image: '/Images/adams.jpg',
-      link: '/adventure-trekking-expedition',
+      link: '/adwenture',
     },
   ];
 

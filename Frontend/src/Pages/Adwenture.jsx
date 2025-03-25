@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Safari() {
+function Adwenture() {
   const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
@@ -9,16 +9,16 @@ function Safari() {
     mobile: '',
     email: '',
     livingCountry: '',
-    tpackage: 'Wildlife Safari Adventure',
+    tpackage: 'Adventure & Trekking Expedition',
     arrivalDate: ''
   });
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
 
   const packageOptions = [
-    'Wildlife Safari Adventure',
     'Cultural Heritage Tour',
     'Beach Paradise Getaway',
+    'Wildlife Safari Adventure',
     'Hill Country Escape',
     'Ayurveda & Wellness Retreat',
     'Adventure & Trekking Expedition'
@@ -126,7 +126,7 @@ function Safari() {
       padding: '0 20px'
     },
     hero: {
-      background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/Images/safari-hero.jpg) center/cover no-repeat',
+      background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/Images/adventure-hero.jpg) center/cover no-repeat',
       height: '60vh',
       display: 'flex',
       alignItems: 'center',
@@ -150,7 +150,7 @@ function Safari() {
       marginBottom: '30px'
     },
     ctaButton: {
-      backgroundColor: '#e67e22',
+      backgroundColor: '#27ae60',
       color: 'white',
       border: 'none',
       padding: '12px 30px',
@@ -208,7 +208,7 @@ function Safari() {
       background: '#f9f9f9',
       padding: '20px',
       borderRadius: '8px',
-      borderLeft: '5px solid #e67e22'
+      borderLeft: '5px solid #27ae60'
     },
     popupOverlay: {
       position: 'fixed',
@@ -302,15 +302,15 @@ function Safari() {
       {/* Hero Section */}
       <div style={styles.hero}>
         <div style={styles.heroContent}>
-          <h1 style={styles.heroTitle}>Wildlife Safari Adventure</h1>
-          <p style={styles.heroSubtitle}>Experience the thrill of spotting leopards, elephants and exotic wildlife in their natural habitat</p>
+          <h1 style={styles.heroTitle}>Adventure & Trekking Expedition</h1>
+          <p style={styles.heroSubtitle}>Challenge yourself with Sri Lanka's most thrilling outdoor experiences</p>
           <button 
             style={styles.ctaButton} 
             onClick={handleBookNow}
-            onMouseOver={(e) => e.target.style.backgroundColor = '#d35400'}
-            onMouseOut={(e) => e.target.style.backgroundColor = '#e67e22'}
+            onMouseOver={(e) => e.target.style.backgroundColor = '#219653'}
+            onMouseOut={(e) => e.target.style.backgroundColor = '#27ae60'}
           >
-            Book Your Safari
+            Book Your Adventure Now
           </button>
         </div>
       </div>
@@ -322,9 +322,9 @@ function Safari() {
           onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-10px)'}
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
-          <div style={styles.highlightIcon}>🦁</div>
+          <div style={styles.highlightIcon}>⛰️</div>
           <h3>Destinations</h3>
-          <p>Yala, Udawalawe, Wilpattu National Parks</p>
+          <p>Adam's Peak, Knuckles Range, Sinharaja Forest</p>
         </div>
         <div 
           style={styles.highlightCard}
@@ -333,7 +333,7 @@ function Safari() {
         >
           <div style={styles.highlightIcon}>⏳</div>
           <h3>Duration</h3>
-          <p>4 Days / 3 Nights</p>
+          <p>8 Days / 7 Nights</p>
         </div>
         <div 
           style={styles.highlightCard}
@@ -342,17 +342,17 @@ function Safari() {
         >
           <div style={styles.highlightIcon}>💰</div>
           <h3>Price</h3>
-          <p>Starting from $800 per person</p>
+          <p>Starting from $1500 per person</p>
         </div>
       </div>
 
       {/* Detailed Description */}
       <section style={{ margin: '40px 0' }}>
-        <h2 style={{ textAlign: 'center', color: '#2c3e50', marginBottom: '20px' }}>About the Safari Adventure</h2>
+        <h2 style={{ textAlign: 'center', color: '#2c3e50', marginBottom: '20px' }}>About the Adventure Expedition</h2>
         <p style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
-          Embark on an unforgettable journey through Sri Lanka's most famous wildlife sanctuaries. 
-          Our expert guides will take you through diverse ecosystems where you can spot leopards, 
-          elephants, and hundreds of bird species in their natural habitats.
+          Embark on an unforgettable journey through Sri Lanka's most spectacular landscapes. This expedition combines 
+          challenging treks, breathtaking views, and encounters with diverse ecosystems. Test your limits while 
+          experiencing the island's natural wonders.
         </p>
       </section>
 
@@ -364,16 +364,16 @@ function Safari() {
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
           <img 
-            src="/Images/minna.jpg" 
-            alt="Yala National Park" 
+            src="/Images/adms.jpg" 
+            alt="Adam's Peak" 
             style={styles.cardImage}
           />
           <div style={styles.cardContent}>
-            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Yala National Park</h3>
+            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Adam's Peak</h3>
             <p>
-              Renowned for its leopard population, Yala offers one of the highest probabilities 
-              of leopard sightings in the world. The park's varied ecosystems also host elephants, 
-              crocodiles, and numerous bird species.
+              Challenge yourself with the pre-dawn climb up this sacred mountain. Reach the summit in time for 
+              sunrise and witness breathtaking views. The 5,500-step ascent is a test of endurance rewarded with 
+              unforgettable panoramas.
             </p>
           </div>
         </div>
@@ -384,16 +384,16 @@ function Safari() {
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
           <img 
-            src="/Images/udawa.jpg" 
-            alt="Udawalawe National Park" 
+            src="/Images/knuk.jpg" 
+            alt="Knuckles Range" 
             style={styles.cardImage}
           />
           <div style={styles.cardContent}>
-            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Udawalawe National Park</h3>
+            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Knuckles Range</h3>
             <p>
-              Famous for its large elephant herds, Udawalawe provides excellent viewing opportunities 
-              throughout the year. The park's reservoir attracts many animals, making it a wildlife 
-              photographer's paradise.
+              Explore this UNESCO World Heritage Conservation Area with its dramatic mountain scenery. Trek through 
+              cloud forests, waterfalls, and traditional villages. The range offers trails for various skill levels 
+              amidst stunning biodiversity.
             </p>
           </div>
         </div>
@@ -404,15 +404,16 @@ function Safari() {
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
           <img 
-            src="/Images/ti.jpg" 
-            alt="Wilpattu National Park" 
+            src="/Images/sinha.jpg" 
+            alt="Sinharaja Forest" 
             style={styles.cardImage}
           />
           <div style={styles.cardContent}>
-            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Wilpattu National Park</h3>
+            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Sinharaja Forest</h3>
             <p>
-              Known for its unique "villus" (natural lakes), Wilpattu is Sri Lanka's largest national park. 
-              Its dense forest cover makes leopard sightings more challenging but equally rewarding.
+              Trek through Sri Lanka's last viable area of primary tropical rainforest. This biodiversity hotspot 
+              is home to numerous endemic species. Experience the dense canopy, rare wildlife, and pristine 
+              ecosystems on guided nature trails.
             </p>
           </div>
         </div>
@@ -420,38 +421,41 @@ function Safari() {
 
       {/* Itinerary */}
       <section style={styles.itinerary}>
-        <h2 style={{ textAlign: 'center', marginBottom: '40px', color: '#2c3e50' }}>Tour Itinerary</h2>
+        <h2 style={{ textAlign: 'center', marginBottom: '40px', color: '#2c3e50' }}>Expedition Itinerary</h2>
         <div style={styles.itineraryGrid}>
           <div style={styles.dayCard}>
-            <h3 style={{ color: '#e67e22', marginBottom: '15px' }}>Day 1: Arrival & Yala Safari</h3>
+            <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Day 1-2: Arrival & Preparation</h3>
             <ul style={{ paddingLeft: '20px' }}>
-              <li style={{ marginBottom: '8px' }}>Morning transfer to Yala</li>
-              <li style={{ marginBottom: '8px' }}>Afternoon safari in Yala National Park</li>
-              <li style={{ marginBottom: '8px' }}>Dinner and overnight stay at safari lodge</li>
+              <li style={{ marginBottom: '8px' }}>Arrival in Colombo</li>
+              <li style={{ marginBottom: '8px' }}>Transfer to base camp</li>
+              <li style={{ marginBottom: '8px' }}>Equipment check and orientation</li>
+              <li style={{ marginBottom: '8px' }}>Acclimatization hike</li>
             </ul>
           </div>
           <div style={styles.dayCard}>
-            <h3 style={{ color: '#e67e22', marginBottom: '15px' }}>Day 2: Yala & Udawalawe</h3>
+            <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Day 3-4: Adam's Peak Ascent</h3>
             <ul style={{ paddingLeft: '20px' }}>
-              <li style={{ marginBottom: '8px' }}>Early morning safari in Yala</li>
-              <li style={{ marginBottom: '8px' }}>Transfer to Udawalawe</li>
-              <li style={{ marginBottom: '8px' }}>Evening safari in Udawalawe</li>
+              <li style={{ marginBottom: '8px' }}>Night climb of Adam's Peak</li>
+              <li style={{ marginBottom: '8px' }}>Sunrise at summit</li>
+              <li style={{ marginBottom: '8px' }}>Descent and recovery</li>
+              <li style={{ marginBottom: '8px' }}>Local village exploration</li>
             </ul>
           </div>
           <div style={styles.dayCard}>
-            <h3 style={{ color: '#e67e22', marginBottom: '15px' }}>Day 3: Udawalawe & Wilpattu</h3>
+            <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Day 5-6: Knuckles Range Trek</h3>
             <ul style={{ paddingLeft: '20px' }}>
-              <li style={{ marginBottom: '8px' }}>Morning safari in Udawalawe</li>
-              <li style={{ marginBottom: '8px' }}>Transfer to Wilpattu</li>
-              <li style={{ marginBottom: '8px' }}>Relax at Wilpattu resort</li>
+              <li style={{ marginBottom: '8px' }}>Multi-day trek through Knuckles</li>
+              <li style={{ marginBottom: '8px' }}>Camping in mountain wilderness</li>
+              <li style={{ marginBottom: '8px' }}>Waterfall swims and viewpoints</li>
             </ul>
           </div>
           <div style={styles.dayCard}>
-            <h3 style={{ color: '#e67e22', marginBottom: '15px' }}>Day 4: Wilpattu & Departure</h3>
+            <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Day 7-8: Sinharaja Exploration</h3>
             <ul style={{ paddingLeft: '20px' }}>
-              <li style={{ marginBottom: '8px' }}>Early morning safari in Wilpattu</li>
+              <li style={{ marginBottom: '8px' }}>Guided rainforest trek</li>
+              <li style={{ marginBottom: '8px' }}>Wildlife spotting</li>
               <li style={{ marginBottom: '8px' }}>Return to Colombo</li>
-              <li style={{ marginBottom: '8px' }}>Airport transfer for departure</li>
+              <li style={{ marginBottom: '8px' }}>Departure</li>
             </ul>
           </div>
         </div>
@@ -471,7 +475,7 @@ function Safari() {
             </button>
             
             <div style={styles.popupHeader}>
-              <h2 style={{ color: '#2c3e50', marginBottom: '10px' }}>Book Your Safari Adventure</h2>
+              <h2 style={{ color: '#2c3e50', marginBottom: '10px' }}>Book Your Adventure Expedition</h2>
               <p style={{ color: '#7f8c8d' }}>Fill in your details to reserve your spot</p>
             </div>
             
@@ -579,7 +583,7 @@ function Safari() {
               <button 
                 type="submit" 
                 style={styles.submitButton}
-                onMouseOver={(e) => e.target.style.backgroundColor = '#2ecc71'}
+                onMouseOver={(e) => e.target.style.backgroundColor = '#219653'}
                 onMouseOut={(e) => e.target.style.backgroundColor = '#27ae60'}
               >
                 Confirm Booking
@@ -604,4 +608,4 @@ function Safari() {
   );
 }
 
-export default Safari;
+export default Adwenture;
