@@ -106,10 +106,10 @@ function Packreport() {
       const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
       
       pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`travel_trails_report_${now.getTime()}.pdf`);
+      pdf.save(`Package_Booking_Summary_${now.getTime()}.pdf`);
 
       // Clean up
-      document.body.removeChild(container);
+      document.body.removeChild(container);na
     } catch (error) {
       console.error('PDF generation failed:', error);
     } finally {
