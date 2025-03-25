@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const PackBookingSchema = new Schema({
+    _id: {
+        type: String, // Set _id as a string
+    },
     name: {
         type: String,
         required: true,
@@ -10,32 +13,27 @@ const PackBookingSchema = new Schema({
     mobile: {
         type: String,
         required: true,
-        match: [/^\d{10}$/, "Please enter a valid 10-digit phone number"],  // Adjust regex as necessary
-    
+        match: [/^\d{10}$/, "Please enter a valid 10-digit phone number"],
     },
     email: {
         type: String,
         required: true,
         trim: true,
         lowercase: true,
-        match: [/^\S+@\S+\.\S+$/, "Please enter a valid email address"], // Email regex
+        match: [/^\S+@\S+\.\S+$/, "Please enter a valid email address"],
     },
     livingCountry: {
         type: String,
         required: true,
         trim: true,
     },
-    package: {
+    tpackage: {
         type: String,
         required: true,
         trim: true,
     },
     arrivalDate: {
-        type: Date,  // Correcting the type to Date
-        required: true,
-    },
-    noOfTravellers: {
-        type: Number,  // Changed from String to Number
+        type: Date,
         required: true,
     }
 });

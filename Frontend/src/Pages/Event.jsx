@@ -1,194 +1,349 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const EventPage = () => {
-  // Styles
-  const styles = {
-    container: {
-      backgroundColor: "#f3f4f6",
-      minHeight: "100vh",
-      padding: "3rem",
-      fontFamily: "'Poppins', sans-serif",
+const Event = () => {
+  const navigate = useNavigate();
+  const [hoveredEvent, setHoveredEvent] = useState(null);
+
+  // Event data
+  const events = [
+    {
+      id: 1,
+      title: "Kandy Esala Perahera",
+      image: "/Images/Kandy Esala Perahera.jpg",
+      description: "The Kandy Esala Perahera is one of Sri Lanka's grandest Buddhist festivals, featuring vibrant processions, traditional dances, and cultural performances.",
+      date: "August 10-20, 2025"
     },
-    hero: {
-      position: "relative",
-      height: "80vh",
-      backgroundImage: 'url("/Images/Beautiful Sri Lanka.jpg")',
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      textAlign: "center",
-      color: "white",
-      padding: "0 20px",
+    {
+      id: 2,
+      title: "Poson Festival",
+      image: "/Images/Poson Festival in Sri Lanka _ Explore Sri Lanka.jpg",
+      description: "Poson Festival marks the arrival of Buddhism in Sri Lanka, with spiritual events, rituals, and cultural celebrations across the island.",
+      date: "June 3-5, 2025"
     },
-    overlay: {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      backgroundColor: "rgba(0, 0, 0, 0.4)",
-      zIndex: 1,
+    {
+      id: 3,
+      title: "Vesak Festival",
+      image: "/Images/Vesak celebrations on the way to flying lanterns at the Borobudur Temple, Indonesia.jpg",
+      description: "Vesak is celebrated to mark the birth, enlightenment, and death of the Buddha. It is a peaceful festival filled with spiritual practices and community activities.",
+      date: "May 5-6, 2025"
     },
-    title: {
-      fontSize: "4rem",
-      fontWeight: "bold",
-      letterSpacing: "2px",
-      zIndex: 2,
-      textShadow: "2px 2px 8px rgba(0, 0, 0, 0.6)",
-    },
-    subtitle: {
-      marginTop: "1rem",
-      fontSize: "1.75rem",
-      zIndex: 2,
-      fontWeight: "300",
-      letterSpacing: "1px",
-      textShadow: "1px 1px 4px rgba(0, 0, 0, 0.5)",
-    },
-    sectionTitle: {
-      fontSize: "2.75rem",
-      fontWeight: "600",
-      textAlign: "center",
-      marginBottom: "3rem",
-      color: "#333",
-      textTransform: "uppercase",
-      letterSpacing: "1px",
-    },
-    eventSection: {
-      display: "grid",
-      gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-      gap: "2rem",
-      padding: "2rem 0",
-    },
-    eventContainer: {
-      backgroundColor: "#ffffff",
-      padding: "1.5rem",
-      borderRadius: "15px",
-      boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)",
-      transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
-      "&:hover": {
-        transform: "translateY(-10px)",
-        boxShadow: "0 12px 24px rgba(0, 0, 0, 0.3)",
-      },
-    },
-    eventImage: {
-      display: "block",
-      margin: "1.5rem auto",
-      width: "100%",
-      maxWidth: "600px",
-      borderRadius: "10px",
-      boxShadow: "0 6px 12px rgba(0, 0, 0, 0.15)",
-      transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
-      "&:hover": {
-        transform: "scale(1.05)",
-        boxShadow: "0 8px 16px rgba(0, 0, 0, 0.3)",
-      },
-    },
-    eventDescription: {
-      margin: "1rem 0",
-      fontSize: "1.2rem",
-      fontWeight: "300",
-      color: "#555",
-      lineHeight: "1.6",
-    },
-    bookButton: {
-      backgroundColor: "#007bff",
-      color: "white",
-      border: "none",
-      padding: "0.75rem 1.5rem",
-      fontSize: "1rem",
-      cursor: "pointer",
-      borderRadius: "25px",
-      transition: "background-color 0.3s ease, transform 0.3s ease",
-      "&:hover": {
-        backgroundColor: "#0056b3",
-        transform: "scale(1.05)",
-      },
-    },
-  };
+    {
+      id: 4,
+      title: "Cultural Festival",
+      image: "/Images/festivel.jpg",
+      description: "This festival celebrates the richness of Sri Lankan culture with music, food, art, and traditional performances.",
+      date: "December 15-20, 2025"
+    }
+  ];
 
   return (
     <div style={styles.container}>
       {/* Hero Section */}
-      <header style={styles.hero}>
+      <div style={styles.hero}>
         <div style={styles.overlay}></div>
         <div style={{ position: "relative", zIndex: 10 }}>
           <h1 style={styles.title}>Welcome to Ceylon Trails Events</h1>
           <p style={styles.subtitle}>
-            Celebrate Sri Lanka's vibrant traditions, music, and festivals.
+            Celebrate Sri Lanka's vibrant traditions, music, and festivals
           </p>
         </div>
-      </header>
+      </div>
 
       {/* Event Listings */}
-      <section>
+      <section style={styles.section}>
         <h2 style={styles.sectionTitle}>Upcoming Events</h2>
 
         <div style={styles.eventSection}>
-          {/* Event 1 */}
-          <div style={styles.eventContainer}>
-            <img
-              src="/Images/Kandy Esala Perahera.jpg"
-              alt="Kandy Esala Perahera"
-              style={styles.eventImage}
-            />
-            <p style={styles.eventDescription}>
-              The Kandy Esala Perahera is one of Sri Lanka's grandest Buddhist
-              festivals, featuring vibrant processions, traditional dances, and
-              cultural performances.
-            </p>
-            <button style={styles.bookButton}>Book Now</button>
-          </div>
-
-          {/* Event 2 */}
-          <div style={styles.eventContainer}>
-            <img
-              src="/Images/Poson Festival in Sri Lanka _ Explore Sri Lanka.jpg"
-              alt="Poson Festival in Sri Lanka"
-              style={styles.eventImage}
-            />
-            <p style={styles.eventDescription}>
-              Poson Festival marks the arrival of Buddhism in Sri Lanka, with
-              spiritual events, rituals, and cultural celebrations across the
-              island.
-            </p>
-            <button style={styles.bookButton}>Book Now</button>
-          </div>
-
-          {/* Event 3 */}
-          <div style={styles.eventContainer}>
-            <img
-              src="/Images/Vesak celebrations on the way to flying lanterns at the Borobudur Temple, Indonesia.jpg"
-              alt="Vesak Festival"
-              style={styles.eventImage}
-            />
-            <p style={styles.eventDescription}>
-              Vesak is celebrated to mark the birth, enlightenment, and death of
-              the Buddha. It is a peaceful festival filled with spiritual
-              practices and community activities.
-            </p>
-            <button style={styles.bookButton}>Book Now</button>
-          </div>
-
-          {/* Event 4 */}
-          <div style={styles.eventContainer}>
-            <img
-              src="/Images/festivel.jpg"
-              alt="Festival Image"
-              style={styles.eventImage}
-            />
-            <p style={styles.eventDescription}>
-              This festival celebrates the richness of Sri Lankan culture with
-              music, food, art, and traditional performances.
-            </p>
-            <button style={styles.bookButton}>Book Now</button>
-          </div>
+          {events.map((event) => (
+            <div
+              key={event.id}
+              style={{
+                ...styles.eventContainer,
+                transform: hoveredEvent === event.id ? 'translateY(-10px)' : 'translateY(0)'
+              }}
+              onMouseEnter={() => setHoveredEvent(event.id)}
+              onMouseLeave={() => setHoveredEvent(null)}
+            >
+              <div style={styles.imageContainer}>
+                <img
+                  src={event.image}
+                  alt={event.title}
+                  style={{
+                    ...styles.eventImage,
+                    transform: hoveredEvent === event.id ? 'scale(1.05)' : 'scale(1)'
+                  }}
+                />
+                {hoveredEvent === event.id && (
+                  <div style={styles.dateBadge}>
+                    {event.date}
+                  </div>
+                )}
+              </div>
+              
+              <h3 style={styles.eventTitle}>
+                {event.title}
+              </h3>
+              
+              <p style={styles.eventDescription}>
+                {event.description}
+              </p>
+              
+              <button
+                style={styles.bookButton}
+                onClick={() => navigate("/book-event")}
+              >
+                Book Now
+                <span style={styles.buttonArrow}>→</span>
+              </button>
+            </div>
+          ))}
         </div>
       </section>
+
+      {/* CSS Animations */}
+      <style>
+        {`
+          @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+          }
+
+          @keyframes slideInDown {
+            from { 
+              transform: translateY(-50px);
+              opacity: 0;
+            }
+            to { 
+              transform: translateY(0);
+              opacity: 1;
+            }
+          }
+
+          @keyframes slideInUp {
+            from { 
+              transform: translateY(50px);
+              opacity: 0;
+            }
+            to { 
+              transform: translateY(0);
+              opacity: 1;
+            }
+          }
+
+          @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+          }
+
+          @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+          }
+
+          .hero-title {
+            animation: slideInDown 1s ease-out;
+          }
+
+          .hero-subtitle {
+            animation: slideInUp 1s ease-out 0.3s forwards;
+            opacity: 0;
+          }
+
+          .section-title {
+            animation: fadeIn 1s ease-out 0.6s forwards;
+            opacity: 0;
+          }
+
+          .event-card {
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+          }
+
+          .book-button-arrow {
+            display: inline-block;
+            animation: pulse 1.5s infinite ease-in-out;
+          }
+        `}
+      </style>
     </div>
   );
 };
 
-export default EventPage;
+// Styles
+const styles = {
+  container: {
+    backgroundColor: "#f8f9fa",
+    minHeight: "100vh",
+    padding: "0",
+    fontFamily: "'Poppins', sans-serif",
+    overflowX: "hidden"
+  },
+  hero: {
+    position: "relative",
+    height: "90vh",
+    backgroundImage: 'url("/Images/Beautiful Sri Lanka.jpg")',
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundAttachment: "fixed",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    color: "white",
+    padding: "0 20px",
+    overflow: "hidden",
+    animation: "float 8s ease-in-out infinite"
+  },
+  overlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    background: "linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%)",
+    zIndex: 1,
+  },
+  title: {
+    fontSize: "4.5rem",
+    fontWeight: "bold",
+    letterSpacing: "2px",
+    zIndex: 2,
+    textShadow: "2px 2px 8px rgba(0, 0, 0, 0.6)",
+    marginBottom: "1rem",
+    background: "linear-gradient(to right, #fff, #f8f9fa)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    backgroundClip: "text",
+    animation: "slideInDown 1s ease-out"
+  },
+  subtitle: {
+    fontSize: "1.8rem",
+    zIndex: 2,
+    fontWeight: "300",
+    letterSpacing: "1px",
+    textShadow: "1px 1px 4px rgba(0, 0, 0, 0.5)",
+    maxWidth: "800px",
+    margin: "0 auto",
+    lineHeight: "1.4",
+    animation: "slideInUp 1s ease-out 0.3s forwards",
+    opacity: 0
+  },
+  section: {
+    padding: "5rem 3rem",
+    maxWidth: "1400px",
+    margin: "0 auto",
+  },
+  sectionTitle: {
+    fontSize: "3rem",
+    fontWeight: "600",
+    textAlign: "center",
+    marginBottom: "4rem",
+    color: "#2c3e50",
+    position: "relative",
+    display: "inline-block",
+    animation: "fadeIn 1s ease-out 0.6s forwards",
+    opacity: 0,
+    "&::after": {
+      content: '""',
+      position: "absolute",
+      bottom: "-10px",
+      left: "50%",
+      transform: "translateX(-50%)",
+      width: "60%",
+      height: "4px",
+      backgroundColor: "#007bff",
+      borderRadius: "2px",
+    },
+  },
+  eventSection: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))",
+    gap: "2.5rem",
+  },
+  eventContainer: {
+    backgroundColor: "#ffffff",
+    padding: "1.8rem",
+    borderRadius: "16px",
+    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.08)",
+    transition: "all 0.3s ease",
+    cursor: "pointer",
+    position: "relative",
+    overflow: "hidden",
+    animation: "fadeIn 0.5s ease-out forwards",
+    opacity: 0,
+    "&:hover": {
+      boxShadow: "0 15px 35px rgba(0, 0, 0, 0.12)",
+    },
+  },
+  imageContainer: {
+    position: "relative",
+    overflow: "hidden",
+    borderRadius: "12px",
+    marginBottom: "1.5rem",
+  },
+  eventImage: {
+    width: "100%",
+    height: "220px",
+    objectFit: "cover",
+    borderRadius: "12px",
+    display: "block",
+    transition: "transform 0.3s ease",
+  },
+  dateBadge: {
+    position: "absolute",
+    bottom: "15px",
+    left: "15px",
+    backgroundColor: "rgba(0, 123, 255, 0.9)",
+    color: "white",
+    padding: "0.5rem 1rem",
+    borderRadius: "20px",
+    fontSize: "0.9rem",
+    fontWeight: "500",
+    animation: "fadeIn 0.3s ease-out"
+  },
+  eventTitle: {
+    fontSize: "1.5rem",
+    fontWeight: "600",
+    marginBottom: "1rem",
+    color: "#2c3e50",
+  },
+  eventDescription: {
+    fontSize: "1.1rem",
+    fontWeight: "300",
+    color: "#555",
+    lineHeight: "1.6",
+    marginBottom: "1.5rem",
+  },
+  bookButton: {
+    backgroundColor: "#007bff",
+    color: "white",
+    border: "none",
+    padding: "0.9rem 1.8rem",
+    fontSize: "1.1rem",
+    cursor: "pointer",
+    borderRadius: "30px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "0.5rem",
+    fontWeight: "500",
+    transition: "all 0.3s ease",
+    width: "100%",
+    "&:hover": {
+      backgroundColor: "#0069d9",
+      "& span": {
+        animation: "pulse 1.5s infinite ease-in-out"
+      }
+    },
+  },
+  buttonArrow: {
+    display: "inline-block",
+    marginLeft: "0.5rem",
+  }
+};
+
+export default Event;
