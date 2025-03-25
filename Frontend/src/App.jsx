@@ -34,6 +34,9 @@ import Packsummary from './Pages/Packsummary';
 import Ayur from './Pages/Ayur';
 import Adwenture from './Pages/Adwenture';
 
+
+import Hotels from './Hotel/Hotels';
+
 const App = () => {
   const location = useLocation(); // Get the current location
 
@@ -83,6 +86,7 @@ const App = () => {
     
         
         <Route path="/updatepbook/:id" element={<Updatepbook />} />
+        <Route path="/hotels" element={<Hotels />} />
 
       </Routes>
 
