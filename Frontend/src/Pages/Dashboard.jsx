@@ -21,7 +21,7 @@ function Dashboard() {
         <ul>
           {/* Booking Management */}
           <li>
-            <button onClick={() => navigate('/hotel-booking')}>
+            <button onClick={() => navigate('/hoteladmin')}>
               Hotel Booking
             </button>
           </li>
