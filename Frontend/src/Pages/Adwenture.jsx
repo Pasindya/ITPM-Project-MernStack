@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Cultural() {
+function Adwenture() {
   const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
@@ -9,7 +9,7 @@ function Cultural() {
     mobile: '',
     email: '',
     livingCountry: '',
-    tpackage: 'Cultural Heritage Tour',
+    tpackage: 'Adventure & Trekking Expedition',
     arrivalDate: ''
   });
   const [errors, setErrors] = useState({});
@@ -126,7 +126,7 @@ function Cultural() {
       padding: '0 20px'
     },
     hero: {
-      background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/Images/cultural-hero.jpg) center/cover no-repeat',
+      background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/Images/adventure-hero.jpg) center/cover no-repeat',
       height: '60vh',
       display: 'flex',
       alignItems: 'center',
@@ -150,7 +150,7 @@ function Cultural() {
       marginBottom: '30px'
     },
     ctaButton: {
-      backgroundColor: '#3498db',
+      backgroundColor: '#27ae60',
       color: 'white',
       border: 'none',
       padding: '12px 30px',
@@ -208,7 +208,7 @@ function Cultural() {
       background: '#f9f9f9',
       padding: '20px',
       borderRadius: '8px',
-      borderLeft: '5px solid #3498db'
+      borderLeft: '5px solid #27ae60'
     },
     popupOverlay: {
       position: 'fixed',
@@ -302,15 +302,15 @@ function Cultural() {
       {/* Hero Section */}
       <div style={styles.hero}>
         <div style={styles.heroContent}>
-          <h1 style={styles.heroTitle}>Cultural Heritage Tour</h1>
-          <p style={styles.heroSubtitle}>Discover Sri Lanka's ancient wonders and living traditions</p>
+          <h1 style={styles.heroTitle}>Adventure & Trekking Expedition</h1>
+          <p style={styles.heroSubtitle}>Challenge yourself with Sri Lanka's most thrilling outdoor experiences</p>
           <button 
             style={styles.ctaButton} 
             onClick={handleBookNow}
-            onMouseOver={(e) => e.target.style.backgroundColor = '#2980b9'}
-            onMouseOut={(e) => e.target.style.backgroundColor = '#3498db'}
+            onMouseOver={(e) => e.target.style.backgroundColor = '#219653'}
+            onMouseOut={(e) => e.target.style.backgroundColor = '#27ae60'}
           >
-            Book Your Cultural Journey
+            Book Your Adventure Now
           </button>
         </div>
       </div>
@@ -322,9 +322,9 @@ function Cultural() {
           onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-10px)'}
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
-          <div style={styles.highlightIcon}>🏛️</div>
+          <div style={styles.highlightIcon}>⛰️</div>
           <h3>Destinations</h3>
-          <p>Kandy, Sigiriya, Anuradhapura</p>
+          <p>Adam's Peak, Knuckles Range, Sinharaja Forest</p>
         </div>
         <div 
           style={styles.highlightCard}
@@ -333,7 +333,7 @@ function Cultural() {
         >
           <div style={styles.highlightIcon}>⏳</div>
           <h3>Duration</h3>
-          <p>7 Days / 6 Nights</p>
+          <p>8 Days / 7 Nights</p>
         </div>
         <div 
           style={styles.highlightCard}
@@ -342,16 +342,17 @@ function Cultural() {
         >
           <div style={styles.highlightIcon}>💰</div>
           <h3>Price</h3>
-          <p>Starting from $1200 per person</p>
+          <p>Starting from $1500 per person</p>
         </div>
       </div>
 
       {/* Detailed Description */}
       <section style={{ margin: '40px 0' }}>
-        <h2 style={{ textAlign: 'center', color: '#2c3e50', marginBottom: '20px' }}>About the Cultural Tour</h2>
+        <h2 style={{ textAlign: 'center', color: '#2c3e50', marginBottom: '20px' }}>About the Adventure Expedition</h2>
         <p style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
-          Journey through Sri Lanka's golden age of ancient kingdoms, exploring UNESCO World Heritage Sites
-          that showcase the island's rich Buddhist heritage, magnificent architecture, and living traditions.
+          Embark on an unforgettable journey through Sri Lanka's most spectacular landscapes. This expedition combines 
+          challenging treks, breathtaking views, and encounters with diverse ecosystems. Test your limits while 
+          experiencing the island's natural wonders.
         </p>
       </section>
 
@@ -363,15 +364,16 @@ function Cultural() {
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
           <img 
-            src="/Images/mali.jpg" 
-            alt="Kandy" 
+            src="/Images/adms.jpg" 
+            alt="Adam's Peak" 
             style={styles.cardImage}
           />
           <div style={styles.cardContent}>
-            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Kandy</h3>
+            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Adam's Peak</h3>
             <p>
-              The last royal capital of Sri Lankan kings, Kandy is home to the sacred Temple of the Tooth Relic.
-              Experience traditional Kandyan dance performances and stroll around the beautiful Kandy Lake.
+              Challenge yourself with the pre-dawn climb up this sacred mountain. Reach the summit in time for 
+              sunrise and witness breathtaking views. The 5,500-step ascent is a test of endurance rewarded with 
+              unforgettable panoramas.
             </p>
           </div>
         </div>
@@ -382,15 +384,16 @@ function Cultural() {
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
           <img 
-            src="/Images/si.jpg" 
-            alt="Sigiriya" 
+            src="/Images/knuk.jpg" 
+            alt="Knuckles Range" 
             style={styles.cardImage}
           />
           <div style={styles.cardContent}>
-            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Sigiriya</h3>
+            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Knuckles Range</h3>
             <p>
-              The spectacular "Lion Rock" fortress rises dramatically from the central plains. Marvel at the
-              ancient frescoes, mirror wall, and the remains of the royal palace atop this UNESCO site.
+              Explore this UNESCO World Heritage Conservation Area with its dramatic mountain scenery. Trek through 
+              cloud forests, waterfalls, and traditional villages. The range offers trails for various skill levels 
+              amidst stunning biodiversity.
             </p>
           </div>
         </div>
@@ -401,15 +404,16 @@ function Cultural() {
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
           <img 
-            src="/Images/anu.jpg" 
-            alt="Anuradhapura" 
+            src="/Images/sinha.jpg" 
+            alt="Sinharaja Forest" 
             style={styles.cardImage}
           />
           <div style={styles.cardContent}>
-            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Anuradhapura</h3>
+            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Sinharaja Forest</h3>
             <p>
-              One of the ancient capitals of Sri Lanka, Anuradhapura boasts well-preserved ruins of an
-              ancient civilization, including massive dagobas, temples, and the sacred Bodhi tree.
+              Trek through Sri Lanka's last viable area of primary tropical rainforest. This biodiversity hotspot 
+              is home to numerous endemic species. Experience the dense canopy, rare wildlife, and pristine 
+              ecosystems on guided nature trails.
             </p>
           </div>
         </div>
@@ -417,39 +421,41 @@ function Cultural() {
 
       {/* Itinerary */}
       <section style={styles.itinerary}>
-        <h2 style={{ textAlign: 'center', marginBottom: '40px', color: '#2c3e50' }}>Tour Itinerary</h2>
+        <h2 style={{ textAlign: 'center', marginBottom: '40px', color: '#2c3e50' }}>Expedition Itinerary</h2>
         <div style={styles.itineraryGrid}>
           <div style={styles.dayCard}>
-            <h3 style={{ color: '#3498db', marginBottom: '15px' }}>Day 1-2: Arrival & Kandy</h3>
+            <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Day 1-2: Arrival & Preparation</h3>
             <ul style={{ paddingLeft: '20px' }}>
               <li style={{ marginBottom: '8px' }}>Arrival in Colombo</li>
-              <li style={{ marginBottom: '8px' }}>Transfer to Kandy</li>
-              <li style={{ marginBottom: '8px' }}>Visit Temple of the Tooth Relic</li>
-              <li style={{ marginBottom: '8px' }}>Cultural dance performance</li>
+              <li style={{ marginBottom: '8px' }}>Transfer to base camp</li>
+              <li style={{ marginBottom: '8px' }}>Equipment check and orientation</li>
+              <li style={{ marginBottom: '8px' }}>Acclimatization hike</li>
             </ul>
           </div>
           <div style={styles.dayCard}>
-            <h3 style={{ color: '#3498db', marginBottom: '15px' }}>Day 3-4: Sigiriya & Dambulla</h3>
+            <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Day 3-4: Adam's Peak Ascent</h3>
             <ul style={{ paddingLeft: '20px' }}>
-              <li style={{ marginBottom: '8px' }}>Climb Sigiriya Rock Fortress</li>
-              <li style={{ marginBottom: '8px' }}>Visit Dambulla Cave Temple</li>
-              <li style={{ marginBottom: '8px' }}>Traditional village tour</li>
+              <li style={{ marginBottom: '8px' }}>Night climb of Adam's Peak</li>
+              <li style={{ marginBottom: '8px' }}>Sunrise at summit</li>
+              <li style={{ marginBottom: '8px' }}>Descent and recovery</li>
+              <li style={{ marginBottom: '8px' }}>Local village exploration</li>
             </ul>
           </div>
           <div style={styles.dayCard}>
-            <h3 style={{ color: '#3498db', marginBottom: '15px' }}>Day 5-6: Anuradhapura</h3>
+            <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Day 5-6: Knuckles Range Trek</h3>
             <ul style={{ paddingLeft: '20px' }}>
-              <li style={{ marginBottom: '8px' }}>Explore ancient ruins</li>
-              <li style={{ marginBottom: '8px' }}>Visit sacred Bodhi tree</li>
-              <li style={{ marginBottom: '8px' }}>Evening meditation session</li>
+              <li style={{ marginBottom: '8px' }}>Multi-day trek through Knuckles</li>
+              <li style={{ marginBottom: '8px' }}>Camping in mountain wilderness</li>
+              <li style={{ marginBottom: '8px' }}>Waterfall swims and viewpoints</li>
             </ul>
           </div>
           <div style={styles.dayCard}>
-            <h3 style={{ color: '#3498db', marginBottom: '15px' }}>Day 7: Return & Departure</h3>
+            <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Day 7-8: Sinharaja Exploration</h3>
             <ul style={{ paddingLeft: '20px' }}>
+              <li style={{ marginBottom: '8px' }}>Guided rainforest trek</li>
+              <li style={{ marginBottom: '8px' }}>Wildlife spotting</li>
               <li style={{ marginBottom: '8px' }}>Return to Colombo</li>
-              <li style={{ marginBottom: '8px' }}>City tour and shopping</li>
-              <li style={{ marginBottom: '8px' }}>Airport transfer for departure</li>
+              <li style={{ marginBottom: '8px' }}>Departure</li>
             </ul>
           </div>
         </div>
@@ -469,7 +475,7 @@ function Cultural() {
             </button>
             
             <div style={styles.popupHeader}>
-              <h2 style={{ color: '#2c3e50', marginBottom: '10px' }}>Book Your Cultural Tour</h2>
+              <h2 style={{ color: '#2c3e50', marginBottom: '10px' }}>Book Your Adventure Expedition</h2>
               <p style={{ color: '#7f8c8d' }}>Fill in your details to reserve your spot</p>
             </div>
             
@@ -577,7 +583,7 @@ function Cultural() {
               <button 
                 type="submit" 
                 style={styles.submitButton}
-                onMouseOver={(e) => e.target.style.backgroundColor = '#2ecc71'}
+                onMouseOver={(e) => e.target.style.backgroundColor = '#219653'}
                 onMouseOut={(e) => e.target.style.backgroundColor = '#27ae60'}
               >
                 Confirm Booking
@@ -602,4 +608,4 @@ function Cultural() {
   );
 }
 
-export default Cultural;
+export default Adwenture;

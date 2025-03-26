@@ -8,7 +8,13 @@ import Dashboard from './Pages/Dashboard';
 import Packages from './Pages/Packages';
 import Weather from './Pages/Weather';
 import Event from './Pages/Event';
+import Eventbooking from './Event/Eventbooking';
+import Eventm from './Event/Eventm';
+import AddEvent from './Event/AddEvent';
+import Add from './Event/Add';
+import UpdateEvent from './Event/UpdateEvent';
 import Calender from './Pages/Calender';
+
 
 
 //Transport Function 
@@ -26,23 +32,29 @@ import TransportSummary from './Pages/Transport CRUD/TransportSummary';
 
 
 
+import Guider from './Pages/Guider';
+import AllGuiders from './Pages/AllGuiders';
+
+
+
+
 import DashNav from './Pages/DashNav';
-
-
-
-
 import Cultural from './Pages/Cultural';
 import Currency from './Pages/Currency';
 import Beach from './Pages/Beach';
 import Safari from './Pages/Safari';
 import Hill from './Pages/Hill';
 import Adminpkg from './Pages/Adminpkg';
+import Packnav from './Packbooking/Packnav';
+import Packreport from './Pages/Packreport';
+import Packdetails from './Pages/Packdetails';
+import Updatepbook from './Pages/Updatepbook';
+import Packsummary from './Pages/Packsummary';
+import Ayur from './Pages/Ayur';
+import Adwenture from './Pages/Adwenture';
 
 
-import Packagenav from './Pages/Packagenav';
-
-
-
+import Hotels from './Hotel/Hotels';
 
 
 
@@ -50,7 +62,11 @@ const App = () => {
   const location = useLocation(); // Get the current location
 
   // Define routes where Navbar and Footer should be hidden
-  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg','/dashNav','/TransportNav','/vehicleadmin','/vehiclebooking','/addbooking','/updatevehicle','/transportsummary'];
+
+ // const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg','/dashNav','/TransportNav','/vehicleadmin','/vehiclebooking','/addbooking','/updatevehicle','/transportsummary'];
+
+  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav','/packnav','/viewbooking','/packdetails','/updatepbook/PBK_12837','/updatepbook/PBK_48926','/updatepbook/PBK_54806','/packreport','/packsummary'];
+
 
   // Check if the current route is in the hideNavbarFooterRoutes array
   const shouldHideNavbarFooter = hideNavbarFooterRoutes.includes(location.pathname);
@@ -67,10 +83,17 @@ const App = () => {
         <Route path="/packages" element={<Packages />} />
         <Route path="/weather" element={<Weather />} />
         <Route path="/event" element={<Event />} />
+        <Route path="/book-event" element={<Eventbooking />} />
+        <Route path="/eventm" element={<Eventm />} />
+        <Route path="/addevent" element={<AddEvent />} />
+        <Route path="/add" element={<Add />} />
+        <Route path="/updateevent/:id" element={<UpdateEvent />} />
         <Route path="/calender" element={<Calender />} />
-    
-        <Route path="/packagenav" element={<Packagenav />} />
+        <Route path="/guider" element={<Guider />} />
+        <Route path="/allGuiders" element={<AllGuiders />} />
+     
         <Route path="/dashNav" element={<DashNav />} />
+
        
         
         {/*Transport */}
@@ -84,15 +107,9 @@ const App = () => {
         <Route path="/updatevehicle" element={<UpdateVehicle />} />
         <Route path="/transportsummary" element={<TransportSummary />} />
        
-       
-
-
-
-
-
-        
-        
       
+        
+
 
         <Route path="/cultural" element={<Cultural />} />
         <Route path="/currency" element={<Currency />} />
@@ -100,15 +117,22 @@ const App = () => {
         <Route path="/safari" element={<Safari />} />
         <Route path="/hill" element={<Hill />} />
         <Route path="/adminpkg" element={<Adminpkg />} />
+        <Route path="/Packnav" element={<Packnav />} />
+        <Route path="/packdetails" element={<Packdetails />} />
+        <Route path="/packreport" element={<Packreport />} />
+        <Route path="/packsummary" element={<Packsummary />} />
+        <Route path="/ayur" element={<Ayur />} />
+        <Route path="/adwenture" element={<Adwenture />} />
+    
         
-        
+        <Route path="/updatepbook/:id" element={<Updatepbook />} />
+        <Route path="/hotels" element={<Hotels />} />
 
       </Routes>
 
       {/* Conditionally render Footer */}
       {!shouldHideNavbarFooter && <Footer />}
     </div>
-
   );
 };
 

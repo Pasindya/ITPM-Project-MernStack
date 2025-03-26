@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Cultural() {
+function Ayur() {
   const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({
@@ -9,7 +9,7 @@ function Cultural() {
     mobile: '',
     email: '',
     livingCountry: '',
-    tpackage: 'Cultural Heritage Tour',
+    tpackage: 'Ayurveda & Wellness Retreat',
     arrivalDate: ''
   });
   const [errors, setErrors] = useState({});
@@ -126,7 +126,7 @@ function Cultural() {
       padding: '0 20px'
     },
     hero: {
-      background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/Images/cultural-hero.jpg) center/cover no-repeat',
+      background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/Images/ayurveda-hero.jpg) center/cover no-repeat',
       height: '60vh',
       display: 'flex',
       alignItems: 'center',
@@ -150,7 +150,7 @@ function Cultural() {
       marginBottom: '30px'
     },
     ctaButton: {
-      backgroundColor: '#3498db',
+      backgroundColor: '#27ae60',
       color: 'white',
       border: 'none',
       padding: '12px 30px',
@@ -208,7 +208,13 @@ function Cultural() {
       background: '#f9f9f9',
       padding: '20px',
       borderRadius: '8px',
-      borderLeft: '5px solid #3498db'
+      borderLeft: '5px solid #27ae60'
+    },
+    treatmentCard: {
+      background: '#f9f9f9',
+      padding: '20px',
+      borderRadius: '8px',
+      marginBottom: '20px'
     },
     popupOverlay: {
       position: 'fixed',
@@ -302,29 +308,29 @@ function Cultural() {
       {/* Hero Section */}
       <div style={styles.hero}>
         <div style={styles.heroContent}>
-          <h1 style={styles.heroTitle}>Cultural Heritage Tour</h1>
-          <p style={styles.heroSubtitle}>Discover Sri Lanka's ancient wonders and living traditions</p>
+          <h1 style={styles.heroTitle}>Ayurveda & Wellness Retreat</h1>
+          <p style={styles.heroSubtitle}>Rejuvenate your mind, body and soul with ancient healing traditions</p>
           <button 
             style={styles.ctaButton} 
             onClick={handleBookNow}
-            onMouseOver={(e) => e.target.style.backgroundColor = '#2980b9'}
-            onMouseOut={(e) => e.target.style.backgroundColor = '#3498db'}
+            onMouseOver={(e) => e.target.style.backgroundColor = '#219653'}
+            onMouseOut={(e) => e.target.style.backgroundColor = '#27ae60'}
           >
-            Book Your Cultural Journey
+            Book Your Wellness Journey
           </button>
         </div>
       </div>
 
-      {/* Tour Highlights */}
+      {/* Retreat Highlights */}
       <div style={styles.highlights}>
         <div 
           style={styles.highlightCard}
           onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-10px)'}
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
-          <div style={styles.highlightIcon}>🏛️</div>
+          <div style={styles.highlightIcon}>📍</div>
           <h3>Destinations</h3>
-          <p>Kandy, Sigiriya, Anuradhapura</p>
+          <p>Beruwala, Ahungalla, Tangalle</p>
         </div>
         <div 
           style={styles.highlightCard}
@@ -333,7 +339,7 @@ function Cultural() {
         >
           <div style={styles.highlightIcon}>⏳</div>
           <h3>Duration</h3>
-          <p>7 Days / 6 Nights</p>
+          <p>5 Days / 4 Nights</p>
         </div>
         <div 
           style={styles.highlightCard}
@@ -342,16 +348,16 @@ function Cultural() {
         >
           <div style={styles.highlightIcon}>💰</div>
           <h3>Price</h3>
-          <p>Starting from $1200 per person</p>
+          <p>Starting from $1000 per person</p>
         </div>
       </div>
 
       {/* Detailed Description */}
       <section style={{ margin: '40px 0' }}>
-        <h2 style={{ textAlign: 'center', color: '#2c3e50', marginBottom: '20px' }}>About the Cultural Tour</h2>
+        <h2 style={{ textAlign: 'center', color: '#2c3e50', marginBottom: '20px' }}>About the Ayurveda Retreat</h2>
         <p style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
-          Journey through Sri Lanka's golden age of ancient kingdoms, exploring UNESCO World Heritage Sites
-          that showcase the island's rich Buddhist heritage, magnificent architecture, and living traditions.
+          Experience authentic Ayurveda treatments in Sri Lanka's most renowned wellness centers. Our retreat combines 
+          ancient healing practices with modern comforts to restore balance and promote holistic wellbeing.
         </p>
       </section>
 
@@ -363,15 +369,15 @@ function Cultural() {
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
           <img 
-            src="/Images/mali.jpg" 
-            alt="Kandy" 
+            src="/Images/ayur.jpg" 
+            alt="Beruwala" 
             style={styles.cardImage}
           />
           <div style={styles.cardContent}>
-            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Kandy</h3>
+            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Beruwala</h3>
             <p>
-              The last royal capital of Sri Lankan kings, Kandy is home to the sacred Temple of the Tooth Relic.
-              Experience traditional Kandyan dance performances and stroll around the beautiful Kandy Lake.
+              Home to some of Sri Lanka's most prestigious Ayurveda resorts, Beruwala offers beachfront wellness centers 
+              with expert physicians and therapists trained in traditional healing methods.
             </p>
           </div>
         </div>
@@ -382,15 +388,15 @@ function Cultural() {
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
           <img 
-            src="/Images/si.jpg" 
-            alt="Sigiriya" 
+            src="/Images/shote.jpg" 
+            alt="Ahungalla" 
             style={styles.cardImage}
           />
           <div style={styles.cardContent}>
-            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Sigiriya</h3>
+            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Ahungalla</h3>
             <p>
-              The spectacular "Lion Rock" fortress rises dramatically from the central plains. Marvel at the
-              ancient frescoes, mirror wall, and the remains of the royal palace atop this UNESCO site.
+              A serene coastal town with luxury Ayurveda resorts that combine traditional treatments with modern spa 
+              therapies, set amidst lush tropical gardens by the Indian Ocean.
             </p>
           </div>
         </div>
@@ -401,55 +407,95 @@ function Cultural() {
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
           <img 
-            src="/Images/anu.jpg" 
-            alt="Anuradhapura" 
+            src="/Images/yoga.jpg" 
+            alt="Tangalle" 
             style={styles.cardImage}
           />
           <div style={styles.cardContent}>
-            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Anuradhapura</h3>
+            <h3 style={{ color: '#2c3e50', marginBottom: '15px' }}>Tangalle</h3>
             <p>
-              One of the ancient capitals of Sri Lanka, Anuradhapura boasts well-preserved ruins of an
-              ancient civilization, including massive dagobas, temples, and the sacred Bodhi tree.
+              This peaceful southern coastal retreat offers authentic Ayurveda programs in tranquil settings, perfect 
+              for those seeking deep relaxation and rejuvenation away from crowds.
             </p>
           </div>
         </div>
       </div>
 
+      {/* Ayurveda Treatments */}
+      <section style={{ margin: '60px 0' }}>
+        <h2 style={{ textAlign: 'center', marginBottom: '40px', color: '#2c3e50' }}>Ayurveda Treatments</h2>
+        
+        <div style={styles.treatmentCard}>
+          <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Panchakarma Detox</h3>
+          <p>
+            A comprehensive detoxification program including therapeutic massage, herbal steam baths, 
+            and cleansing treatments to eliminate toxins and restore balance to the body.
+          </p>
+        </div>
+        
+        <div style={styles.treatmentCard}>
+          <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Abhyanga Massage</h3>
+          <p>
+            Warm herbal oil massage performed by two therapists simultaneously to improve circulation, 
+            relieve muscle tension, and promote deep relaxation.
+          </p>
+        </div>
+        
+        <div style={styles.treatmentCard}>
+          <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Shirodhara Therapy</h3>
+          <p>
+            A continuous stream of warm herbal oil poured on the forehead to calm the nervous system, 
+            relieve stress, and promote mental clarity.
+          </p>
+        </div>
+        
+        <div style={styles.treatmentCard}>
+          <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Yoga & Meditation</h3>
+          <p>
+            Daily sessions with experienced instructors to complement your Ayurveda treatments, 
+            including asanas, pranayama, and guided meditation.
+          </p>
+        </div>
+      </section>
+
       {/* Itinerary */}
       <section style={styles.itinerary}>
-        <h2 style={{ textAlign: 'center', marginBottom: '40px', color: '#2c3e50' }}>Tour Itinerary</h2>
+        <h2 style={{ textAlign: 'center', marginBottom: '40px', color: '#2c3e50' }}>Retreat Itinerary</h2>
         <div style={styles.itineraryGrid}>
           <div style={styles.dayCard}>
-            <h3 style={{ color: '#3498db', marginBottom: '15px' }}>Day 1-2: Arrival & Kandy</h3>
+            <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Day 1: Arrival & Consultation</h3>
             <ul style={{ paddingLeft: '20px' }}>
-              <li style={{ marginBottom: '8px' }}>Arrival in Colombo</li>
-              <li style={{ marginBottom: '8px' }}>Transfer to Kandy</li>
-              <li style={{ marginBottom: '8px' }}>Visit Temple of the Tooth Relic</li>
-              <li style={{ marginBottom: '8px' }}>Cultural dance performance</li>
+              <li style={{ marginBottom: '8px' }}>Arrival at retreat center</li>
+              <li style={{ marginBottom: '8px' }}>Consultation with Ayurveda doctor</li>
+              <li style={{ marginBottom: '8px' }}>Welcome herbal drink & orientation</li>
+              <li style={{ marginBottom: '8px' }}>Gentle yoga session</li>
             </ul>
           </div>
           <div style={styles.dayCard}>
-            <h3 style={{ color: '#3498db', marginBottom: '15px' }}>Day 3-4: Sigiriya & Dambulla</h3>
+            <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Day 2: Full Treatment Day</h3>
             <ul style={{ paddingLeft: '20px' }}>
-              <li style={{ marginBottom: '8px' }}>Climb Sigiriya Rock Fortress</li>
-              <li style={{ marginBottom: '8px' }}>Visit Dambulla Cave Temple</li>
-              <li style={{ marginBottom: '8px' }}>Traditional village tour</li>
+              <li style={{ marginBottom: '8px' }}>Morning yoga & meditation</li>
+              <li style={{ marginBottom: '8px' }}>Abhyanga massage</li>
+              <li style={{ marginBottom: '8px' }}>Herbal steam bath</li>
+              <li style={{ marginBottom: '8px' }}>Ayurveda lunch</li>
             </ul>
           </div>
           <div style={styles.dayCard}>
-            <h3 style={{ color: '#3498db', marginBottom: '15px' }}>Day 5-6: Anuradhapura</h3>
+            <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Day 3: Deep Healing</h3>
             <ul style={{ paddingLeft: '20px' }}>
-              <li style={{ marginBottom: '8px' }}>Explore ancient ruins</li>
-              <li style={{ marginBottom: '8px' }}>Visit sacred Bodhi tree</li>
-              <li style={{ marginBottom: '8px' }}>Evening meditation session</li>
+              <li style={{ marginBottom: '8px' }}>Sunrise meditation</li>
+              <li style={{ marginBottom: '8px' }}>Shirodhara therapy</li>
+              <li style={{ marginBottom: '8px' }}>Herbal compress massage</li>
+              <li style={{ marginBottom: '8px' }}>Nutrition consultation</li>
             </ul>
           </div>
           <div style={styles.dayCard}>
-            <h3 style={{ color: '#3498db', marginBottom: '15px' }}>Day 7: Return & Departure</h3>
+            <h3 style={{ color: '#27ae60', marginBottom: '15px' }}>Day 4-5: Wellness & Departure</h3>
             <ul style={{ paddingLeft: '20px' }}>
-              <li style={{ marginBottom: '8px' }}>Return to Colombo</li>
-              <li style={{ marginBottom: '8px' }}>City tour and shopping</li>
-              <li style={{ marginBottom: '8px' }}>Airport transfer for departure</li>
+              <li style={{ marginBottom: '8px' }}>Customized treatments</li>
+              <li style={{ marginBottom: '8px' }}>Follow-up consultation</li>
+              <li style={{ marginBottom: '8px' }}>Wellness plan for home</li>
+              <li style={{ marginBottom: '8px' }}>Departure transfer</li>
             </ul>
           </div>
         </div>
@@ -469,8 +515,8 @@ function Cultural() {
             </button>
             
             <div style={styles.popupHeader}>
-              <h2 style={{ color: '#2c3e50', marginBottom: '10px' }}>Book Your Cultural Tour</h2>
-              <p style={{ color: '#7f8c8d' }}>Fill in your details to reserve your spot</p>
+              <h2 style={{ color: '#2c3e50', marginBottom: '10px' }}>Book Your Wellness Retreat</h2>
+              <p style={{ color: '#7f8c8d' }}>Fill in your details to reserve your healing journey</p>
             </div>
             
             <form onSubmit={handleSubmit}>
@@ -577,7 +623,7 @@ function Cultural() {
               <button 
                 type="submit" 
                 style={styles.submitButton}
-                onMouseOver={(e) => e.target.style.backgroundColor = '#2ecc71'}
+                onMouseOver={(e) => e.target.style.backgroundColor = '#219653'}
                 onMouseOut={(e) => e.target.style.backgroundColor = '#27ae60'}
               >
                 Confirm Booking
@@ -602,4 +648,4 @@ function Cultural() {
   );
 }
 
-export default Cultural;
+export default Ayur;
