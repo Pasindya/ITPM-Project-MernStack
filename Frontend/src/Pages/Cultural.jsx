@@ -126,7 +126,7 @@ function Cultural() {
       padding: '0 20px'
     },
     hero: {
-      background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/Images/cultural-hero.jpg) center/cover no-repeat',
+      background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/Images/trmp.jpg) center/cover no-repeat',
       height: '60vh',
       display: 'flex',
       alignItems: 'center',
@@ -134,20 +134,24 @@ function Cultural() {
       textAlign: 'center',
       color: 'white',
       marginBottom: '40px',
-      borderRadius: '8px'
+      borderRadius: '8px',
+      position: 'relative'
     },
     heroContent: {
       maxWidth: '800px',
-      padding: '0 20px'
+      padding: '0 20px',
+      zIndex: 2
     },
     heroTitle: {
       fontSize: '3rem',
       marginBottom: '20px',
-      textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+      textShadow: '1px 1px 4px rgba(0, 0, 0, 0.5)',
+      color: 'white'
     },
     heroSubtitle: {
       fontSize: '1.5rem',
-      marginBottom: '30px'
+      marginBottom: '30px',
+      textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'
     },
     ctaButton: {
       backgroundColor: '#3498db',
@@ -157,7 +161,8 @@ function Cultural() {
       fontSize: '1.2rem',
       borderRadius: '50px',
       cursor: 'pointer',
-      transition: 'all 0.3s ease'
+      transition: 'all 0.3s ease',
+      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
     },
     highlights: {
       display: 'grid',
@@ -170,11 +175,13 @@ function Cultural() {
       padding: '25px',
       borderRadius: '8px',
       textAlign: 'center',
-      transition: 'transform 0.3s ease'
+      transition: 'transform 0.3s ease',
+      boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
     },
     highlightIcon: {
       fontSize: '2.5rem',
-      marginBottom: '15px'
+      marginBottom: '15px',
+      color: '#3498db'
     },
     destinationGrid: {
       display: 'grid',
@@ -186,7 +193,8 @@ function Cultural() {
       borderRadius: '8px',
       overflow: 'hidden',
       boxShadow: '0 5px 15px rgba(0, 0, 0, 0.1)',
-      transition: 'transform 0.3s ease'
+      transition: 'transform 0.3s ease',
+      background: 'white'
     },
     cardImage: {
       width: '100%',
@@ -197,7 +205,10 @@ function Cultural() {
       padding: '20px'
     },
     itinerary: {
-      margin: '60px 0'
+      margin: '60px 0',
+      padding: '20px',
+      background: '#f9f9f9',
+      borderRadius: '8px'
     },
     itineraryGrid: {
       display: 'grid',
@@ -205,10 +216,11 @@ function Cultural() {
       gap: '20px'
     },
     dayCard: {
-      background: '#f9f9f9',
+      background: 'white',
       padding: '20px',
       borderRadius: '8px',
-      borderLeft: '5px solid #3498db'
+      borderLeft: '5px solid #3498db',
+      boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
     },
     popupOverlay: {
       position: 'fixed',
@@ -299,7 +311,7 @@ function Cultural() {
 
   return (
     <div style={styles.page}>
-      {/* Hero Section */}
+      {/* Hero Section with Image */}
       <div style={styles.hero}>
         <div style={styles.heroContent}>
           <h1 style={styles.heroTitle}>Cultural Heritage Tour</h1>
@@ -352,6 +364,8 @@ function Cultural() {
         <p style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
           Journey through Sri Lanka's golden age of ancient kingdoms, exploring UNESCO World Heritage Sites
           that showcase the island's rich Buddhist heritage, magnificent architecture, and living traditions.
+          Our expert guides will bring history to life as you visit sacred temples, ancient cities, and cultural
+          landmarks that have stood the test of time.
         </p>
       </section>
 
@@ -363,7 +377,7 @@ function Cultural() {
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
           <img 
-            src="/Images/mali.jpg" 
+            src="/Images/Kandy.jpg" 
             alt="Kandy" 
             style={styles.cardImage}
           />
@@ -401,7 +415,7 @@ function Cultural() {
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
           <img 
-            src="/Images/anu.jpg" 
+            src="Images/anu.jpg" 
             alt="Anuradhapura" 
             style={styles.cardImage}
           />
@@ -426,6 +440,7 @@ function Cultural() {
               <li style={{ marginBottom: '8px' }}>Transfer to Kandy</li>
               <li style={{ marginBottom: '8px' }}>Visit Temple of the Tooth Relic</li>
               <li style={{ marginBottom: '8px' }}>Cultural dance performance</li>
+              <li style={{ marginBottom: '8px' }}>Visit Royal Botanical Gardens</li>
             </ul>
           </div>
           <div style={styles.dayCard}>
@@ -434,6 +449,7 @@ function Cultural() {
               <li style={{ marginBottom: '8px' }}>Climb Sigiriya Rock Fortress</li>
               <li style={{ marginBottom: '8px' }}>Visit Dambulla Cave Temple</li>
               <li style={{ marginBottom: '8px' }}>Traditional village tour</li>
+              <li style={{ marginBottom: '8px' }}>Elephant safari at Minneriya</li>
             </ul>
           </div>
           <div style={styles.dayCard}>
@@ -442,6 +458,7 @@ function Cultural() {
               <li style={{ marginBottom: '8px' }}>Explore ancient ruins</li>
               <li style={{ marginBottom: '8px' }}>Visit sacred Bodhi tree</li>
               <li style={{ marginBottom: '8px' }}>Evening meditation session</li>
+              <li style={{ marginBottom: '8px' }}>Visit Mihintale - birthplace of Buddhism</li>
             </ul>
           </div>
           <div style={styles.dayCard}>
@@ -449,6 +466,7 @@ function Cultural() {
             <ul style={{ paddingLeft: '20px' }}>
               <li style={{ marginBottom: '8px' }}>Return to Colombo</li>
               <li style={{ marginBottom: '8px' }}>City tour and shopping</li>
+              <li style={{ marginBottom: '8px' }}>Visit National Museum</li>
               <li style={{ marginBottom: '8px' }}>Airport transfer for departure</li>
             </ul>
           </div>

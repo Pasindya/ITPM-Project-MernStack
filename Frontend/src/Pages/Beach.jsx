@@ -126,7 +126,7 @@ function Beach() {
       padding: '0 20px'
     },
     hero: {
-      background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/Images/beach-hero.jpg) center/cover no-repeat',
+      background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/Images/be.jpg) center/cover no-repeat',
       height: '60vh',
       display: 'flex',
       alignItems: 'center',
@@ -143,7 +143,8 @@ function Beach() {
     heroTitle: {
       fontSize: '3rem',
       marginBottom: '20px',
-      textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+      textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+      color: 'white'
     },
     heroSubtitle: {
       fontSize: '1.5rem',
