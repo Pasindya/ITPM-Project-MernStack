@@ -14,11 +14,30 @@ import AddEvent from './Event/AddEvent';
 import Add from './Event/Add';
 import UpdateEvent from './Event/UpdateEvent';
 import Calender from './Pages/Calender';
-import Guider from './Pages/Guider';
-import AllGuiders from './Pages/AllGuiders';
+
+
+
+//Transport Function 
 import Transport from './Pages/Transport';
 import VehicleCategory from './Pages/VehicleCategory';
-import TransportNav from './Pages/TransportNav';
+import TransportNav from './Pages/transportNav';
+import Vehicleadmin from './Pages/Vehicleadmin';
+import VehicleBooking from './Pages/Transport CRUD/VehicleBooking';
+import Booking from './Pages/Transport CRUD/Booking';
+import UpdateVehicle from './Pages/Transport CRUD/UpdateVehicle';
+import TransportSummary from './Pages/Transport CRUD/TransportSummary';
+
+
+
+
+
+
+import Guider from './Pages/Guider';
+import AllGuiders from './Pages/AllGuiders';
+
+
+
+
 import DashNav from './Pages/DashNav';
 import Cultural from './Pages/Cultural';
 import Currency from './Pages/Currency';
@@ -42,11 +61,16 @@ import Hbooking from './Hotel/Hbooking';
 import Hoteldetails from './Hotel/Hoteldetails';
 import Updatehbook from './Hotel/Updatehbook';
 
+
+
 const App = () => {
   const location = useLocation(); // Get the current location
 
   // Define routes where Navbar and Footer should be hidden
-  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav','/packnav','/viewbooking','/packdetails','/updatepbook/PBK_12837','/updatepbook/PBK_48926','/updatepbook/PBK_54806','/packreport','/packsummary','/hoteladmin','/hotelnav','/hoteldetails'];
+
+  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav','/packnav','/viewbooking','/packdetails','/updatepbook/PBK_12837','/updatepbook/PBK_48926','/updatepbook/PBK_54806','/packreport','/packsummary','/hoteladmin','/hotelnav','/hoteldetails','/TransportNav','/vehicleadmin','/vehiclebooking','/addbooking','/updatevehicle','/transportsummary'];
+
+
 
   // Check if the current route is in the hideNavbarFooterRoutes array
   const shouldHideNavbarFooter = hideNavbarFooterRoutes.includes(location.pathname);
@@ -73,9 +97,24 @@ const App = () => {
         <Route path="/allGuiders" element={<AllGuiders />} />
      
         <Route path="/dashNav" element={<DashNav />} />
+
+       
+        
+        {/*Transport */}
         <Route path="/transport" element={<Transport />} />
         <Route path="/vehicles/:category" element={<VehicleCategory />} />
         <Route path="/transportnav" element={<TransportNav />} />
+        <Route path="/vehicleadmin" element={<Vehicleadmin />} />
+        <Route path="/vehiclebooking" element={<VehicleBooking />} />
+        <Route path="/booking" element={<Booking />} />
+        <Route path="/vehiclebooking/:id" element={<UpdateVehicle />} />
+        <Route path="/updatevehicle" element={<UpdateVehicle />} />
+        <Route path="/transportsummary" element={<TransportSummary />} />
+       
+      
+        
+
+
         <Route path="/cultural" element={<Cultural />} />
         <Route path="/currency" element={<Currency />} />
         <Route path="/beach" element={<Beach />} />
