@@ -9,14 +9,20 @@ const HTransportSchema = new Schema({
         enum: [
             "Hatchback", 
             "Sedan", 
-            "Van", 
+            "Aqua",
+            "Prius",
+            "Hybrid Car",
+            "Wagoner Car",
+            "Standard Van", 
             "Luxury Van", 
             "Mini Bus", 
             "Tourist Coach Bus", 
             "Jeep", 
+            "4x4 SUV",
             "Motor Bicycle", 
             "Scooter",
-            "Tuk Tuk Wheel" // Add "Tuk Tuk Wheel" to the enum
+            "Tuk Tuk Wheel",
+            "Bicycle Ride" // Add "Tuk Tuk Wheel" to the enum
         ]
 
     },
@@ -62,15 +68,21 @@ HTransportSchema.pre('save', function (next) {
 
     const vehiclePrices = {
         "Hatchback": 130,
-        "Sedan": 110,
-        "Van": 100,
+        "Sedan": 120,
+        "Aqua":110,
+        "Prius":140,
+        "Hybrid Car":150,
+        "Wagoner Car":110,
+        "Standard Van": 100,
         "Luxury Van": 200,
         "Mini Bus": 120,
         "Tourist Coach Bus": 200,
         "Jeep": 150,
+        "4x4 SUV":180,
         "Tuk Tuk Wheel": 90, // Add price for "Tuk Tuk Wheel"
         "Motor Bicycle": 80,
-        "Scooter": 70
+        "Scooter": 70,
+        "Bicycle Ride":50
     };
 
     // Assign pricePerKm automatically based on vehicleType
