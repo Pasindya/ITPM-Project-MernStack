@@ -55,6 +55,11 @@ import Adwenture from './Pages/Adwenture';
 
 
 import Hotels from './Hotel/Hotels';
+import Hoteladmin from './Hotel/Hoteladmin';
+import Hotelnav from './Hotel/Hotelnav';
+import Hbooking from './Hotel/Hbooking';
+import Hoteldetails from './Hotel/Hoteldetails';
+import Updatehbook from './Hotel/Updatehbook';
 
 
 
@@ -63,9 +68,8 @@ const App = () => {
 
   // Define routes where Navbar and Footer should be hidden
 
- // const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg','/dashNav','/TransportNav','/vehicleadmin','/vehiclebooking','/addbooking','/updatevehicle','/transportsummary'];
+  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav','/packnav','/viewbooking','/packdetails','/updatepbook/PBK_12837','/updatepbook/PBK_48926','/updatepbook/PBK_54806','/packreport','/packsummary','/hoteladmin','/hotelnav','/hoteldetails','/TransportNav','/vehicleadmin','/vehiclebooking','/addbooking','/updatevehicle','/transportsummary'];
 
-  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav','/packnav','/viewbooking','/packdetails','/updatepbook/PBK_12837','/updatepbook/PBK_48926','/updatepbook/PBK_54806','/packreport','/packsummary'];
 
 
   // Check if the current route is in the hideNavbarFooterRoutes array
@@ -127,6 +131,11 @@ const App = () => {
         
         <Route path="/updatepbook/:id" element={<Updatepbook />} />
         <Route path="/hotels" element={<Hotels />} />
+        <Route path="/hoteladmin" element={<Hoteladmin />} />
+        <Route path="/hotelnav" element={<Hotelnav />} />
+        <Route path="/hbooking" element={<Hbooking />} />
+        <Route path="/hoteldetails" element={<Hoteldetails />} />
+        <Route path="/updatehbook/:id" element={<Updatehbook />} />
 
       </Routes>
 
