@@ -126,7 +126,7 @@ function Hill() {
       padding: '0 20px'
     },
     hero: {
-      background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/Images/hill-hero.jpg) center/cover no-repeat',
+      background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/Images/moun.jpg) center/cover no-repeat',
       height: '60vh',
       display: 'flex',
       alignItems: 'center',
