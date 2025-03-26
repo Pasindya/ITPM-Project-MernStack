@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
-import '../CSS/Transport.css'; // Import the CSS file
 
 function Transport() {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -45,29 +44,28 @@ function Transport() {
           ac: true,
           facilities: ['Hybrid Engine', 'Eco-Friendly', 'Touchscreen Display', 'Air Conditioning']
         },
-         {
-        name: 'Hybrid Car', 
-        pricePerKm: 150, 
-        image: '/Images/Transport/hybrid.jpg', // Replace with the correct image path
-        seats: 5,
-        ac: true,
-        facilities: ['Fuel Efficient', 'Regenerative Braking', 'Advanced Safety Features', 'Air Conditioning']
-      },
-      { 
-        name: 'Wagoner Car', 
-        pricePerKm: 110, 
-        image: '/Images/Transport/wagonr.jpg', // Replace with the correct image path
-        seats: 7,
-        ac: true,
-        facilities: ['Spacious Interior', 'All-Wheel Drive', 'Roof Rack', 'Air Conditioning']
-      },
+        {
+          name: 'Hybrid Car', 
+          pricePerKm: 150, 
+          image: '/Images/Transport/hybrid.jpg', // Replace with the correct image path
+          seats: 5,
+          ac: true,
+          facilities: ['Fuel Efficient', 'Regenerative Braking', 'Advanced Safety Features', 'Air Conditioning']
+        },
+        { 
+          name: 'Wagoner Car', 
+          pricePerKm: 110, 
+          image: '/Images/Transport/wagonr.jpg', // Replace with the correct image path
+          seats: 7,
+          ac: true,
+          facilities: ['Spacious Interior', 'All-Wheel Drive', 'Roof Rack', 'Air Conditioning']
+        },
       ],
     },
     {
       id: 2,
       type: 'Vans',
       image: '/Images/Transport/van1.jpg', // Replace with your image path
-      
       description: 'Perfect for group travel or transporting goods with ample space and comfort.',
       vehicles: [
         { 
@@ -187,24 +185,24 @@ function Transport() {
   };
 
   return (
-    <div className="transport-container">
-      <h1 className="transport-title">Explore Our Vehicle Categories</h1>
-      <p className="transport-subtitle">Choose from a wide range of vehicle types for your travel needs.</p>
+    <div style={styles.transportContainer}>
+      <h1 style={styles.transportTitle}>Explore Our Vehicle Categories</h1>
+      <p style={styles.transportSubtitle}>Choose from a wide range of vehicle types for your travel needs.</p>
 
       {/* Vehicle Categories Grid */}
-      <div className="vehicle-categories-grid">
+      <div style={styles.vehicleCategoriesGrid}>
         {vehicleCategories.map((category) => (
-          <div key={category.id} className="vehicle-category-card">
+          <div key={category.id} style={styles.vehicleCategoryCard}>
             {/* Vehicle Category Image */}
-            <div className="image-container">
-              <img src={category.image} alt={category.type} className="vehicle-category-image" />
+            <div style={styles.imageContainer}>
+              <img src={category.image} alt={category.type} style={styles.vehicleCategoryImage} />
             </div>
             {/* Vehicle Category Details */}
-            <h2 className="vehicle-category-type">{category.type}</h2>
-            <p className="vehicle-category-description">{category.description}</p>
+            <h2 style={styles.vehicleCategoryType}>{category.type}</h2>
+            <p style={styles.vehicleCategoryDescription}>{category.description}</p>
             {/* View More Button */}
             <button
-              className="view-more-button"
+              style={styles.viewMoreButton}
               onClick={() => handleViewMore(category)}
             >
               View More
@@ -215,5 +213,76 @@ function Transport() {
     </div>
   );
 }
+
+// Inline CSS styles
+const styles = {
+  transportContainer: {
+    padding: '20px',
+    backgroundColor: '#f9f9f9',
+    textAlign: 'center',
+  },
+  transportTitle: {
+    fontSize: '2.5rem',
+    color: '#333',
+    marginBottom: '10px',
+  },
+  transportSubtitle: {
+    fontSize: '1.2rem',
+    color: '#666',
+    marginBottom: '30px',
+  },
+  vehicleCategoriesGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    gap: '20px',
+    padding: '0 20px',
+  },
+  vehicleCategoryCard: {
+    backgroundColor: '#fff',
+    borderRadius: '10px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    overflow: 'hidden',
+    transition: 'transform 0.3s ease',
+    cursor: 'pointer',
+    ':hover': {
+      transform: 'translateY(-10px)',
+    },
+  },
+  imageContainer: {
+    width: '100%',
+    height: '200px',
+    overflow: 'hidden',
+  },
+  vehicleCategoryImage: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  },
+  vehicleCategoryType: {
+    fontSize: '1.8rem',
+    color: '#333',
+    margin: '15px 0 10px',
+  },
+  vehicleCategoryDescription: {
+    fontSize: '1rem',
+    color: '#666',
+    padding: '0 15px',
+    marginBottom: '20px',
+  },
+  viewMoreButton: {
+    backgroundColor: '#007bff',
+    color: '#fff',
+    border: 'none',
+    borderRadius: '5px',
+    padding: '10px 20px',
+    fontSize: '1rem',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s ease',
+    marginBottom: '20px',
+    ':hover': {
+      backgroundColor: '#0056b3',
+    },
+  },
+};
 
 export default Transport;

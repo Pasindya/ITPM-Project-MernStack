@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import '../CSS/VehicleCategory.css'; // Import the CSS file
+import axios from 'axios'; // Import axios for HTTP requests
+import '../CSS/VehicleCategory.css';
 
 function VehicleCategory() {
   const location = useLocation();
@@ -17,6 +18,8 @@ function VehicleCategory() {
     handoverDate: '',
   });
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const openModal = (vehicle) => {
     setSelectedVehicle(vehicle);
@@ -35,23 +38,21 @@ function VehicleCategory() {
       handoverDate: '',
     });
     setErrors({});
+    setSubmitError('');
   };
 
-  // Handle input change and apply validation rules
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-
     let updatedValue = value;
 
-    // Validation rules
     if (name === 'name') {
-      updatedValue = value.replace(/[^A-Za-z\s]/g, ''); // Allow only alphabets and spaces
+      updatedValue = value.replace(/[^A-Za-z\s]/g, '');
     } else if (name === 'mobile') {
-      updatedValue = value.replace(/\D/g, ''); // Allow only numbers
+      updatedValue = value.replace(/\D/g, '').slice(0, 10);
     } else if (name === 'passportNumber') {
-      updatedValue = value.replace(/[^A-Za-z0-9]/g, ''); // Alphanumeric only
+      updatedValue = value.replace(/[^A-Za-z0-9]/g, '');
     } else if (name === 'expectedDays') {
-      updatedValue = value.replace(/\D/g, ''); // Allow only numbers
+      updatedValue = value.replace(/\D/g, '');
     }
 
     setFormData({
@@ -60,7 +61,6 @@ function VehicleCategory() {
     });
   };
 
-  // Function to validate the form before submission
   const validateForm = () => {
     const newErrors = {};
 
@@ -78,37 +78,63 @@ function VehicleCategory() {
 
     if (!formData.passportNumber.trim()) {
       newErrors.passportNumber = 'Passport Number is required';
-    } else if (!/^[A-Za-z0-9]+$/.test(formData.passportNumber)) {
-      newErrors.passportNumber = 'Passport Number can only contain letters and numbers';
     }
 
     if (!formData.expectedDays.trim()) {
       newErrors.expectedDays = 'Expected Days is required';
     } else if (!/^\d+$/.test(formData.expectedDays)) {
       newErrors.expectedDays = 'Expected Days must be a number';
+    } else if (parseInt(formData.expectedDays) < 1) {
+      newErrors.expectedDays = 'Expected Days must be at least 1';
     }
 
-    if (!formData.bookingDate) newErrors.bookingDate = 'Booking Date is required';
-    if (!formData.handoverDate) newErrors.handoverDate = 'Handover Date is required';
+    if (!formData.bookingDate) {
+      newErrors.bookingDate = 'Booking Date is required';
+    }
+
+    if (!formData.handoverDate) {
+      newErrors.handoverDate = 'Handover Date is required';
+    } else if (formData.bookingDate && new Date(formData.handoverDate) <= new Date(formData.bookingDate)) {
+      newErrors.handoverDate = 'Handover Date must be after Booking Date';
+    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitError('');
 
-    if (validateForm()) {
-      const bookingDetails = {
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+
+    try {
+      const bookingData = {
         vehicleType: selectedVehicle.name,
-        pricePerKm: selectedVehicle.pricePerKm,
-        ...formData,
+        name: formData.name,
+        mobile: formData.mobile,
+        passportNumber: formData.passportNumber,
+        expectedDays: parseInt(formData.expectedDays),
+        bookingdate: formData.bookingDate,
+        handoverDate: formData.handoverDate,
+        pricePerKm: selectedVehicle.pricePerKm
       };
 
-      console.log('Booking Details:', bookingDetails);
-      alert('Booking Successful!');
-      closeModal();
+      const response = await axios.post('http://localhost:5000/htransports', bookingData);
+
+      if (response.status === 200) {
+        alert('Booking Successful!');
+        closeModal();
+      } else {
+        setSubmitError('Failed to create booking. Please try again.');
+      }
+    } catch (error) {
+      console.error('Booking error:', error);
+      setSubmitError(error.response?.data?.message || 'An error occurred while booking. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -140,6 +166,7 @@ function VehicleCategory() {
         <div className="modal-overlay">
           <div className="modal">
             <h2>Book {selectedVehicle.name}</h2>
+            {submitError && <div className="error-message">{submitError}</div>}
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label>Vehicle Type:</label>
@@ -152,55 +179,87 @@ function VehicleCategory() {
 
               <div className="form-group">
                 <label>Name:</label>
-                <input type="text" name="name" value={formData.name} onChange={handleInputChange} />
+                <input 
+                  type="text" 
+                  name="name" 
+                  value={formData.name} 
+                  onChange={handleInputChange} 
+                  required 
+                />
                 {errors.name && <span className="error">{errors.name}</span>}
               </div>
 
               <div className="form-group">
                 <label>Mobile:</label>
-                <input type="text" name="mobile" value={formData.mobile} onChange={handleInputChange} />
+                <input 
+                  type="text" 
+                  name="mobile" 
+                  value={formData.mobile} 
+                  onChange={handleInputChange} 
+                  maxLength="10"
+                  required 
+                />
                 {errors.mobile && <span className="error">{errors.mobile}</span>}
               </div>
 
               <div className="form-group">
                 <label>Passport Number:</label>
-                <input type="text" name="passportNumber" value={formData.passportNumber} onChange={handleInputChange} />
+                <input 
+                  type="text" 
+                  name="passportNumber" 
+                  value={formData.passportNumber} 
+                  onChange={handleInputChange} 
+                  required 
+                />
                 {errors.passportNumber && <span className="error">{errors.passportNumber}</span>}
               </div>
 
               <div className="form-group">
                 <label>Expected Days:</label>
-                <input type="text" name="expectedDays" value={formData.expectedDays} onChange={handleInputChange} />
+                <input 
+                  type="number" 
+                  name="expectedDays" 
+                  value={formData.expectedDays} 
+                  onChange={handleInputChange} 
+                  min="1"
+                  required 
+                />
                 {errors.expectedDays && <span className="error">{errors.expectedDays}</span>}
               </div>
 
               <div className="form-group">
-              <label>Booking Date:</label>
-              <input 
-               type="date" 
-               name="bookingDate" 
-               value={formData.bookingDate} 
-               min={new Date().toISOString().split('T')[0]} 
-               onChange={handleInputChange} 
-              />
-               {errors.bookingDate && <span className="error">{errors.bookingDate}</span>}
-          </div>
+                <label>Booking Date:</label>
+                <input 
+                  type="date" 
+                  name="bookingDate" 
+                  value={formData.bookingDate} 
+                  min={new Date().toISOString().split('T')[0]} 
+                  onChange={handleInputChange} 
+                  required 
+                />
+                {errors.bookingDate && <span className="error">{errors.bookingDate}</span>}
+              </div>
 
-           <div className="form-group">
-           <label>Handover Date:</label>
-            <input 
-            type="date" 
-            name="handoverDate" 
-            value={formData.handoverDate} 
-            min={new Date().toISOString().split('T')[0]} 
-           onChange={handleInputChange} 
-           />
-            {errors.handoverDate && <span className="error">{errors.handoverDate}</span>}
-         </div>
+              <div className="form-group">
+                <label>Handover Date:</label>
+                <input 
+                  type="date" 
+                  name="handoverDate" 
+                  value={formData.handoverDate} 
+                  min={formData.bookingDate || new Date().toISOString().split('T')[0]} 
+                  onChange={handleInputChange} 
+                  required 
+                />
+                {errors.handoverDate && <span className="error">{errors.handoverDate}</span>}
+              </div>
 
               <div className="form-buttons">
-                <button type="button" onClick={closeModal}>Cancel</button>
-                <button type="submit">Submit</button>
+                <button type="button" onClick={closeModal} disabled={isSubmitting}>
+                  Cancel
+                </button>
+                <button type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? 'Submitting...' : 'Submit'}
+                </button>
               </div>
             </form>
           </div>

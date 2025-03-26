@@ -9,12 +9,23 @@ import Packages from './Pages/Packages';
 import Weather from './Pages/Weather';
 import Event from './Pages/Event';
 import Calender from './Pages/Calender';
-import Transport from './Pages/Transport';
 
+
+//Transport Function 
+import Transport from './Pages/Transport';
 import VehicleCategory from './Pages/VehicleCategory';
 import TransportNav from './Pages/transportNav';
+import Vehicleadmin from './Pages/Vehicleadmin';
+import VehicleBooking from './Pages/Transport CRUD/VehicleBooking';
+import Booking from './Pages/Transport CRUD/Booking';
+import UpdateVehicle from './Pages/Transport CRUD/UpdateVehicle';
+import TransportSummary from './Pages/Transport CRUD/TransportSummary';
 
-import Driver from './Pages/driver';
+
+
+
+
+
 import DashNav from './Pages/DashNav';
 
 
@@ -33,11 +44,13 @@ import Packagenav from './Pages/Packagenav';
 
 
 
+
+
 const App = () => {
   const location = useLocation(); // Get the current location
 
   // Define routes where Navbar and Footer should be hidden
-  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg','/dashNav'];
+  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg','/dashNav','/TransportNav','/vehicleadmin','/vehiclebooking','/addbooking','/updatevehicle','/transportsummary'];
 
   // Check if the current route is in the hideNavbarFooterRoutes array
   const shouldHideNavbarFooter = hideNavbarFooterRoutes.includes(location.pathname);
@@ -60,11 +73,21 @@ const App = () => {
         <Route path="/dashNav" element={<DashNav />} />
        
         
-
-
+        {/*Transport */}
         <Route path="/transport" element={<Transport />} />
         <Route path="/vehicles/:category" element={<VehicleCategory />} />
         <Route path="/transportnav" element={<TransportNav />} />
+        <Route path="/vehicleadmin" element={<Vehicleadmin />} />
+        <Route path="/vehiclebooking" element={<VehicleBooking />} />
+        <Route path="/booking" element={<Booking />} />
+        <Route path="/vehiclebooking/:id" element={<UpdateVehicle />} />
+        <Route path="/updatevehicle" element={<UpdateVehicle />} />
+        <Route path="/transportsummary" element={<TransportSummary />} />
+       
+       
+
+
+
 
 
         
