@@ -60,6 +60,7 @@ import Hotelnav from './Hotel/Hotelnav';
 import Hbooking from './Hotel/Hbooking';
 import Hoteldetails from './Hotel/Hoteldetails';
 import Updatehbook from './Hotel/Updatehbook';
+import Viewhotel from './Hotel/Viewhotel';
 
 
 
@@ -136,6 +137,8 @@ const App = () => {
         <Route path="/hbooking" element={<Hbooking />} />
         <Route path="/hoteldetails" element={<Hoteldetails />} />
         <Route path="/updatehbook/:id" element={<Updatehbook />} />
+        <Route path="/viewhotel" element={<Viewhotel />} />
+
 
       </Routes>
 
