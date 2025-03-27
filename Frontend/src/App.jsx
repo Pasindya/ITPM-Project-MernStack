@@ -61,6 +61,7 @@ import Hbooking from './Hotel/Hbooking';
 import Hoteldetails from './Hotel/Hoteldetails';
 import Updatehbook from './Hotel/Updatehbook';
 import Viewhotel from './Hotel/Viewhotel';
+import Hotelhome from './Hotel/Hotelhome';
 
 
 
@@ -69,7 +70,7 @@ const App = () => {
 
   // Define routes where Navbar and Footer should be hidden
 
-  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav','/packnav','/viewbooking','/packdetails','/updatepbook/PBK_12837','/updatepbook/PBK_48926','/updatepbook/PBK_54806','/packreport','/packsummary','/hoteladmin','/hotelnav','/hoteldetails','/TransportNav','/vehicleadmin','/vehiclebooking','/addbooking','/updatevehicle','/transportsummary'];
+  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav','/packnav','/viewbooking','/packdetails','/updatepbook/PBK_12837','/updatepbook/PBK_48926','/updatepbook/PBK_54806','/packreport','/packsummary','/hoteladmin','/hotelnav','/hoteldetails','/TransportNav','/vehicleadmin','/vehiclebooking','/addbooking','/updatevehicle','/transportsummary','/hoteldetails','/viewhotel'];
 
 
 
@@ -138,6 +139,7 @@ const App = () => {
         <Route path="/hoteldetails" element={<Hoteldetails />} />
         <Route path="/updatehbook/:id" element={<Updatehbook />} />
         <Route path="/viewhotel" element={<Viewhotel />} />
+        <Route path="/hotelhome" element={<Hotelhome />} />
 
 
       </Routes>
