@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
-import { toPng } from 'html-to-image';
-import { jsPDF } from 'jspdf';
 import PropTypes from 'prop-types';
 import Hotelnav from './Hotelnav';
 import Hbooking from './Hbooking';
@@ -164,36 +162,6 @@ const ActionButtons = styled.div`
   }
 `;
 
-const DownloadButton = styled.button`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1.5rem;
-  background-color: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 0.9rem;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background-color: #1d4ed8;
-  }
-
-  &:disabled {
-    background-color: #cbd5e1;
-    cursor: not-allowed;
-  }
-`;
-
-const DownloadIcon = styled.svg`
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-`;
-
 const BookingsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
@@ -327,7 +295,6 @@ function Hoteldetails() {
   const [searchOption, setSearchOption] = useState('hotelName');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
   const tableRef = useRef(null);
 
   useEffect(() => {
@@ -368,56 +335,6 @@ function Hoteldetails() {
   const handleDelete = (id) => {
     setHbookings(hbookings.filter(booking => booking._id !== id));
     setFilteredBookings(filteredBookings.filter(booking => booking._id !== id));
-  };
-
-  const generatePDF = async () => {
-    if (!tableRef.current || isGeneratingPDF) return;
-    setIsGeneratingPDF(true);
-
-    try {
-      const container = document.createElement('div');
-      container.style.position = 'fixed';
-      container.style.left = '-9999px';
-      container.style.width = '800px';
-      document.body.appendChild(container);
-
-      const reportContent = document.createElement('div');
-      reportContent.style.padding = '20px';
-      reportContent.style.fontFamily = 'Arial, sans-serif';
-      reportContent.style.backgroundColor = 'white';
-      
-      const now = new Date();
-      reportContent.innerHTML = `
-        <div style="text-align: center; margin-bottom: 20px;">
-          <h1 style="color: #3182ce;">Hotel Bookings Report</h1>
-          <p style="font-size: 14px; color: #555;">
-            Generated on ${now.toLocaleDateString()} at ${now.toLocaleTimeString()}
-          </p>
-          ${searchTerm ? `<p style="font-size: 14px;">Filtered by: ${searchOption} containing "${searchTerm}"</p>` : ''}
-        </div>
-      `;
-
-      const tableClone = tableRef.current.cloneNode(true);
-      tableClone.style.width = '100%';
-      tableClone.style.fontSize = '12px';
-      reportContent.appendChild(tableClone);
-      
-      const dataUrl = await toPng(reportContent);
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      const imgProps = pdf.getImageProperties(dataUrl);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      
-      pdf.addImage(dataUrl, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`hotel_bookings_report_${now.getTime()}.pdf`);
-
-      document.body.removeChild(container);
-    } catch (error) {
-      console.error('PDF generation failed:', error);
-      alert('Failed to generate PDF');
-    } finally {
-      setIsGeneratingPDF(false);
-    }
   };
 
   return (
@@ -467,15 +384,7 @@ function Hoteldetails() {
             </SearchSection>
             
             <ActionButtons>
-              <DownloadButton
-                onClick={generatePDF}
-                disabled={isGeneratingPDF || filteredBookings.length === 0}
-              >
-                <DownloadIcon viewBox="0 0 24 24">
-                  <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-                </DownloadIcon>
-                {isGeneratingPDF ? 'Generating PDF...' : 'Download Report'}
-              </DownloadButton>
+              {/* PDF download button has been removed */}
             </ActionButtons>
           </Controls>
 
@@ -541,7 +450,6 @@ Hoteldetails.propTypes = {
   searchOption: PropTypes.string,
   loading: PropTypes.bool,
   error: PropTypes.string,
-  isGeneratingPDF: PropTypes.bool,
 };
 
 export default Hoteldetails;
