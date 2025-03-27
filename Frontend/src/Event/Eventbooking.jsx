@@ -16,30 +16,143 @@ function Eventbooking() {
         Location: "",
         EventCategory: ""
     });
+    const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [shake, setShake] = useState(false);
-    const [error, setError] = useState(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        
+        // Validate input based on field type before updating state
+        let isValid = true;
+        let errorMessage = "";
+        
+        if (name === "FirstName" || name === "LastName") {
+            // Name fields - allow only letters and spaces
+            if (value && /[^a-zA-Z\s]/.test(value)) {
+                isValid = false;
+                errorMessage = "Only letters and spaces allowed";
+            }
+        } else if (name === "Number" || name === "NumberAdult") {
+            // Number fields - allow only digits
+            if (value && !/^\d*$/.test(value)) {
+                isValid = false;
+                errorMessage = "Only numbers allowed";
+            }
+        } else if (name === "City" || name === "Location") {
+            // City and Location - allow letters, numbers, spaces and basic punctuation
+            if (value && /[^a-zA-Z0-9\s\-,.()]/.test(value)) {
+                isValid = false;
+                errorMessage = "Only letters, numbers, spaces, and basic punctuation (-,.) allowed";
+            }
+        }
+        
+        if (!isValid) {
+            setErrors(prev => ({
+                ...prev,
+                [name]: errorMessage
+            }));
+            return;
+        }
+
         setInputs(prev => ({
             ...prev,
             [name]: value
         }));
+        
+        // Clear error when user starts typing
+        if (errors[name]) {
+            setErrors(prev => {
+                const newErrors = {...prev};
+                delete newErrors[name];
+                return newErrors;
+            });
+        }
+    };
+
+    const validateForm = () => {
+        const newErrors = {};
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^[0-9]{10,15}$/;
+        const currentDateTime = new Date();
+        const selectedDateTime = inputs.Date && inputs.Time ? 
+            new Date(`${inputs.Date}T${inputs.Time}`) : null;
+
+        // Required fields validation
+        if (!inputs.FirstName.trim()) newErrors.FirstName = "First name is required";
+        if (!inputs.LastName.trim()) newErrors.LastName = "Last name is required";
+        if (!inputs.Date) newErrors.Date = "Date is required";
+        if (!inputs.Time) newErrors.Time = "Time is required";
+
+        // Name fields validation - letters only
+        if (inputs.FirstName.trim() && /[^a-zA-Z\s]/.test(inputs.FirstName)) {
+            newErrors.FirstName = "Only letters and spaces allowed";
+        }
+        if (inputs.LastName.trim() && /[^a-zA-Z\s]/.test(inputs.LastName)) {
+            newErrors.LastName = "Only letters and spaces allowed";
+        }
+
+        // City and Location validation
+        if (inputs.City && /[^a-zA-Z0-9\s\-,.()]/.test(inputs.City)) {
+            newErrors.City = "Only letters, numbers, spaces, and basic punctuation (-,.) allowed";
+        }
+        if (inputs.Location && /[^a-zA-Z0-9\s\-,.()]/.test(inputs.Location)) {
+            newErrors.Location = "Only letters, numbers, spaces, and basic punctuation (-,.) allowed";
+        }
+
+        // Email validation
+        if (inputs.Gmail && !emailRegex.test(inputs.Gmail)) {
+            newErrors.Gmail = "Please enter a valid email address";
+        }
+
+        // Phone number validation
+        if (inputs.Number && !phoneRegex.test(inputs.Number)) {
+            newErrors.Number = "Please enter a valid phone number (10-15 digits)";
+        }
+
+        // Number of adults validation
+        if (inputs.NumberAdult) {
+            const numAdults = Number(inputs.NumberAdult);
+            if (isNaN(numAdults)) {
+                newErrors.NumberAdult = "Must be a number";
+            } else if (numAdults < 1) {
+                newErrors.NumberAdult = "Must be at least 1";
+            } else if (numAdults > 100) {
+                newErrors.NumberAdult = "Maximum 100 adults";
+            }
+        }
+
+        // Date and Time validation
+        if (selectedDateTime) {
+            if (selectedDateTime < currentDateTime) {
+                newErrors.Date = "Date and time cannot be in the past";
+                newErrors.Time = "Date and time cannot be in the past";
+            }
+        } else if (inputs.Date) {
+            const selectedDate = new Date(inputs.Date);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            if (selectedDate < today) {
+                newErrors.Date = "Date cannot be in the past";
+            }
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
     };
 
     const sendRequest = async () => {
         try {
             const response = await axios.post("http://localhost:5000/events", {
-                FirstName: inputs.FirstName,
-                LastName: inputs.LastName,
-                City: inputs.City,
-                Number: inputs.Number,
-                Gmail: inputs.Gmail,
+                FirstName: inputs.FirstName.trim(),
+                LastName: inputs.LastName.trim(),
+                City: inputs.City.trim(),
+                Number: inputs.Number.trim(),
+                Gmail: inputs.Gmail.trim(),
                 NumberAdult: Number(inputs.NumberAdult) || 0,
                 Date: inputs.Date,
                 Time: inputs.Time,
-                Location: inputs.Location,
+                Location: inputs.Location.trim(),
                 EventCategory: inputs.EventCategory
             });
             return response.data;
@@ -51,13 +164,10 @@ function Eventbooking() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(null);
         
-        // Validate required fields
-        if (!inputs.FirstName || !inputs.LastName || !inputs.Date || !inputs.Time) {
+        if (!validateForm()) {
             setShake(true);
             setTimeout(() => setShake(false), 500);
-            setError("Please fill in all required fields");
             return;
         }
 
@@ -67,10 +177,24 @@ function Eventbooking() {
             navigate("/eventm");
         } catch (error) {
             console.error("Submission error:", error);
-            setError("Failed to create event. Please try again.");
+            setErrors({
+                form: "Failed to create event. Please try again."
+            });
         } finally {
             setIsSubmitting(false);
         }
+    };
+
+    const getError = (fieldName) => {
+        return errors[fieldName] ? (
+            <div style={{
+                color: '#dc3545',
+                fontSize: '0.8rem',
+                marginTop: '0.3rem'
+            }}>
+                {errors[fieldName]}
+            </div>
+        ) : null;
     };
 
     return (
@@ -103,9 +227,9 @@ function Eventbooking() {
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
                     color: 'transparent'
-                }}>Create New Event</h1>
+                }}>Add Member To Event</h1>
                 
-                {error && (
+                {errors.form && (
                     <div style={{
                         backgroundColor: '#fee2e2',
                         color: '#b91c1c',
@@ -114,7 +238,7 @@ function Eventbooking() {
                         marginBottom: '1.5rem',
                         textAlign: 'center'
                     }}>
-                        {error}
+                        {errors.form}
                     </div>
                 )}
 
@@ -131,11 +255,10 @@ function Eventbooking() {
                             placeholder=" "
                             value={inputs.FirstName}
                             onChange={handleChange}
-                            required
                             style={{
                                 width: '100%',
                                 padding: '1rem',
-                                border: '2px solid #e0e0e0',
+                                border: `2px solid ${errors.FirstName ? '#dc3545' : '#e0e0e0'}`,
                                 borderRadius: '10px',
                                 fontSize: '1rem',
                                 transition: 'all 0.3s ease',
@@ -148,13 +271,14 @@ function Eventbooking() {
                             transform: inputs.FirstName ? 'translateY(-50%) scale(0.9)' : 'none',
                             background: inputs.FirstName ? 'white' : 'transparent',
                             padding: inputs.FirstName ? '0 0.5rem' : '0',
-                            color: inputs.FirstName ? '#6a11cb' : '#757575',
+                            color: errors.FirstName ? '#dc3545' : (inputs.FirstName ? '#6a11cb' : '#757575'),
                             transition: 'all 0.2s ease',
                             pointerEvents: 'none',
                             fontSize: inputs.FirstName ? '0.9rem' : '1rem'
                         }}>
                             First Name*
                         </label>
+                        {getError('FirstName')}
                     </div>
 
                     {/* Last Name */}
@@ -165,11 +289,10 @@ function Eventbooking() {
                             placeholder=" "
                             value={inputs.LastName}
                             onChange={handleChange}
-                            required
                             style={{
                                 width: '100%',
                                 padding: '1rem',
-                                border: '2px solid #e0e0e0',
+                                border: `2px solid ${errors.LastName ? '#dc3545' : '#e0e0e0'}`,
                                 borderRadius: '10px',
                                 fontSize: '1rem',
                                 transition: 'all 0.3s ease',
@@ -182,13 +305,14 @@ function Eventbooking() {
                             transform: inputs.LastName ? 'translateY(-50%) scale(0.9)' : 'none',
                             background: inputs.LastName ? 'white' : 'transparent',
                             padding: inputs.LastName ? '0 0.5rem' : '0',
-                            color: inputs.LastName ? '#6a11cb' : '#757575',
+                            color: errors.LastName ? '#dc3545' : (inputs.LastName ? '#6a11cb' : '#757575'),
                             transition: 'all 0.2s ease',
                             pointerEvents: 'none',
                             fontSize: inputs.LastName ? '0.9rem' : '1rem'
                         }}>
                             Last Name*
                         </label>
+                        {getError('LastName')}
                     </div>
 
                     {/* City */}
@@ -202,7 +326,7 @@ function Eventbooking() {
                             style={{
                                 width: '100%',
                                 padding: '1rem',
-                                border: '2px solid #e0e0e0',
+                                border: `2px solid ${errors.City ? '#dc3545' : '#e0e0e0'}`,
                                 borderRadius: '10px',
                                 fontSize: '1rem',
                                 transition: 'all 0.3s ease',
@@ -215,13 +339,14 @@ function Eventbooking() {
                             transform: inputs.City ? 'translateY(-50%) scale(0.9)' : 'none',
                             background: inputs.City ? 'white' : 'transparent',
                             padding: inputs.City ? '0 0.5rem' : '0',
-                            color: inputs.City ? '#6a11cb' : '#757575',
+                            color: errors.City ? '#dc3545' : (inputs.City ? '#6a11cb' : '#757575'),
                             transition: 'all 0.2s ease',
                             pointerEvents: 'none',
                             fontSize: inputs.City ? '0.9rem' : '1rem'
                         }}>
                             City
                         </label>
+                        {getError('City')}
                     </div>
 
                     {/* Phone Number */}
@@ -235,7 +360,7 @@ function Eventbooking() {
                             style={{
                                 width: '100%',
                                 padding: '1rem',
-                                border: '2px solid #e0e0e0',
+                                border: `2px solid ${errors.Number ? '#dc3545' : '#e0e0e0'}`,
                                 borderRadius: '10px',
                                 fontSize: '1rem',
                                 transition: 'all 0.3s ease',
@@ -248,13 +373,14 @@ function Eventbooking() {
                             transform: inputs.Number ? 'translateY(-50%) scale(0.9)' : 'none',
                             background: inputs.Number ? 'white' : 'transparent',
                             padding: inputs.Number ? '0 0.5rem' : '0',
-                            color: inputs.Number ? '#6a11cb' : '#757575',
+                            color: errors.Number ? '#dc3545' : (inputs.Number ? '#6a11cb' : '#757575'),
                             transition: 'all 0.2s ease',
                             pointerEvents: 'none',
                             fontSize: inputs.Number ? '0.9rem' : '1rem'
                         }}>
                             Phone Number
                         </label>
+                        {getError('Number')}
                     </div>
 
                     {/* Email */}
@@ -268,7 +394,7 @@ function Eventbooking() {
                             style={{
                                 width: '100%',
                                 padding: '1rem',
-                                border: '2px solid #e0e0e0',
+                                border: `2px solid ${errors.Gmail ? '#dc3545' : '#e0e0e0'}`,
                                 borderRadius: '10px',
                                 fontSize: '1rem',
                                 transition: 'all 0.3s ease',
@@ -281,13 +407,14 @@ function Eventbooking() {
                             transform: inputs.Gmail ? 'translateY(-50%) scale(0.9)' : 'none',
                             background: inputs.Gmail ? 'white' : 'transparent',
                             padding: inputs.Gmail ? '0 0.5rem' : '0',
-                            color: inputs.Gmail ? '#6a11cb' : '#757575',
+                            color: errors.Gmail ? '#dc3545' : (inputs.Gmail ? '#6a11cb' : '#757575'),
                             transition: 'all 0.2s ease',
                             pointerEvents: 'none',
                             fontSize: inputs.Gmail ? '0.9rem' : '1rem'
                         }}>
                             Email
                         </label>
+                        {getError('Gmail')}
                     </div>
 
                     {/* Number of Adults */}
@@ -299,10 +426,11 @@ function Eventbooking() {
                             value={inputs.NumberAdult}
                             onChange={handleChange}
                             min="1"
+                            max="100"
                             style={{
                                 width: '100%',
                                 padding: '1rem',
-                                border: '2px solid #e0e0e0',
+                                border: `2px solid ${errors.NumberAdult ? '#dc3545' : '#e0e0e0'}`,
                                 borderRadius: '10px',
                                 fontSize: '1rem',
                                 transition: 'all 0.3s ease',
@@ -315,13 +443,14 @@ function Eventbooking() {
                             transform: inputs.NumberAdult ? 'translateY(-50%) scale(0.9)' : 'none',
                             background: inputs.NumberAdult ? 'white' : 'transparent',
                             padding: inputs.NumberAdult ? '0 0.5rem' : '0',
-                            color: inputs.NumberAdult ? '#6a11cb' : '#757575',
+                            color: errors.NumberAdult ? '#dc3545' : (inputs.NumberAdult ? '#6a11cb' : '#757575'),
                             transition: 'all 0.2s ease',
                             pointerEvents: 'none',
                             fontSize: inputs.NumberAdult ? '0.9rem' : '1rem'
                         }}>
                             Number of Adults
                         </label>
+                        {getError('NumberAdult')}
                     </div>
 
                     {/* Date */}
@@ -332,11 +461,11 @@ function Eventbooking() {
                             placeholder=" "
                             value={inputs.Date}
                             onChange={handleChange}
-                            required
+                            min={new Date().toISOString().split('T')[0]}
                             style={{
                                 width: '100%',
                                 padding: '1rem',
-                                border: '2px solid #e0e0e0',
+                                border: `2px solid ${errors.Date ? '#dc3545' : '#e0e0e0'}`,
                                 borderRadius: '10px',
                                 fontSize: '1rem',
                                 transition: 'all 0.3s ease',
@@ -349,13 +478,14 @@ function Eventbooking() {
                             transform: inputs.Date ? 'translateY(-50%) scale(0.9)' : 'none',
                             background: inputs.Date ? 'white' : 'transparent',
                             padding: inputs.Date ? '0 0.5rem' : '0',
-                            color: inputs.Date ? '#6a11cb' : '#757575',
+                            color: errors.Date ? '#dc3545' : (inputs.Date ? '#6a11cb' : '#757575'),
                             transition: 'all 0.2s ease',
                             pointerEvents: 'none',
                             fontSize: inputs.Date ? '0.9rem' : '1rem'
                         }}>
                             Date*
                         </label>
+                        {getError('Date')}
                     </div>
 
                     {/* Time */}
@@ -366,11 +496,10 @@ function Eventbooking() {
                             placeholder=" "
                             value={inputs.Time}
                             onChange={handleChange}
-                            required
                             style={{
                                 width: '100%',
                                 padding: '1rem',
-                                border: '2px solid #e0e0e0',
+                                border: `2px solid ${errors.Time ? '#dc3545' : '#e0e0e0'}`,
                                 borderRadius: '10px',
                                 fontSize: '1rem',
                                 transition: 'all 0.3s ease',
@@ -383,13 +512,14 @@ function Eventbooking() {
                             transform: inputs.Time ? 'translateY(-50%) scale(0.9)' : 'none',
                             background: inputs.Time ? 'white' : 'transparent',
                             padding: inputs.Time ? '0 0.5rem' : '0',
-                            color: inputs.Time ? '#6a11cb' : '#757575',
+                            color: errors.Time ? '#dc3545' : (inputs.Time ? '#6a11cb' : '#757575'),
                             transition: 'all 0.2s ease',
                             pointerEvents: 'none',
                             fontSize: inputs.Time ? '0.9rem' : '1rem'
                         }}>
                             Time*
                         </label>
+                        {getError('Time')}
                     </div>
 
                     {/* Location */}
@@ -403,7 +533,7 @@ function Eventbooking() {
                             style={{
                                 width: '100%',
                                 padding: '1rem',
-                                border: '2px solid #e0e0e0',
+                                border: `2px solid ${errors.Location ? '#dc3545' : '#e0e0e0'}`,
                                 borderRadius: '10px',
                                 fontSize: '1rem',
                                 transition: 'all 0.3s ease',
@@ -416,13 +546,14 @@ function Eventbooking() {
                             transform: inputs.Location ? 'translateY(-50%) scale(0.9)' : 'none',
                             background: inputs.Location ? 'white' : 'transparent',
                             padding: inputs.Location ? '0 0.5rem' : '0',
-                            color: inputs.Location ? '#6a11cb' : '#757575',
+                            color: errors.Location ? '#dc3545' : (inputs.Location ? '#6a11cb' : '#757575'),
                             transition: 'all 0.2s ease',
                             pointerEvents: 'none',
                             fontSize: inputs.Location ? '0.9rem' : '1rem'
                         }}>
                             Location
                         </label>
+                        {getError('Location')}
                     </div>
 
                     {/* Event Category */}
@@ -434,7 +565,7 @@ function Eventbooking() {
                             style={{
                                 width: '100%',
                                 padding: '1rem',
-                                border: '2px solid #e0e0e0',
+                                border: `2px solid ${errors.EventCategory ? '#dc3545' : '#e0e0e0'}`,
                                 borderRadius: '10px',
                                 fontSize: '1rem',
                                 transition: 'all 0.3s ease',
@@ -443,10 +574,10 @@ function Eventbooking() {
                             }}
                         >
                             <option value="">Select Event Category</option>
-                            <option value="Wedding">Wedding</option>
-                            <option value="Corporate">Corporate</option>
-                            <option value="Birthday">Birthday</option>
-                            <option value="Conference">Conference</option>
+                            <option value="Wedding">Beach Party</option>
+                            <option value="Corporate">Dj</option>
+                            <option value="Birthday">Culturel Event</option>
+                            <option value="Conference">Sport Event</option>
                             <option value="Other">Other</option>
                         </select>
                         <label style={{
@@ -456,13 +587,14 @@ function Eventbooking() {
                             transform: inputs.EventCategory ? 'translateY(-50%) scale(0.9)' : 'none',
                             background: inputs.EventCategory ? 'white' : 'transparent',
                             padding: inputs.EventCategory ? '0 0.5rem' : '0',
-                            color: inputs.EventCategory ? '#6a11cb' : '#757575',
+                            color: errors.EventCategory ? '#dc3545' : (inputs.EventCategory ? '#6a11cb' : '#757575'),
                             transition: 'all 0.2s ease',
                             pointerEvents: 'none',
                             fontSize: inputs.EventCategory ? '0.9rem' : '1rem'
                         }}>
                             Event Category
                         </label>
+                        {getError('EventCategory')}
                     </div>
 
                     <div style={{ gridColumn: '1 / -1', display: 'flex', justifyContent: 'center' }}>

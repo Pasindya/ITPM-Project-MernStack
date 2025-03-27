@@ -13,6 +13,8 @@ import Eventm from './Event/Eventm';
 import AddEvent from './Event/AddEvent';
 import Add from './Event/Add';
 import UpdateEvent from './Event/UpdateEvent';
+import Taskboard from './Event/Taskboard';
+import EventCharts from './Event/EventCharts'; // Import the EventCharts component
 import Calender from './Pages/Calender';
 import Guider from './Pages/Guider';
 import AllGuiders from './Pages/AllGuiders';
@@ -57,6 +59,8 @@ const App = () => {
         <Route path="/addevent" element={<AddEvent />} />
         <Route path="/add" element={<Add />} />
         <Route path="/updateevent/:id" element={<UpdateEvent />} />
+        <Route path="/taskboard" element={<Taskboard />} />
+        <Route path="/eventcharts" element={<EventCharts />} /> {/* Add the EventCharts route */}
         <Route path="/calender" element={<Calender />} />
         <Route path="/guider" element={<Guider />} />
         <Route path="/allGuiders" element={<AllGuiders />} />
