@@ -16,11 +16,30 @@ import UpdateEvent from './Event/UpdateEvent';
 import Taskboard from './Event/Taskboard';
 import EventCharts from './Event/EventCharts'; // Import the EventCharts component
 import Calender from './Pages/Calender';
-import Guider from './Pages/Guider';
-import AllGuiders from './Pages/AllGuiders';
+
+
+
+//Transport Function 
 import Transport from './Pages/Transport';
 import VehicleCategory from './Pages/VehicleCategory';
-import TransportNav from './Pages/TransportNav';
+import TransportNav from './Pages/transportNav';
+import Vehicleadmin from './Pages/Vehicleadmin';
+import VehicleBooking from './Pages/Transport CRUD/VehicleBooking';
+import Booking from './Pages/Transport CRUD/Booking';
+import UpdateVehicle from './Pages/Transport CRUD/UpdateVehicle';
+import TransportSummary from './Pages/Transport CRUD/TransportSummary';
+
+
+
+
+
+
+import Guider from './Pages/Guider';
+import AllGuiders from './Pages/AllGuiders';
+
+
+
+
 import DashNav from './Pages/DashNav';
 import Cultural from './Pages/Cultural';
 import Currency from './Pages/Currency';
@@ -29,15 +48,36 @@ import Safari from './Pages/Safari';
 import Hill from './Pages/Hill';
 import Adminpkg from './Pages/Adminpkg';
 import Packnav from './Packbooking/Packnav';
-
+import Packreport from './Pages/Packreport';
 import Packdetails from './Pages/Packdetails';
 import Updatepbook from './Pages/Updatepbook';
+import Packsummary from './Pages/Packsummary';
+import Ayur from './Pages/Ayur';
+import Adwenture from './Pages/Adwenture';
+
+
+import Hotels from './Hotel/Hotels';
+import Hoteladmin from './Hotel/Hoteladmin';
+import Hotelnav from './Hotel/Hotelnav';
+import Hbooking from './Hotel/Hbooking';
+import Hoteldetails from './Hotel/Hoteldetails';
+import Updatehbook from './Hotel/Updatehbook';
+import Viewhotel from './Hotel/Viewhotel';
+import Hotelhome from './Hotel/Hotelhome';
+import Hotelsummary from './Hotel/Hotelsummary';
+
+
 
 const App = () => {
   const location = useLocation(); // Get the current location
 
   // Define routes where Navbar and Footer should be hidden
-  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav','/packnav','/viewbooking','/packdetails','/updatepbook/PBK_12837','/updatepbook/PBK_48926','/updatepbook/PBK_54806'];
+
+  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav','/packnav','/viewbooking','/packdetails','/updatepbook/PBK_12837','/updatepbook/PBK_48926','/updatepbook/PBK_54806','/packreport','/packsummary','/hoteladmin','/hotelnav','/hoteldetails','/TransportNav','/vehicleadmin','/vehiclebooking','/addbooking','/updatevehicle','/transportsummary','/hoteldetails','/viewhotel'
+    ,'/hotelsummary'
+  ];
+
+
 
   // Check if the current route is in the hideNavbarFooterRoutes array
   const shouldHideNavbarFooter = hideNavbarFooterRoutes.includes(location.pathname);
@@ -66,9 +106,24 @@ const App = () => {
         <Route path="/allGuiders" element={<AllGuiders />} />
      
         <Route path="/dashNav" element={<DashNav />} />
+
+       
+        
+        {/*Transport */}
         <Route path="/transport" element={<Transport />} />
         <Route path="/vehicles/:category" element={<VehicleCategory />} />
         <Route path="/transportnav" element={<TransportNav />} />
+        <Route path="/vehicleadmin" element={<Vehicleadmin />} />
+        <Route path="/vehiclebooking" element={<VehicleBooking />} />
+        <Route path="/booking" element={<Booking />} />
+        <Route path="/vehiclebooking/:id" element={<UpdateVehicle />} />
+        <Route path="/updatevehicle" element={<UpdateVehicle />} />
+        <Route path="/transportsummary" element={<TransportSummary />} />
+       
+      
+        
+
+
         <Route path="/cultural" element={<Cultural />} />
         <Route path="/currency" element={<Currency />} />
         <Route path="/beach" element={<Beach />} />
@@ -77,8 +132,23 @@ const App = () => {
         <Route path="/adminpkg" element={<Adminpkg />} />
         <Route path="/Packnav" element={<Packnav />} />
         <Route path="/packdetails" element={<Packdetails />} />
+        <Route path="/packreport" element={<Packreport />} />
+        <Route path="/packsummary" element={<Packsummary />} />
+        <Route path="/ayur" element={<Ayur />} />
+        <Route path="/adwenture" element={<Adwenture />} />
+    
         
         <Route path="/updatepbook/:id" element={<Updatepbook />} />
+        <Route path="/hotels" element={<Hotels />} />
+        <Route path="/hoteladmin" element={<Hoteladmin />} />
+        <Route path="/hotelnav" element={<Hotelnav />} />
+        <Route path="/hbooking" element={<Hbooking />} />
+        <Route path="/hoteldetails" element={<Hoteldetails />} />
+        <Route path="/updatehbook/:id" element={<Updatehbook />} />
+        <Route path="/viewhotel" element={<Viewhotel />} />
+        <Route path="/hotelhome" element={<Hotelhome />} />
+        <Route path="/hotelsummary" element={<Hotelsummary />} />
+
 
       </Routes>
 

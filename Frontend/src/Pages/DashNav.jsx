@@ -150,7 +150,7 @@ function DashNav() {
             }}
           >
             <Link
-              to="/view-report"
+              to="/packreport"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -178,7 +178,7 @@ function DashNav() {
             }}
           >
             <Link
-              to="/main-summary"
+              to="/packsummary"
               style={{
                 display: 'flex',
                 alignItems: 'center',

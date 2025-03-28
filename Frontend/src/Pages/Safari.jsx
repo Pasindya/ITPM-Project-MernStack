@@ -126,7 +126,7 @@ function Safari() {
       padding: '0 20px'
     },
     hero: {
-      background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/Images/safari-hero.jpg) center/cover no-repeat',
+      background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/Images/tisa.jpg) center/cover no-repeat',
       height: '60vh',
       display: 'flex',
       alignItems: 'center',
@@ -143,7 +143,8 @@ function Safari() {
     heroTitle: {
       fontSize: '3rem',
       marginBottom: '20px',
-      textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+      textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+      color: 'white'
     },
     heroSubtitle: {
       fontSize: '1.5rem',
@@ -364,7 +365,7 @@ function Safari() {
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
           <img 
-            src="/Images/yala.jpg" 
+            src="/Images/minna.jpg" 
             alt="Yala National Park" 
             style={styles.cardImage}
           />
@@ -384,7 +385,7 @@ function Safari() {
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
           <img 
-            src="/Images/udawalawe.jpg" 
+            src="/Images/udawa.jpg" 
             alt="Udawalawe National Park" 
             style={styles.cardImage}
           />
@@ -404,7 +405,7 @@ function Safari() {
           onMouseOut={(e) => e.currentTarget.style.transform = ''}
         >
           <img 
-            src="/Images/wilpattu.jpg" 
+            src="/Images/ti.jpg" 
             alt="Wilpattu National Park" 
             style={styles.cardImage}
           />

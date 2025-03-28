@@ -3,6 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import '../CSS/Dashboard.css'; // Import the CSS file for styling
 import adminImage from '../assets/admin.jpg'; // Import the image
+import vehicleImage from '../assets/vadmin.jpg';
 
 function Dashboard() {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -21,7 +22,7 @@ function Dashboard() {
         <ul>
           {/* Booking Management */}
           <li>
-            <button onClick={() => navigate('/hotel-booking')}>
+            <button onClick={() => navigate('/hoteladmin')}>
               Hotel Booking
             </button>
           </li>
@@ -43,7 +44,7 @@ function Dashboard() {
             </button>
           </li>
           <li>
-            <button onClick={() => navigate('/transport-management')}>
+            <button onClick={() => navigate('/vehicleadmin')}>
               Transport Management
             </button>
           </li>

@@ -29,7 +29,7 @@ function Navbar() {
               <div className="dropdown-menu">
                 <Link to="/transport">Transport</Link>
                 <Link to="/guiders">Guiders</Link>
-                <Link to="/hotels">Hotels</Link>
+                <Link to="/hotelhome">Hotels</Link>
               </div>
             )}
           </div>

@@ -1,16 +1,26 @@
 const express = require("express");
 const router = express.Router();
+const {
+    addHBookings,
+    getAllHBookings,
+    getById,
+    updateHBooking,
+    deleteHBooking
+} = require("../Controllers/HBookingControl");
 
-//Insert model
-const HBooking = require("../Model/HBookingModel")
+// POST /api/bookings - Create new booking
+router.post("/", addHBookings);
 
-//Insert Controler
-const HBookingController = require("../Controllers/HBookingControl");
+// GET /api/bookings - Get all bookings
+router.get("/", getAllHBookings);
 
-router.get("/",HBookingController.getAllHBookings);
-router.post("/",HBookingController.addHBookings);
-router.get("/:id",HBookingController.getById);
-router.put("/:id",HBookingController.updateHBooking);
-router.delete("/:id",HBookingController.deleteHBooking);
-//export
+// GET /api/bookings/:id - Get single booking
+router.get("/:id", getById);
+
+// PUT /api/bookings/:id - Update booking
+router.put("/:id", updateHBooking);
+
+// DELETE /api/bookings/:id - Delete booking
+router.delete("/:id", deleteHBooking);
+
 module.exports = router;
