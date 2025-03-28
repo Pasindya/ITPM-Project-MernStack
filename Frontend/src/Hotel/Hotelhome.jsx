@@ -637,6 +637,8 @@ const SubmitButton = styled.button`
 `;
 
 function HotelHome() {
+
+
   // State management
   const [searchTerm, setSearchTerm] = useState('');
   const [priceFilter, setPriceFilter] = useState('all');
@@ -665,7 +667,8 @@ function HotelHome() {
   const [hotels, setHotels] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+   
+ 
   // Sample hotel data (would normally come from API)
   const featuredHotels = [
     {
@@ -836,6 +839,7 @@ function HotelHome() {
     return matchesSearch && matchesPrice && matchesLocation;
   });
 
+
   // Handle book now click
   const handleBookNow = (hotel) => {
     setSelectedHotel(hotel);
@@ -859,9 +863,11 @@ function HotelHome() {
   };
 
   // Form validation
+  
   const validateForm = () => {
     const errors = {};
     const today = new Date().toISOString().split('T')[0];
+    
     
     if (!formData.checkIn) {
       errors.checkIn = 'Check-in date is required';
@@ -1171,7 +1177,7 @@ function HotelHome() {
               </svg>
               Contact Our Experts
             </PrimaryButton>
-            <SecondaryButton>
+            <SecondaryButton onClick={() => navigate('/hotels')}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
                 <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
