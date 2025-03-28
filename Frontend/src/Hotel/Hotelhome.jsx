@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import styled, { keyframes } from 'styled-components';
 
 // Animations
 const fadeIn = keyframes`
@@ -50,7 +51,6 @@ const HeroContent = styled.div`
   max-width: 800px;
   padding: 40px;
   animation: ${fadeIn} 1s ease-out;
-  
 `;
 
 const HeroTitle = styled.h1`
@@ -58,7 +58,7 @@ const HeroTitle = styled.h1`
   margin-bottom: 20px;
   font-weight: 700;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-  color:white;
+  color: white;
 `;
 
 const HeroSubtitle = styled.p`
@@ -637,8 +637,8 @@ const SubmitButton = styled.button`
 `;
 
 function HotelHome() {
-
-
+  const navigate = useNavigate();
+  
   // State management
   const [searchTerm, setSearchTerm] = useState('');
   const [priceFilter, setPriceFilter] = useState('all');
@@ -664,12 +664,8 @@ function HotelHome() {
   });
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [hotels, setHotels] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-   
- 
-  // Sample hotel data (would normally come from API)
+
+  // Sample hotel data
   const featuredHotels = [
     {
       id: 1,
@@ -839,7 +835,6 @@ function HotelHome() {
     return matchesSearch && matchesPrice && matchesLocation;
   });
 
-
   // Handle book now click
   const handleBookNow = (hotel) => {
     setSelectedHotel(hotel);
@@ -863,11 +858,9 @@ function HotelHome() {
   };
 
   // Form validation
-  
   const validateForm = () => {
     const errors = {};
     const today = new Date().toISOString().split('T')[0];
-    
     
     if (!formData.checkIn) {
       errors.checkIn = 'Check-in date is required';
@@ -1002,7 +995,7 @@ function HotelHome() {
         <HeroContent>
           <HeroTitle>Discover Sri Lankan Hospitality</HeroTitle>
           <HeroSubtitle>Luxury stays amidst ancient wonders, tropical beaches, and lush hill country</HeroSubtitle>
-          <PrimaryButton>
+          <PrimaryButton onClick={() => navigate('/hotels')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
               <circle cx="12" cy="10" r="3"></circle>
