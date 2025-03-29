@@ -130,7 +130,7 @@ function TransportNav() {
             </Link>
           </li>
           <li>
-            <Link to="/updatevehicle" style={styles.sidebarLink} onClick={() => setIsOpen(false)}>
+            <Link to="/" style={styles.sidebarLink} onClick={() => setIsOpen(false)}>
               <FaEdit style={styles.icon} /> Edit Vehicle Bookings
             </Link>
           </li>
