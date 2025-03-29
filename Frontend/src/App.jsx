@@ -28,6 +28,7 @@ import VehicleBooking from './Pages/Transport CRUD/VehicleBooking';
 import Booking from './Pages/Transport CRUD/Booking';
 import UpdateVehicle from './Pages/Transport CRUD/UpdateVehicle';
 import TransportSummary from './Pages/Transport CRUD/TransportSummary';
+import TransportHome from './Pages/TransportHome';
 
 
 
@@ -119,6 +120,7 @@ const App = () => {
         <Route path="/vehiclebooking/:id" element={<UpdateVehicle />} />
         <Route path="/updatevehicle" element={<UpdateVehicle />} />
         <Route path="/transportsummary" element={<TransportSummary />} />
+        <Route path="/transporthome" element={<TransportHome />} />
        
       
         
