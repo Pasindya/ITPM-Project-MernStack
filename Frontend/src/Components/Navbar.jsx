@@ -27,7 +27,7 @@ function Navbar() {
             <Link to="/services">Services</Link>
             {servicesOpen && (
               <div className="dropdown-menu">
-                <Link to="/transport">Transport</Link>
+                <Link to="/transporthome">Transport</Link>
                 <Link to="/guiders">Guiders</Link>
                 <Link to="/hotelhome">Hotels</Link>
               </div>
