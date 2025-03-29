@@ -2,9 +2,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const HTransportSchema = new Schema({
-
-    
-   
+    _id: {
+        type: String,
+        default: function() {
+            return `HTB${Math.floor(10000 + Math.random() * 90000)}`;
+        }
+    },
     vehicleType: { 
         type: String, 
         required: [true, "Vehicle type is required"], 
