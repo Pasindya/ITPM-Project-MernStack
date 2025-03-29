@@ -125,36 +125,64 @@ function VehicleCategory() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitError('');
-
+  
     if (!validateForm()) return;
-
+  
     setIsSubmitting(true);
-
+  
     try {
+      // Format dates for backend
+      const bookingDate = new Date(formData.bookingDate);
+      const handoverDate = new Date(formData.handoverDate);
+  
       const bookingData = {
         vehicleType: selectedVehicle.name,
-        name: formData.name,
-        mobile: formData.mobile,
-        passportNumber: formData.passportNumber,
+        name: formData.name.trim(),
+        mobile: formData.mobile.trim(),
+        passportNumber: formData.passportNumber.trim().toUpperCase(),
         expectedDays: parseInt(formData.expectedDays),
-        bookingdate: formData.bookingDate,
-        handoverDate: formData.handoverDate,
+        bookingdate: bookingDate.toISOString(),
+        handoverDate: handoverDate.toISOString(),
         pricePerKm: selectedVehicle.pricePerKm
       };
-
+  
       console.log("Sending data to backend:", bookingData);
-
-      const response = await axios.post('http://localhost:5000/htransports', bookingData);
-      console.log("Backend response:", response); // Add this
-      if (response.status === 200) {
+  
+      const response = await axios.post('http://localhost:5000/htransports', bookingData, {
+        timeout: 5000,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+  
+      console.log("Backend response:", response);
+  
+      if (response.status === 200 || response.status === 201) {
         alert('Booking Successful!');
         closeModal();
       } else {
-        setSubmitError('Failed to create booking. Please try again.');
+        throw new Error(`Unexpected response status: ${response.status}`);
       }
     } catch (error) {
-      console.error('Booking error:', error);
-      setSubmitError(error.response?.data?.message || 'An error occurred while booking. Please try again.');
+      console.error('Booking error:', {
+        message: error.message,
+        response: error.response?.data,
+        stack: error.stack
+      });
+      
+      let errorMessage = 'An error occurred while booking. Please try again.';
+      
+      if (error.response) {
+        errorMessage = error.response.data?.message || 
+                      error.response.data?.error ||
+                      `Server responded with ${error.response.status}`;
+      } else if (error.request) {
+        errorMessage = 'No response from server. Is it running?';
+      } else if (error.code === 'ECONNABORTED') {
+        errorMessage = 'Request timed out. Please try again.';
+      }
+      
+      setSubmitError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
