@@ -50,9 +50,16 @@ function UpdateVehicle() {
                 }
                 break;
             case 'passportNumber':
-                // Only allow alphanumeric
-                if (!/^[A-Za-z0-9]$/.test(e.key)) {
-                    e.preventDefault();
+                // Only allow letters for first 2 characters, then digits
+                const currentValue = e.target.value;
+                if (currentValue.length < 2) {
+                    if (!/^[A-Za-z]$/.test(e.key)) {
+                        e.preventDefault();
+                    }
+                } else {
+                    if (!/^\d$/.test(e.key)) {
+                        e.preventDefault();
+                    }
                 }
                 break;
         }
@@ -60,12 +67,28 @@ function UpdateVehicle() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        let updatedValue = value;
 
-        // Format passport number to uppercase automatically
+        // Format passport number to uppercase automatically and enforce format
         if (name === 'passportNumber') {
-            updatedValue = value.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+            // Remove any non-alphanumeric characters
+            updatedValue = value.replace(/[^A-Za-z0-9]/g, '');
+            
+            // Convert first 2 characters to uppercase
+            if (updatedValue.length > 2) {
+                updatedValue = updatedValue.substring(0, 2).toUpperCase() + 
+                               updatedValue.substring(2);
+            } else {
+                updatedValue = updatedValue.toUpperCase();
+            }
+            
+            // Limit to 12 characters (2 letters + 10 digits)
+            if (updatedValue.length > 12) {
+                updatedValue = updatedValue.substring(0, 12);
+            }
         }
+
+        setFormData({ ...formData, [name]: updatedValue });
 
         // Clear error when user starts typing
         if (errors[name]) {
@@ -75,13 +98,10 @@ function UpdateVehicle() {
     };
 
     const validatePassportNumber = (passportNumber) => {
-        // Common passport number validation pattern:
-        // 1-2 letters followed by 6-7 digits (most common format)
-        // OR 9 digits (US/UK style)
-        const commonPattern = /^([A-Za-z]{1,2}\d{6,7}|\d{9})$/;
-        return commonPattern.test(passportNumber);
+        // Strict validation: exactly 2 letters followed by exactly 10 digits
+        const strictPattern = /^[A-Za-z]{2}\d{10}$/;
+        return strictPattern.test(passportNumber);
     };
-
 
     const validate = () => {
         let tempErrors = {};
@@ -101,17 +121,16 @@ function UpdateVehicle() {
             setInputValidity(prev => ({ ...prev, mobile: false }));
         }
 
-         // Enhanced Passport number validation
-         if (!formData.passportNumber.trim()) {
+        // Enhanced Passport number validation
+        if (!formData.passportNumber.trim()) {
             tempErrors.passportNumber = "Passport Number is required";
             isValid = false;
             setInputValidity(prev => ({ ...prev, passportNumber: false }));
         } else if (!validatePassportNumber(formData.passportNumber)) {
-            tempErrors.passportNumber = "Invalid passport format. Expected: AB123456, A1234567, or 123456789";
+            tempErrors.passportNumber = "Passport must be 2 letters followed by 10 digits (e.g., AB1234567890)";
             isValid = false;
             setInputValidity(prev => ({ ...prev, passportNumber: false }));
         }
-
 
         // Date validations
         if (formData.bookingdate < today) {
@@ -144,7 +163,7 @@ function UpdateVehicle() {
         }
     };
 
-    // Styles
+    // Styles (same as before)
     const containerStyle = {
         maxWidth: "600px",
         margin: "2rem auto",
@@ -234,7 +253,7 @@ function UpdateVehicle() {
                         onChange={handleChange}
                         style={baseInputStyle}
                         required
-                        disabled  // Disable this field
+                        disabled
                     />
                 </div>
 
@@ -278,6 +297,8 @@ function UpdateVehicle() {
                         value={formData.passportNumber}
                         onChange={handleChange}
                         onKeyPress={handleKeyPress}
+                        maxLength="12"
+                        placeholder="AB1234567890"
                         style={inputValidity.passportNumber ? validInputStyle : invalidInputStyle}
                         required
                     />
@@ -340,7 +361,7 @@ function UpdateVehicle() {
                         step="0.01"
                         style={baseInputStyle}
                         required
-                        disabled  // Disable this field
+                        disabled
                     />
                 </div>
 

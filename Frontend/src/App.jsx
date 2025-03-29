@@ -28,6 +28,9 @@ import VehicleBooking from './Pages/Transport CRUD/VehicleBooking';
 import Booking from './Pages/Transport CRUD/Booking';
 import UpdateVehicle from './Pages/Transport CRUD/UpdateVehicle';
 import TransportSummary from './Pages/Transport CRUD/TransportSummary';
+import TransportHome from './Pages/TransportHome';
+import TransportDetails from './Pages/Transport CRUD/TransportDetails';
+
 
 
 
@@ -68,13 +71,14 @@ import Hotelsummary from './Hotel/Hotelsummary';
 
 
 
+
 const App = () => {
   const location = useLocation(); // Get the current location
 
   // Define routes where Navbar and Footer should be hidden
 
   const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav','/packnav','/viewbooking','/packdetails','/updatepbook/PBK_12837','/updatepbook/PBK_48926','/updatepbook/PBK_54806','/packreport','/packsummary','/hoteladmin','/hotelnav','/hoteldetails','/TransportNav','/vehicleadmin','/vehiclebooking','/addbooking','/updatevehicle','/transportsummary','/hoteldetails','/viewhotel'
-    ,'/hotelsummary'
+    ,'/hotelsummary','/taskboard','/transportdetails'
   ];
 
 
@@ -119,6 +123,9 @@ const App = () => {
         <Route path="/vehiclebooking/:id" element={<UpdateVehicle />} />
         <Route path="/updatevehicle" element={<UpdateVehicle />} />
         <Route path="/transportsummary" element={<TransportSummary />} />
+        <Route path="/transporthome" element={<TransportHome />} />
+        <Route path="/transportdetails" element={<TransportDetails />} />
+       
        
       
         
