@@ -13,6 +13,8 @@ import Eventm from './Event/Eventm';
 import AddEvent from './Event/AddEvent';
 import Add from './Event/Add';
 import UpdateEvent from './Event/UpdateEvent';
+import Taskboard from './Event/Taskboard';
+import EventCharts from './Event/EventCharts'; // Import the EventCharts component
 import Calender from './Pages/Calender';
 
 
@@ -60,6 +62,9 @@ import Hotelnav from './Hotel/Hotelnav';
 import Hbooking from './Hotel/Hbooking';
 import Hoteldetails from './Hotel/Hoteldetails';
 import Updatehbook from './Hotel/Updatehbook';
+import Viewhotel from './Hotel/Viewhotel';
+import Hotelhome from './Hotel/Hotelhome';
+import Hotelsummary from './Hotel/Hotelsummary';
 
 
 
@@ -68,7 +73,9 @@ const App = () => {
 
   // Define routes where Navbar and Footer should be hidden
 
-  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav','/packnav','/viewbooking','/packdetails','/updatepbook/PBK_12837','/updatepbook/PBK_48926','/updatepbook/PBK_54806','/packreport','/packsummary','/hoteladmin','/hotelnav','/hoteldetails','/TransportNav','/vehicleadmin','/vehiclebooking','/addbooking','/updatevehicle','/transportsummary'];
+  const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav','/packnav','/viewbooking','/packdetails','/updatepbook/PBK_12837','/updatepbook/PBK_48926','/updatepbook/PBK_54806','/packreport','/packsummary','/hoteladmin','/hotelnav','/hoteldetails','/TransportNav','/vehicleadmin','/vehiclebooking','/addbooking','/updatevehicle','/transportsummary','/hoteldetails','/viewhotel'
+    ,'/hotelsummary'
+  ];
 
 
 
@@ -92,6 +99,8 @@ const App = () => {
         <Route path="/addevent" element={<AddEvent />} />
         <Route path="/add" element={<Add />} />
         <Route path="/updateevent/:id" element={<UpdateEvent />} />
+        <Route path="/taskboard" element={<Taskboard />} />
+        <Route path="/eventcharts" element={<EventCharts />} /> {/* Add the EventCharts route */}
         <Route path="/calender" element={<Calender />} />
         <Route path="/guider" element={<Guider />} />
         <Route path="/allGuiders" element={<AllGuiders />} />
@@ -136,6 +145,10 @@ const App = () => {
         <Route path="/hbooking" element={<Hbooking />} />
         <Route path="/hoteldetails" element={<Hoteldetails />} />
         <Route path="/updatehbook/:id" element={<Updatehbook />} />
+        <Route path="/viewhotel" element={<Viewhotel />} />
+        <Route path="/hotelhome" element={<Hotelhome />} />
+        <Route path="/hotelsummary" element={<Hotelsummary />} />
+
 
       </Routes>
 

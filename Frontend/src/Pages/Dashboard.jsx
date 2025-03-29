@@ -39,7 +39,7 @@ function Dashboard() {
             </button>
           </li>
           <li>
-            <button onClick={() => navigate('/eventm')}>
+            <button onClick={() => navigate('/taskboard')}>
               Event Management
             </button>
           </li>

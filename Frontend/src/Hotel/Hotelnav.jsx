@@ -127,16 +127,16 @@ function Hotelnav() {
                 borderRadius: '0.375rem',
                 color: 'white',
                 textDecoration: 'none',
-                backgroundColor: window.location.pathname === '/edit-reservation' ? '#3b82f6' : 'transparent',
+                backgroundColor: window.location.pathname === '/hoteldetails' ? '#3b82f6' : 'transparent',
                 transition: 'background-color 0.2s',
               }}
               onMouseEnter={(e) => {
-                if (window.location.pathname !== '/edit-reservation') {
+                if (window.location.pathname !== '/hoteldetailsl') {
                   e.currentTarget.style.backgroundColor = '#3b82f6';
                 }
               }}
               onMouseLeave={(e) => {
-                if (window.location.pathname !== '/edit-reservation') {
+                if (window.location.pathname !== '/viewhotel') {
                   e.currentTarget.style.backgroundColor = 'transparent';
                 }
               }}
@@ -147,7 +147,7 @@ function Hotelnav() {
           </li>
           <li style={{ marginBottom: '0.5rem' }}>
             <Link
-              to="/view-reservation"
+              to="/viewhotel"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -155,11 +155,11 @@ function Hotelnav() {
                 borderRadius: '0.375rem',
                 color: 'white',
                 textDecoration: 'none',
-                backgroundColor: window.location.pathname === '/view-reservation' ? '#3b82f6' : 'transparent',
+                backgroundColor: window.location.pathname === '/viewhotel' ? '#3b82f6' : 'transparent',
                 transition: 'background-color 0.2s',
               }}
               onMouseEnter={(e) => {
-                if (window.location.pathname !== '/view-reservation') {
+                if (window.location.pathname !== '/viewhotel') {
                   e.currentTarget.style.backgroundColor = '#3b82f6';
                 }
               }}
@@ -175,7 +175,7 @@ function Hotelnav() {
           </li>
           <li style={{ marginBottom: '0.5rem' }}>
             <Link
-              to="/hotel-summary"
+              to="/hotelsummary"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -183,16 +183,16 @@ function Hotelnav() {
                 borderRadius: '0.375rem',
                 color: 'white',
                 textDecoration: 'none',
-                backgroundColor: window.location.pathname === '/hotel-summary' ? '#3b82f6' : 'transparent',
+                backgroundColor: window.location.pathname === '/hotelsummary' ? '#3b82f6' : 'transparent',
                 transition: 'background-color 0.2s',
               }}
               onMouseEnter={(e) => {
-                if (window.location.pathname !== '/hotel-summary') {
+                if (window.location.pathname !== '/hotelsummary') {
                   e.currentTarget.style.backgroundColor = '#3b82f6';
                 }
               }}
               onMouseLeave={(e) => {
-                if (window.location.pathname !== '/hotel-summary') {
+                if (window.location.pathname !== '/hotelsummary') {
                   e.currentTarget.style.backgroundColor = 'transparent';
                 }
               }}
