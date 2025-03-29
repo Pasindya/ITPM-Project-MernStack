@@ -29,19 +29,25 @@ function Eventbooking() {
         
         if (name === "FirstName" || name === "LastName") {
             // Name fields - allow only letters and spaces
-            if (value && /[^a-zA-Z\s]/.test(value)) {
+            if (value && !/^[a-zA-Z\s]*$/.test(value)) {
                 isValid = false;
                 errorMessage = "Only letters and spaces allowed";
             }
-        } else if (name === "Number" || name === "NumberAdult") {
-            // Number fields - allow only digits
+        } else if (name === "Number") {
+            // Phone number - allow only digits
+            if (value && !/^\d*$/.test(value)) {
+                isValid = false;
+                errorMessage = "Only numbers allowed";
+            }
+        } else if (name === "NumberAdult") {
+            // Number of adults - allow only digits
             if (value && !/^\d*$/.test(value)) {
                 isValid = false;
                 errorMessage = "Only numbers allowed";
             }
         } else if (name === "City" || name === "Location") {
             // City and Location - allow letters, numbers, spaces and basic punctuation
-            if (value && /[^a-zA-Z0-9\s\-,.()]/.test(value)) {
+            if (value && !/^[a-zA-Z0-9\s\-,.()]*$/.test(value)) {
                 isValid = false;
                 errorMessage = "Only letters, numbers, spaces, and basic punctuation (-,.) allowed";
             }
@@ -74,9 +80,8 @@ function Eventbooking() {
         const newErrors = {};
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const phoneRegex = /^[0-9]{10,15}$/;
-        const currentDateTime = new Date();
-        const selectedDateTime = inputs.Date && inputs.Time ? 
-            new Date(`${inputs.Date}T${inputs.Time}`) : null;
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
 
         // Required fields validation
         if (!inputs.FirstName.trim()) newErrors.FirstName = "First name is required";
@@ -85,19 +90,11 @@ function Eventbooking() {
         if (!inputs.Time) newErrors.Time = "Time is required";
 
         // Name fields validation - letters only
-        if (inputs.FirstName.trim() && /[^a-zA-Z\s]/.test(inputs.FirstName)) {
+        if (inputs.FirstName.trim() && !/^[a-zA-Z\s]+$/.test(inputs.FirstName)) {
             newErrors.FirstName = "Only letters and spaces allowed";
         }
-        if (inputs.LastName.trim() && /[^a-zA-Z\s]/.test(inputs.LastName)) {
+        if (inputs.LastName.trim() && !/^[a-zA-Z\s]+$/.test(inputs.LastName)) {
             newErrors.LastName = "Only letters and spaces allowed";
-        }
-
-        // City and Location validation
-        if (inputs.City && /[^a-zA-Z0-9\s\-,.()]/.test(inputs.City)) {
-            newErrors.City = "Only letters, numbers, spaces, and basic punctuation (-,.) allowed";
-        }
-        if (inputs.Location && /[^a-zA-Z0-9\s\-,.()]/.test(inputs.Location)) {
-            newErrors.Location = "Only letters, numbers, spaces, and basic punctuation (-,.) allowed";
         }
 
         // Email validation
@@ -122,16 +119,9 @@ function Eventbooking() {
             }
         }
 
-        // Date and Time validation
-        if (selectedDateTime) {
-            if (selectedDateTime < currentDateTime) {
-                newErrors.Date = "Date and time cannot be in the past";
-                newErrors.Time = "Date and time cannot be in the past";
-            }
-        } else if (inputs.Date) {
+        // Date validation
+        if (inputs.Date) {
             const selectedDate = new Date(inputs.Date);
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
             if (selectedDate < today) {
                 newErrors.Date = "Date cannot be in the past";
             }
@@ -149,7 +139,7 @@ function Eventbooking() {
                 City: inputs.City.trim(),
                 Number: inputs.Number.trim(),
                 Gmail: inputs.Gmail.trim(),
-                NumberAdult: Number(inputs.NumberAdult) || 0,
+                NumberAdult: inputs.NumberAdult ? Number(inputs.NumberAdult) : 0,
                 Date: inputs.Date,
                 Time: inputs.Time,
                 Location: inputs.Location.trim(),
@@ -214,8 +204,7 @@ function Eventbooking() {
                 padding: '2.5rem',
                 width: '100%',
                 maxWidth: '700px',
-                transform: shake ? 'translateX(0)' : 'translateY(0)',
-                animation: shake ? 'shake 0.5s' : 'fadeInUp 0.6s ease-out'
+                animation: shake ? 'shake 0.5s' : 'none'
             }}>
                 <h1 style={{
                     textAlign: 'center',
@@ -225,9 +214,8 @@ function Eventbooking() {
                     background: 'linear-gradient(to right, #6a11cb 0%, #2575fc 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                    color: 'transparent'
-                }}>Add Member To Event</h1>
+                    backgroundClip: 'text'
+                }}>Event Registration</h1>
                 
                 {errors.form && (
                     <div style={{
@@ -574,10 +562,10 @@ function Eventbooking() {
                             }}
                         >
                             <option value="">Select Event Category</option>
-                            <option value="Wedding">Beach Party</option>
-                            <option value="Corporate">Dj</option>
-                            <option value="Birthday">Culturel Event</option>
-                            <option value="Conference">Sport Event</option>
+                            <option value="Beach Party">Beach Party</option>
+                            <option value="DJ">DJ</option>
+                            <option value="Cultural Event">Cultural Event</option>
+                            <option value="Sport Event">Sport Event</option>
                             <option value="Other">Other</option>
                         </select>
                         <label style={{
@@ -631,24 +619,13 @@ function Eventbooking() {
                                         animation: 'loadingBar 1s linear infinite'
                                     }}></span>
                                 </>
-                            ) : 'Create Event'}
+                            ) : 'Register'}
                         </button>
                     </div>
                 </form>
             </div>
 
             <style>{`
-                @keyframes fadeInUp {
-                    from {
-                        opacity: 0;
-                        transform: translateY(20px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0);
-                    }
-                }
-                
                 @keyframes shake {
                     0%, 100% { transform: translateX(0); }
                     10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
