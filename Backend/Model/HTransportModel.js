@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const HTransportSchema = new Schema({
+   
     vehicleType: { 
         type: String, 
         required: [true, "Vehicle type is required"], 
@@ -60,6 +61,7 @@ const HTransportSchema = new Schema({
     
 }
 );
+
 
 // Auto-assign pricePerKm and calculate fullPayment before saving
 HTransportSchema.pre('save', function (next) {

@@ -23,7 +23,9 @@ const getAllHTransports = async (req, res, next) =>{
 //data insert
 const addHTransports  = async (req, res, next) =>{
 
-    const {vehicleType,
+    const {
+        
+        vehicleType,
         name,
         mobile,
         passportNumber,
