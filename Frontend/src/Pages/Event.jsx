@@ -34,6 +34,20 @@ const Event = () => {
       image: "/Images/festivel.jpg",
       description: "This festival celebrates the richness of Sri Lankan culture with music, food, art, and traditional performances.",
       date: "December 15-20, 2025"
+    },
+    {
+      id: 5,
+      title: "Dj",
+      image: "/Images/Dj.jpg",
+      description: "Join us for an electrifying night of music and dance with top DJs from around the world. Experience the ultimate party atmosphere.",
+      date: "March 15-20, 2025"
+    },
+    {
+      id: 6,
+      title: "Ultra Music Festival",
+      image: "/Images/Ultra.jpg",
+      description: "Join us for an electrifying night of music and dance with top DJs from around the world. Experience the ultimate party atmosphere.",
+      date: "April 15-20, 2025"
     }
   ];
 
