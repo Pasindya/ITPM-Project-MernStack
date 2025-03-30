@@ -59,7 +59,7 @@ function TransportNav() {
       transition: '0.3s',
       whiteSpace: 'nowrap',
       opacity: isOpen ? '1' : '0',
-      transition: 'opacity 0.3s',
+      //transition: 'opacity 0.3s',
     },
     logoutButton: {
       display: 'flex',
@@ -73,7 +73,7 @@ function TransportNav() {
       transition: '0.3s',
       whiteSpace: 'nowrap',
       opacity: isOpen ? '1' : '0',
-      transition: 'opacity 0.3s',
+     
     },
     icon: {
       fontSize: '1.5rem',
