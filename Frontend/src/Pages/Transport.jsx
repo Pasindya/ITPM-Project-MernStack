@@ -310,7 +310,7 @@ const styles = {
     transform: 'skewY(-4deg)',
     transformOrigin: 'top left',
     marginTop: '-100px',
-    height: '500px',
+    //height: '500px',
     backgroundSize: '400% 400%',
     animation: 'gradientShift 15s ease infinite',
   },
