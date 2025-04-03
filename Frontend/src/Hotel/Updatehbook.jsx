@@ -43,16 +43,34 @@ function Updatehbook() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setBooking(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    
+    // Special handling for phone number input
+    if (name === 'phone') {
+      // Remove all non-digit characters
+      const cleanedValue = value.replace(/\D/g, '');
+      // Limit to 10 digits
+      const limitedValue = cleanedValue.slice(0, 10);
+      setBooking(prev => ({
+        ...prev,
+        [name]: limitedValue
+      }));
+    } else {
+      setBooking(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Only send the editable fields to the backend
+      // Validate phone number length
+      if (booking.phone.length !== 10) {
+        setError("Phone number must be 10 digits");
+        return;
+      }
+
       const updateData = {
         checkIn: booking.checkIn,
         checkOut: booking.checkOut,
@@ -78,7 +96,6 @@ function Updatehbook() {
     );
   }
 
-  // Calculate minimum check-out date (one day after check-in)
   const minCheckOutDate = booking.checkIn 
     ? new Date(new Date(booking.checkIn).getTime() + 86400000).toISOString().split('T')[0]
     : '';
@@ -147,8 +164,12 @@ function Updatehbook() {
             onChange={handleChange}
             required
             pattern="[0-9]{10}"
-            title="Please enter a 10-digit phone number"
+            title="Please enter a 10-digit phone number (digits only)"
+            inputMode="numeric" // Shows numeric keyboard on mobile devices
           />
+          {booking.phone.length > 0 && booking.phone.length < 10 && (
+            <p className="phone-error">Phone number must be 10 digits</p>
+          )}
         </div>
         
         {error && <p className="form-error">{error}</p>}
@@ -157,7 +178,7 @@ function Updatehbook() {
           <button type="button" onClick={() => navigate('/hoteldetails')} className="cancel-btn">
             Cancel
           </button>
-          <button type="submit" className="update-btn">
+          <button type="submit" className="update-btn" disabled={booking.phone.length !== 10}>
             Update Booking
           </button>
         </div>
@@ -166,7 +187,7 @@ function Updatehbook() {
   );
 }
 
-// CSS Styles
+// CSS Styles (added phone-error style)
 const styles = `
   .update-container {
     max-width: 600px;
@@ -267,10 +288,15 @@ const styles = `
     background-color: #2b6cb0;
   }
 
-  .form-error {
+  .update-btn:disabled {
+    background-color: #a0aec0;
+    cursor: not-allowed;
+  }
+
+  .form-error, .phone-error {
     color: #e53e3e;
-    text-align: center;
-    margin: 0.5rem 0;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
   }
 
   .loading, .error {
