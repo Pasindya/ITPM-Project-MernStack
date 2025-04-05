@@ -19,6 +19,7 @@ import Calender from './Pages/Calender';
 
 
 
+
 //Transport Function 
 import Transport from './Pages/Transport';
 import VehicleCategory from './Pages/VehicleCategory';
@@ -29,6 +30,8 @@ import Booking from './Pages/Transport CRUD/Booking';
 import UpdateVehicle from './Pages/Transport CRUD/UpdateVehicle';
 import TransportSummary from './Pages/Transport CRUD/TransportSummary';
 import TransportHome from './Pages/TransportHome';
+import TransportDetails from './Pages/Transport CRUD/TransportDetails';
+
 
 
 
@@ -66,10 +69,15 @@ import Updatehbook from './Hotel/Updatehbook';
 import Viewhotel from './Hotel/Viewhotel';
 import Hotelhome from './Hotel/Hotelhome';
 import Hotelsummary from './Hotel/Hotelsummary';
+
 import AddGuider from './Guider/AddGuider';
 import ManageGuiders from './Guider/ManageGuiders';
 import GuiderList from './Guider/GuiderList';
 // import Sidebar from './Guider/Sidebar';
+
+import Packrecipt from './Pages/Packrecipt';
+
+
 
 
 
@@ -80,7 +88,7 @@ const App = () => {
   // Define routes where Navbar and Footer should be hidden
 
   const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav','/packnav','/viewbooking','/packdetails','/updatepbook/PBK_12837','/updatepbook/PBK_48926','/updatepbook/PBK_54806','/packreport','/packsummary','/hoteladmin','/hotelnav','/hoteldetails','/TransportNav','/vehicleadmin','/vehiclebooking','/addbooking','/updatevehicle','/transportsummary','/hoteldetails','/viewhotel'
-    ,'/hotelsummary','/taskboard'
+    ,'/hotelsummary','/taskboard','/transportdetails'
   ];
 
 
@@ -127,6 +135,8 @@ const App = () => {
         <Route path="/updatevehicle" element={<UpdateVehicle />} />
         <Route path="/transportsummary" element={<TransportSummary />} />
         <Route path="/transporthome" element={<TransportHome />} />
+        <Route path="/transportdetails" element={<TransportDetails />} />
+       
        
       
         
@@ -156,11 +166,15 @@ const App = () => {
         <Route path="/viewhotel" element={<Viewhotel />} />
         <Route path="/hotelhome" element={<Hotelhome />} />
         <Route path="/hotelsummary" element={<Hotelsummary />} />
+
         <Route path='/glist' element={<GuiderList />} />
         <Route path='/adds' element={<AddGuider />} />
         <Route path='/all' element={<ManageGuiders />} />
         <Route path='/list' element={<GuiderList />} />
         {/* <Route path='/list' element={<GuiderList />} /> */}
+
+        <Route path="/packrecipt" element={<Packrecipt />} />
+
 
 
       </Routes>
