@@ -19,6 +19,7 @@ import Calender from './Pages/Calender';
 
 
 
+
 //Transport Function 
 import Transport from './Pages/Transport';
 import VehicleCategory from './Pages/VehicleCategory';
@@ -68,6 +69,9 @@ import Updatehbook from './Hotel/Updatehbook';
 import Viewhotel from './Hotel/Viewhotel';
 import Hotelhome from './Hotel/Hotelhome';
 import Hotelsummary from './Hotel/Hotelsummary';
+import Packrecipt from './Pages/Packrecipt';
+
+
 
 
 
@@ -155,6 +159,7 @@ const App = () => {
         <Route path="/viewhotel" element={<Viewhotel />} />
         <Route path="/hotelhome" element={<Hotelhome />} />
         <Route path="/hotelsummary" element={<Hotelsummary />} />
+        <Route path="/packrecipt" element={<Packrecipt />} />
 
 
       </Routes>

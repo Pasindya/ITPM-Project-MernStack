@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-brands-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
@@ -18,9 +20,8 @@
     "axios": "^1.8.4",
     "chart.js": "^4.4.8",
     "date-fns": "^4.1.0",
-
+    "emailjs-com": "^3.2.0",
     "framer-motion": "^12.5.0",
-
     "html-to-image": "^1.11.13",
     "jspdf": "^3.0.1",
     "jspdf-autotable": "^5.0.2",
