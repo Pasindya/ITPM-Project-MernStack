@@ -38,8 +38,8 @@ import TransportDetails from './Pages/Transport CRUD/TransportDetails';
 
 
 
-import Guider from './Pages/Guider';
-import AllGuiders from './Pages/AllGuiders';
+// import Guider from './Pages/Guider';
+// import AllGuiders from './Pages/AllGuiders';
 
 
 
@@ -69,6 +69,12 @@ import Updatehbook from './Hotel/Updatehbook';
 import Viewhotel from './Hotel/Viewhotel';
 import Hotelhome from './Hotel/Hotelhome';
 import Hotelsummary from './Hotel/Hotelsummary';
+
+import AddGuider from './Guider/AddGuider';
+import ManageGuiders from './Guider/ManageGuiders';
+import GuiderList from './Guider/GuiderList';
+// import Sidebar from './Guider/Sidebar';
+
 import Packrecipt from './Pages/Packrecipt';
 
 
@@ -110,10 +116,11 @@ const App = () => {
         <Route path="/taskboard" element={<Taskboard />} />
         <Route path="/eventcharts" element={<EventCharts />} /> {/* Add the EventCharts route */}
         <Route path="/calender" element={<Calender />} />
-        <Route path="/guider" element={<Guider />} />
+        {/* <Route path="/guider" element={<Guider />} />
         <Route path="/allGuiders" element={<AllGuiders />} />
-     
+      */}
         <Route path="/dashNav" element={<DashNav />} />
+        
 
        
         
@@ -159,7 +166,15 @@ const App = () => {
         <Route path="/viewhotel" element={<Viewhotel />} />
         <Route path="/hotelhome" element={<Hotelhome />} />
         <Route path="/hotelsummary" element={<Hotelsummary />} />
+
+        <Route path='/glist' element={<GuiderList />} />
+        <Route path='/adds' element={<AddGuider />} />
+        <Route path='/all' element={<ManageGuiders />} />
+        <Route path='/list' element={<GuiderList />} />
+        {/* <Route path='/list' element={<GuiderList />} /> */}
+
         <Route path="/packrecipt" element={<Packrecipt />} />
+
 
 
       </Routes>
