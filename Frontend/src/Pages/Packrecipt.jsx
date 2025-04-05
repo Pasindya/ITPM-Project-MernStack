@@ -3,20 +3,30 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import jsPDF from 'jspdf';
 import logoImage from '../assets/Travel Trails.png';
 import { FaDownload, FaEnvelope, FaCheckCircle, FaExclamationTriangle, FaArrowLeft } from 'react-icons/fa';
-import emailjs from 'emailjs-com';
-import axios from 'axios';
 
 function Packrecipt() {
   const location = useLocation();
   const navigate = useNavigate();
-  const bookingData = location.state?.formData || {};
+  const bookingData = location.state?.formData || {
+    name: '',
+    email: '',
+    mobile: '',
+    tpackage: '',
+    arrivalDate: '',
+    livingCountry: ''
+  };
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
-  const [isSendingEmail, setIsSendingEmail] = useState(false);
   const [emailStatus, setEmailStatus] = useState({ message: '', success: false });
   const [receiptNumber] = useState(generateReceiptNumber());
   const [logoLoaded, setLogoLoaded] = useState(false);
   const [pdfGenerated, setPdfGenerated] = useState(null);
   const logoRef = useRef();
+
+  // Debug booking data on load
+  useEffect(() => {
+    console.log('Received booking data:', bookingData);
+    console.log('Email exists:', !!bookingData?.email);
+  }, [bookingData]);
 
   // Load logo image
   useEffect(() => {
@@ -43,6 +53,15 @@ function Packrecipt() {
       setPdfGenerated(pdf);
     }
   }, [logoLoaded, bookingData]);
+
+  // Email validation function
+  const validateEmail = (email) => {
+    if (!email) return false;
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail) return false;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(trimmedEmail);
+  };
 
   // Get detailed package information
   const getPackageDetails = (packageName) => {
@@ -182,9 +201,7 @@ function Packrecipt() {
 
   // Generate PDF receipt
   const generatePDF = () => {
-    if (!logoLoaded) {
-      return null;
-    }
+    if (!logoLoaded) return null;
 
     const doc = new jsPDF();
     const packageInfo = getPackageDetails(bookingData.tpackage);
@@ -278,104 +295,63 @@ function Packrecipt() {
     return doc;
   };
 
-  // Send email with booking details
-  const sendBookingConfirmation = async () => {
-    if (!bookingData.email) {
-      setEmailStatus({ message: 'No email address provided', success: false });
+  // Open email client with booking details
+  const sendBookingConfirmation = () => {
+    const email = bookingData?.email?.trim();
+    
+    if (!email) {
+      setEmailStatus({ 
+        message: 'No email address provided in booking details', 
+        success: false 
+      });
       return;
     }
 
-    setIsSendingEmail(true);
-    setEmailStatus({ message: 'Sending confirmation email...', success: true });
-
-    try {
-      // First approach: Using EmailJS (client-side only)
-      try {
-        await sendViaEmailJS();
-        setEmailStatus({ message: 'Confirmation email sent successfully!', success: true });
-        return;
-      } catch (emailJSError) {
-        console.log('EmailJS failed, trying backend approach:', emailJSError);
-      }
-
-      // Fallback approach: Using backend API
-      await sendViaBackendAPI();
-      setEmailStatus({ message: 'Confirmation email sent successfully!', success: true });
-    } catch (error) {
-      console.error('Error sending email:', error);
+    if (!validateEmail(email)) {
       setEmailStatus({ 
-        message: `Failed to send confirmation email: ${error.message || 'Please try again later'}`, 
+        message: 'Please provide a valid email address', 
         success: false 
       });
-    } finally {
-      setIsSendingEmail(false);
+      return;
     }
-  };
-
-  // Method 1: Send using EmailJS (client-side only)
-  const sendViaEmailJS = async () => {
-    // Initialize EmailJS with your credentials
-    emailjs.init(process.env.REACT_APP_EMAILJS_USER_ID);
 
     const packageInfo = getPackageDetails(bookingData.tpackage);
     
-    const templateParams = {
-      to_name: bookingData.name,
-      to_email: bookingData.email,
-      receipt_number: receiptNumber,
-      package_name: bookingData.tpackage,
-      arrival_date: formatDate(bookingData.arrivalDate),
-      duration: packageInfo.duration,
-      destinations: packageInfo.destinations,
-      price: packageInfo.price,
-      includes: packageInfo.includes.join('\n• '),
-      highlights: packageInfo.highlights.join('\n• '),
-      special_notes: packageInfo.specialNotes,
-      cancellation_policy: packageInfo.cancellationPolicy,
-      current_date: currentDateTime.toLocaleDateString(),
-      support_email: 'support@traveltrails.com',
-      support_phone: '+1 (300) 1234 6543'
-    };
-
-    await emailjs.send(
-      process.env.REACT_APP_EMAILJS_SERVICE_ID,
-      process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
-      templateParams
-    );
-  };
-
-  // Method 2: Send using backend API
-  const sendViaBackendAPI = async () => {
-    if (!pdfGenerated) {
-      throw new Error('PDF generation failed');
-    }
+    // Create email subject
+    const subject = `Booking Confirmation for ${bookingData.tpackage || 'Travel Package'}`;
     
-    // Convert PDF to base64 string
-    const pdfBase64 = pdfGenerated.output('datauristring').split(',')[1];
-    
-    const payload = {
-      email: bookingData.email,
-      name: bookingData.name,
-      package: bookingData.tpackage,
-      arrivalDate: bookingData.arrivalDate,
-      receiptNumber: receiptNumber,
-      pdfBase64: pdfBase64,
-      pdfFileName: `Travel_Trails_Receipt_${receiptNumber}.pdf`
-    };
+    // Create email body
+    let body = `Dear ${bookingData.name || 'Customer'},\n\n`;
+    body += `Thank you for booking with Travel Trails! Below are your booking details:\n\n`;
+    body += `Booking Reference: ${receiptNumber}\n`;
+    body += `Package: ${bookingData.tpackage || 'N/A'}\n`;
+    body += `Arrival Date: ${formatDate(bookingData.arrivalDate) || 'To be determined'}\n`;
+    body += `Duration: ${packageInfo.duration}\n`;
+    body += `Destinations: ${packageInfo.destinations}\n\n`;
+    body += `Package Includes:\n`;
+    packageInfo.includes.forEach(item => {
+      body += `- ${item}\n`;
+    });
+    body += `\nTotal Price: ${packageInfo.price}\n\n`;
+    body += `We're excited to welcome you on your adventure! If you have any questions, please don't hesitate to contact us.\n\n`;
+    body += `Best regards,\nTravel Trails Team\n`;
+    body += `support@traveltrails.com\n`;
+    body += `+1 (300) 1234 6543`;
 
-    const response = await axios.post(
-      'https://your-backend-api.com/api/send-confirmation',
-      payload,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      }
-    );
+    // Encode the subject and body for URL
+    const encodedSubject = encodeURIComponent(subject);
+    const encodedBody = encodeURIComponent(body);
 
-    if (!response.data.success) {
-      throw new Error(response.data.message || 'Failed to send email');
-    }
+    // Create mailto link
+    const mailtoLink = `mailto:${email}?subject=${encodedSubject}&body=${encodedBody}`;
+
+    // Open default email client
+    window.location.href = mailtoLink;
+
+    setEmailStatus({ 
+      message: `Email client opened with booking details`, 
+      success: true 
+    });
   };
 
   // Download PDF receipt
@@ -384,7 +360,6 @@ function Packrecipt() {
       alert('Receipt is still being generated, please try again');
       return;
     }
-    
     pdfGenerated.save(`Travel_Trails_Receipt_${receiptNumber}.pdf`);
   };
 
@@ -588,11 +563,23 @@ function Packrecipt() {
       {emailStatus.message && (
         <div className={`email-status ${emailStatus.success ? 'success' : 'error'}`}>
           {emailStatus.success ? (
-            <FaCheckCircle className="status-icon" />
+            <>
+              <FaCheckCircle className="status-icon" />
+              <span>{emailStatus.message}</span>
+            </>
           ) : (
-            <FaExclamationTriangle className="status-icon" />
+            <>
+              <FaExclamationTriangle className="status-icon" />
+              <span>{emailStatus.message}</span>
+              <button 
+                onClick={sendBookingConfirmation}
+                className="retry-btn"
+                disabled={!validateEmail(bookingData?.email)}
+              >
+                Try Again
+              </button>
+            </>
           )}
-          <span>{emailStatus.message}</span>
         </div>
       )}
 
@@ -609,10 +596,12 @@ function Packrecipt() {
         <button 
           onClick={sendBookingConfirmation} 
           className="email-btn"
-          disabled={isSendingEmail || !bookingData.email || !pdfGenerated}
+          disabled={!validateEmail(bookingData?.email)}
+          title={!bookingData?.email ? "No email provided" : 
+                !validateEmail(bookingData.email) ? "Invalid email format" : ""}
         >
           <FaEnvelope className="button-icon" />
-          {isSendingEmail ? 'Sending...' : 'Email Confirmation'}
+          Email Confirmation
         </button>
       </div>
 
@@ -956,8 +945,10 @@ function Packrecipt() {
           padding: 0.75rem 1rem;
           border-radius: 0.5rem;
           display: flex;
+          flex-direction: column;
           align-items: center;
           gap: 0.5rem;
+          text-align: center;
           font-size: 0.9rem;
         }
         
@@ -974,7 +965,36 @@ function Packrecipt() {
         }
         
         .status-icon {
-          font-size: 1.2rem;
+          font-size: 1.5rem;
+        }
+        
+        .status-note {
+          font-size: 0.8rem;
+          margin-top: 0.3rem;
+          opacity: 0.8;
+        }
+        
+        .retry-btn {
+          background: none;
+          border: none;
+          color: inherit;
+          text-decoration: underline;
+          cursor: pointer;
+          margin-top: 0.5rem;
+          padding: 0.25rem 0.5rem;
+          font-size: 0.9rem;
+          border-radius: 0.25rem;
+          transition: background-color 0.2s;
+        }
+        
+        .retry-btn:hover {
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .retry-btn:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+          text-decoration: none;
         }
         
         .action-buttons {
@@ -1009,6 +1029,8 @@ function Packrecipt() {
           transform: translateY(-2px);
           box-shadow: 0 6px 8px rgba(37, 99, 235, 0.3);
         }
+        
+      
         
         .email-btn {
           background: linear-gradient(135deg, #38a169, #2f855a);
