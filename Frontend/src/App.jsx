@@ -76,6 +76,8 @@ import GuiderList from './Guider/GuiderList';
 // import Sidebar from './Guider/Sidebar';
 
 import Packrecipt from './Pages/Packrecipt';
+import ContactUs from './Pages/ContactUs';
+
 
 
 
@@ -174,6 +176,7 @@ const App = () => {
         {/* <Route path='/list' element={<GuiderList />} /> */}
 
         <Route path="/packrecipt" element={<Packrecipt />} />
+        <Route path="/contactUs" element={<ContactUs />} />
 
 
 
