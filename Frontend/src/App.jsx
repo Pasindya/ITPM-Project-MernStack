@@ -80,6 +80,8 @@ import Guidertak from './Guider/Guidertak';
 
 
 import Packrecipt from './Pages/Packrecipt';
+import ContactUs from './Pages/ContactUs';
+
 
 
 
@@ -179,7 +181,11 @@ const App = () => {
 
         <Route path="/guiderdashboard" element={<GuiderDashboard />} />
         <Route path="/packrecipt" element={<Packrecipt />} />
+
         <Route path="/guidertak" element={<Guidertak />} />
+
+        <Route path="/contactUs" element={<ContactUs />} />
+
 
 
 
