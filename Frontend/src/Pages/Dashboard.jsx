@@ -34,7 +34,7 @@ function Dashboard() {
 
           {/* Other Management Sections */}
           <li>
-            <button onClick={() => navigate('/adds')}>
+            <button onClick={() => navigate('/guiderdashboard')}>
               Guider Management
             </button>
           </li>
