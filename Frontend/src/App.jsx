@@ -73,7 +73,11 @@ import Hotelsummary from './Hotel/Hotelsummary';
 import AddGuider from './Guider/AddGuider';
 import ManageGuiders from './Guider/ManageGuiders';
 import GuiderList from './Guider/GuiderList';
-// import Sidebar from './Guider/Sidebar';
+// import Guidernav from './Guider/Guidernav';
+import GuiderDashboard from './Guider/GuiderDashboard';
+import Guidertak from './Guider/Guidertak';
+
+
 
 import Packrecipt from './Pages/Packrecipt';
 import ContactUs from './Pages/ContactUs';
@@ -175,8 +179,13 @@ const App = () => {
         <Route path='/list' element={<GuiderList />} />
         {/* <Route path='/list' element={<GuiderList />} /> */}
 
+        <Route path="/guiderdashboard" element={<GuiderDashboard />} />
         <Route path="/packrecipt" element={<Packrecipt />} />
+
+        <Route path="/guidertak" element={<Guidertak />} />
+
         <Route path="/contactUs" element={<ContactUs />} />
+
 
 
 
