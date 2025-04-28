@@ -94,7 +94,7 @@ const App = () => {
   // Define routes where Navbar and Footer should be hidden
 
   const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav','/packnav','/viewbooking','/packdetails','/updatepbook/PBK_12837','/updatepbook/PBK_48926','/updatepbook/PBK_54806','/packreport','/packsummary','/hoteladmin','/hotelnav','/hoteldetails','/TransportNav','/vehicleadmin','/vehiclebooking','/addbooking','/updatevehicle','/transportsummary','/hoteldetails','/viewhotel'
-    ,'/hotelsummary','/taskboard','/transportdetails'
+    ,'/hotelsummary','/taskboard','/transportdetails','/guiderdashboard','/adds','/all','/guidertak'
   ];
 
 
