@@ -169,6 +169,8 @@ const SearchInput = styled.input`
 
 function Transport() {
   const navigate = useNavigate();
+
+  
   
 
   const vehicleCategories = [
@@ -352,6 +354,10 @@ function Transport() {
       } 
     });
   };
+
+
+
+  
 
 
   return (

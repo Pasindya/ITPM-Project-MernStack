@@ -34,6 +34,9 @@ import UpdateVehicle from './Pages/Transport CRUD/UpdateVehicle';
 import TransportSummary from './Pages/Transport CRUD/TransportSummary';
 import TransportHome from './Pages/TransportHome';
 import TransportDetails from './Pages/Transport CRUD/TransportDetails';
+import BookingConfirmation from './Pages/Transport CRUD/BookingConfirmation';
+
+
 
 
 
@@ -141,6 +144,9 @@ const App = () => {
         <Route path="/transportsummary" element={<TransportSummary />} />
         <Route path="/transporthome" element={<TransportHome />} />
         <Route path="/transportdetails" element={<TransportDetails />} />
+        <Route path="/bookingconfirmation" element={<BookingConfirmation />} />
+        
+        
        
        
       
