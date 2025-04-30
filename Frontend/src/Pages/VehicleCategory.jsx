@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../CSS/Vehiclecategory.css';
 
 function VehicleCategory() {
   const location = useLocation();
-  const { category } = location.state;
+  const navigate = useNavigate();
+  const { category } = location.state || {};
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedVehicle, setSelectedVehicle] = useState(null);
@@ -20,6 +21,13 @@ function VehicleCategory() {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
+
+  // Redirect if no category data
+  useEffect(() => {
+    if (!category) {
+      navigate('/');
+    }
+  }, [category, navigate]);
 
   const openModal = (vehicle) => {
     setSelectedVehicle(vehicle);
@@ -125,16 +133,15 @@ function VehicleCategory() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitError('');
-  
+    
     if (!validateForm()) return;
-  
+    
     setIsSubmitting(true);
-  
+    
     try {
-      // Format dates for backend
       const bookingDate = new Date(formData.bookingDate);
       const handoverDate = new Date(formData.handoverDate);
-  
+    
       const bookingData = {
         vehicleType: selectedVehicle.name,
         name: formData.name.trim(),
@@ -145,48 +152,50 @@ function VehicleCategory() {
         handoverDate: handoverDate.toISOString(),
         pricePerKm: selectedVehicle.pricePerKm
       };
-  
-      console.log("Sending data to backend:", bookingData);
-  
-      const response = await axios.post('http://localhost:5000/htransports', bookingData, {
-        timeout: 5000,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-  
-      console.log("Backend response:", response);
-  
+    
+      const response = await axios.post('http://localhost:5000/htransports', bookingData);
+    
       if (response.status === 200 || response.status === 201) {
-        alert('Booking Successful!');
-        closeModal();
+
+        console.log("Navigating to booking confirmation with state:", {
+          ...response.data,
+          vehicleType: bookingData.vehicleType,
+          name: bookingData.name,
+          mobile: bookingData.mobile,
+          passportNumber: bookingData.passportNumber,
+          pricePerKm: bookingData.pricePerKm,
+          bookingdate: bookingData.bookingdate,
+          handoverDate: bookingData.handoverDate
+        });
+        // Ensure all necessary data is passed
+        navigate('/bookingconfirmation', { 
+          state: { 
+            bookingData: {
+              ...response.data,
+              vehicleType: bookingData.vehicleType,
+              name: bookingData.name,
+              mobile: bookingData.mobile,
+              passportNumber: bookingData.passportNumber,
+              pricePerKm: bookingData.pricePerKm,
+              bookingdate: bookingData.bookingdate,
+              handoverDate: bookingData.handoverDate
+            } 
+          } 
+        });
       } else {
         throw new Error(`Unexpected response status: ${response.status}`);
       }
     } catch (error) {
-      console.error('Booking error:', {
-        message: error.message,
-        response: error.response?.data,
-        stack: error.stack
-      });
-      
-      let errorMessage = 'An error occurred while booking. Please try again.';
-      
-      if (error.response) {
-        errorMessage = error.response.data?.message || 
-                      error.response.data?.error ||
-                      `Server responded with ${error.response.status}`;
-      } else if (error.request) {
-        errorMessage = 'No response from server. Is it running?';
-      } else if (error.code === 'ECONNABORTED') {
-        errorMessage = 'Request timed out. Please try again.';
-      }
-      
-      setSubmitError(errorMessage);
+      console.error('Booking error:', error);
+      setSubmitError(error.response?.data?.message || 'An error occurred while booking. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
   };
+
+ 
+
+  if (!category) return null;
 
   return (
     <div style={{
