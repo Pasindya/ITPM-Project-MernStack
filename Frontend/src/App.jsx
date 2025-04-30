@@ -16,6 +16,8 @@ import UpdateEvent from './Event/UpdateEvent';
 import Taskboard from './Event/Taskboard';
 import EventCharts from './Event/EventCharts'; // Import the EventCharts component
 import Calender from './Pages/Calender';
+import EmergencyService from './Pages/EmergencyService';
+import SriLankaSpecial from './Pages/SriLankaSpecial';
 
 
 
@@ -126,7 +128,8 @@ const App = () => {
         <Route path="/allGuiders" element={<AllGuiders />} />
       */}
         <Route path="/dashNav" element={<DashNav />} />
-  
+        <Route path="/emergency" element={<EmergencyService />} />
+        <Route path="/srilankaspecial" element={<SriLankaSpecial />} />
        
         
 

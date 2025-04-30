@@ -7,58 +7,60 @@ const PageContainer = styled.div`
   min-height: 100vh;
   background-color: #f8f9fa;
   font-family: 'Roboto', sans-serif;
-  padding: 20px;
+  padding: 20px 0;
 `;
 
 const ContentContainer = styled.div`
   max-width: 1400px;
   margin: 0 auto;
+  padding: 0 20px;
 `;
 
 const Header = styled.div`
   text-align: center;
-  margin-bottom: 40px;
-  padding: 20px 0;
+  margin-bottom: 30px;
+  padding: 10px 0;
 `;
 
 const Title = styled.h1`
-  font-size: 2.5rem;
+  font-size: 2.2rem;
   font-weight: 700;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   color: #333;
   
   @media (max-width: 768px) {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 `;
 
 const Subtitle = styled.p`
-  font-size: 1.1rem;
+  font-size: 1rem;
   max-width: 700px;
-  margin: 0 auto 25px;
+  margin: 0 auto 15px;
   color: #666;
-  line-height: 1.6;
+  line-height: 1.5;
   
   @media (max-width: 768px) {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 `;
 
 const Divider = styled.div`
-  width: 80px;
+  width: 60px;
   height: 3px;
   background: #2c7be5;
-  margin: 20px auto;
+  margin: 15px auto;
 `;
 
 const GridContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  margin-bottom: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
   
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    gap: 15px;
   }
 `;
 
@@ -66,20 +68,23 @@ const Card = styled.div`
   background-color: #fff;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
   }
 `;
 
 const CardImageContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 200px;
+  height: 180px;
   overflow: hidden;
 `;
 
@@ -87,84 +92,83 @@ const CardImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease;
+  
+  ${Card}:hover & {
+    transform: scale(1.03);
+  }
 `;
 
 const CardContent = styled.div`
-  padding: 20px;
+  padding: 15px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 `;
 
 const CardTitle = styled.h3`
-  font-size: 1.4rem;
-  margin: 0 0 12px;
+  font-size: 1.2rem;
+  margin: 0 0 8px;
   color: #333;
   font-weight: 600;
 `;
 
 const CardDescription = styled.p`
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   color: #666;
-  margin-bottom: 15px;
-  line-height: 1.5;
+  margin-bottom: 12px;
+  line-height: 1.4;
+  flex: 1;
 `;
 
 const FacilitiesList = styled.ul`
   margin: 0;
   padding: 0;
   list-style: none;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
 `;
 
 const FacilityItem = styled.li`
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: #555;
-  padding: 5px 0;
+  padding: 2px 0;
   display: flex;
   align-items: center;
   
   &:before {
     content: '•';
     color: #2c7be5;
-    margin-right: 8px;
-    font-size: 1.2rem;
+    margin-right: 6px;
+    font-size: 1rem;
   }
 `;
 
 const ViewButton = styled.button`
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   border: none;
   border-radius: 6px;
   background-color: #2c7be5;
   color: white;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-top: auto;
   
   &:hover {
     background-color: #1a68d1;
   }
 `;
 
-const SearchContainer = styled.div`
-  max-width: 600px;
-  margin: 40px auto;
-  position: relative;
-`;
-
-const SearchInput = styled.input`
-  width: 100%;
-  padding: 15px 20px;
-  border: 1px solid #ddd;
-  border-radius: 30px;
-  font-size: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  
-  &:focus {
-    outline: none;
-    border-color: #2c7be5;
-    box-shadow: 0 2px 12px rgba(44,123,229,0.2);
-  }
+const CategoryCount = styled.div`
+  font-size: 0.8rem;
+  color: #2c7be5;
+  margin-bottom: 8px;
+  font-weight: 500;
 `;
 
 function Transport() {
@@ -290,7 +294,7 @@ function Transport() {
           image: '/Images/Transport/scooter.jpg',
           seats: 2,
           ac: false,
-          facilities: ['Lightweight', 'Eco-Friendly', 'USB Charger']
+          facilities: ['Lightweight', 'Eco-Friendly', 'Easy to Park']
         },
         { 
           name: 'Motor Bicycle', 
