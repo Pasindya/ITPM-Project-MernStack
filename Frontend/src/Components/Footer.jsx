@@ -55,7 +55,7 @@ function Footer() {
             </li>
             <li style={{ marginBottom: '0.5rem' }}>
               <a
-                href="/special-packages"
+                href="/packages"
                 style={{ color: '#ecf0f1', textDecoration: 'none', transition: 'color 0.3s ease' }}
                 onMouseOver={(e) => (e.target.style.color = '#3498db')}
                 onMouseOut={(e) => (e.target.style.color = '#ecf0f1')}
@@ -65,7 +65,7 @@ function Footer() {
             </li>
             <li style={{ marginBottom: '0.5rem' }}>
               <a
-                href="/special-offers"
+                href="/hotels"
                 style={{ color: '#ecf0f1', textDecoration: 'none', transition: 'color 0.3s ease' }}
                 onMouseOver={(e) => (e.target.style.color = '#3498db')}
                 onMouseOut={(e) => (e.target.style.color = '#ecf0f1')}
@@ -75,7 +75,7 @@ function Footer() {
             </li>
             <li style={{ marginBottom: '0.5rem' }}>
               <a
-                href="/blog"
+                href="/event"
                 style={{ color: '#ecf0f1', textDecoration: 'none', transition: 'color 0.3s ease' }}
                 onMouseOver={(e) => (e.target.style.color = '#3498db')}
                 onMouseOut={(e) => (e.target.style.color = '#ecf0f1')}
