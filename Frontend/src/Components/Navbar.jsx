@@ -62,6 +62,7 @@ function Navbar() {
                 <Link to="/currency">Currency Converter</Link>
                 <Link to="/emergency">Emergency Services</Link>
                 <Link to="/calender">Calendar with Holidays</Link>
+                <Link to="/srilankaspecial">Sri Lanka Special</Link>
               </div>
             )}
           </div>

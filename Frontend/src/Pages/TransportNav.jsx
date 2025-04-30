@@ -125,15 +125,16 @@ function TransportNav() {
             </Link>
           </li>
           <li>
-            <Link to="/vehiclebooking" style={styles.sidebarLink} onClick={() => setIsOpen(false)}>
-              <FaChartLine style={styles.icon} /> View Report
-            </Link>
-          </li>
-          <li>
             <Link to="/transportdetails" style={styles.sidebarLink} onClick={() => setIsOpen(false)}>
               <FaEdit style={styles.icon} /> Edit Vehicle Bookings
             </Link>
           </li>
+          <li>
+            <Link to="/vehiclebooking" style={styles.sidebarLink} onClick={() => setIsOpen(false)}>
+              <FaChartLine style={styles.icon} /> View Report
+            </Link>
+          </li>
+         
           <li>
             <Link to="/transportsummary" style={styles.sidebarLink} onClick={() => setIsOpen(false)}>
               <FaFileAlt style={styles.icon} /> Main Summary

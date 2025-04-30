@@ -482,7 +482,7 @@ function VehicleBooking() {
                   <th style={thStyle}>Vehicle Type</th>
                   <th style={thStyle}>Booking Date</th>
                   <th style={thStyle}>Handover Date</th>
-                  <th style={thStyle}>Actions</th>
+                  
                 </tr>
               </thead>
               <tbody>
@@ -501,20 +501,7 @@ function VehicleBooking() {
                     <td style={tdStyle}>
                       {booking.handoverDate ? new Date(booking.handoverDate).toLocaleDateString() : '--'}
                     </td>
-                    <td style={tdStyle}>
-                      <button 
-                        style={editButtonStyle}
-                        onClick={() => handleUpdate(booking)}
-                      >
-                        <FaEdit /> Edit
-                      </button>
-                      <button 
-                        style={deleteButtonStyle}
-                        onClick={() => handleDelete(booking._id)}
-                      >
-                        <FaTrash /> Delete
-                      </button>
-                    </td>
+                    
                   </tr>
                 ))}
               </tbody>
