@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaEdit, FaTrash, FaSearch } from 'react-icons/fa';
-import TransportNav from '../transportNav';
+import TransportNav from '../TransportNav';
 
 const URL = "http://localhost:5000/htransports";
 
