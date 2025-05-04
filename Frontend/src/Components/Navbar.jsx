@@ -16,7 +16,7 @@ function Navbar() {
       </div>
       <ul className="navbar-links">
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/places">Places</Link></li>
+        <li><Link to="/map">Places</Link></li>
         <li><Link to="/packages">Packages</Link></li>
         <li>
           <div
