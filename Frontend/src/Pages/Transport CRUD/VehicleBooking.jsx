@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import TransportNav from '../transportNav';
+import TransportNav from '../TransportNav';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaEdit, FaTrash, FaFileDownload } from 'react-icons/fa';
@@ -482,7 +482,7 @@ function VehicleBooking() {
                   <th style={thStyle}>Vehicle Type</th>
                   <th style={thStyle}>Booking Date</th>
                   <th style={thStyle}>Handover Date</th>
-                  <th style={thStyle}>Actions</th>
+                  
                 </tr>
               </thead>
               <tbody>
@@ -501,20 +501,7 @@ function VehicleBooking() {
                     <td style={tdStyle}>
                       {booking.handoverDate ? new Date(booking.handoverDate).toLocaleDateString() : '--'}
                     </td>
-                    <td style={tdStyle}>
-                      <button 
-                        style={editButtonStyle}
-                        onClick={() => handleUpdate(booking)}
-                      >
-                        <FaEdit /> Edit
-                      </button>
-                      <button 
-                        style={deleteButtonStyle}
-                        onClick={() => handleDelete(booking._id)}
-                      >
-                        <FaTrash /> Delete
-                      </button>
-                    </td>
+                    
                   </tr>
                 ))}
               </tbody>

@@ -28,8 +28,9 @@ function Navbar() {
             {servicesOpen && (
               <div className="dropdown-menu">
                 <Link to="/transporthome">Transport</Link>
-                <Link to="/guiders">Guiders</Link>
+                <Link to="/list">Guiders</Link>
                 <Link to="/hotelhome">Hotels</Link>
+              
               </div>
             )}
           </div>
@@ -59,8 +60,9 @@ function Navbar() {
               <div className="dropdown-menu">
                 <Link to="/weather">Weather Tracker</Link>
                 <Link to="/currency">Currency Converter</Link>
-                <Link to="/emergency-services">Emergency Services</Link>
+                <Link to="/emergency">Emergency Services</Link>
                 <Link to="/calender">Calendar with Holidays</Link>
+               
               </div>
             )}
           </div>

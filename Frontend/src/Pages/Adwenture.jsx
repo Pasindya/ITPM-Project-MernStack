@@ -107,7 +107,7 @@ function Adwenture() {
       setSuccessMessage('Booking successful! Redirecting...');
       setTimeout(() => {
         setShowForm(false);
-        navigate('/packages', { state: { formData } });
+        navigate('/packrecipt', { state: { formData } });
       }, 2000);
     } catch (error) {
       console.error('Error submitting form:', error);

@@ -1,5 +1,5 @@
 import React from 'react';
-import TransportNav from './transportNav';
+import TransportNav from './TransportNav';
 
 function Vehicleadmin() {
   return (
