@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import TransportNav from '../transportNav';
+import TransportNav from '../TransportNav';
 import axios from "axios";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 

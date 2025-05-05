@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import TransportNav from '../transportNav';
+import TransportNav from '../TransportNav';
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaEdit, FaTrash, FaFileDownload } from 'react-icons/fa';
