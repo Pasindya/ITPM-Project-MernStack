@@ -16,6 +16,9 @@ import UpdateEvent from './Event/UpdateEvent';
 import Taskboard from './Event/Taskboard';
 import EventCharts from './Event/EventCharts'; // Import the EventCharts component
 import Calender from './Pages/Calender';
+
+import Map from './Pages/Map';
+
 import EmergencyService from './Pages/EmergencyService';
 
 
@@ -173,6 +176,7 @@ const App = () => {
         <Route path="/packsummary" element={<Packsummary />} />
         <Route path="/ayur" element={<Ayur />} />
         <Route path="/adwenture" element={<Adwenture />} />
+        <Route path="/map" element={<Map />} />
     
         
         <Route path="/updatepbook/:id" element={<Updatepbook />} />
