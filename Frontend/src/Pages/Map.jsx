@@ -67,7 +67,7 @@ const nationalSymbols = [
   {
     title: "National Bird",
     name: "Sri Lanka Junglefowl",
-    image: "/Images/national/kukula.jpg",
+    image: "/Images/national/kukula.jpeg",
     description: "The colorful Sri Lanka junglefowl (Gallus lafayettii) is endemic to the island. The male's striking plumage features red, orange, yellow, and deep blue feathers."
   }
 ];
