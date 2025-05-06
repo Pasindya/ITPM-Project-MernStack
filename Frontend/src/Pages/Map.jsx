@@ -28,43 +28,46 @@ const nationalSymbols = [
   {
     title: "National Flower",
     name: "Nil Manel (Blue Water Lily)",
-    image: "/images/blue-water-lily.jpg",
+    image: "/Images/national/nil.jpg",
     description: "The beautiful blue water lily was declared the national flower of Sri Lanka in 1986. It symbolizes truth, purity, and discipline in Buddhist philosophy."
   },
   {
     title: "National Gem",
     name: "Blue Sapphire",
-    image: "/images/blue-sapphire.jpg",
+    image: "/Images/national/manik.jpg",
     description: "Sri Lanka's blue sapphires are world-renowned for their quality. The 400-carat 'Blue Giant of the Orient' found in Sri Lanka is one of the largest sapphires ever discovered."
   },
   {
     title: "National Game",
     name: "Volleyball",
-    image: "/images/volleyball.jpg",
+    image: "/Images/national/volley.jpg",
     description: "Volleyball was declared the national sport of Sri Lanka in 1991. The country has a strong volleyball tradition, especially in rural areas."
   },
   {
     title: "National Flag",
     name: "Lion Flag",
-    image: "/images/sri-lanka-flag.jpg",
+    image: "/Images/national/flag.jpg",
     description: "The flag features a golden lion holding a sword, representing the Sinhalese ethnicity and the nation's strength. The orange and green stripes represent Tamils and Moors."
   },
   {
-    title: "National Animal",
-    name: "Sri Lankan Elephant",
-    image: "/images/sri-lankan-elephant.jpg",
-    description: "The Sri Lankan elephant (Elephas maximus maximus) is a subspecies of Asian elephant native to Sri Lanka. They play an important cultural and religious role in the country."
-  },
+    title: "National Animal ",
+    name: "Sri Lankan Giant Squirrel (දඬුලේනා)",
+    scientific_name: "Ratufa macroura",
+    image: "/Images/national/lena.jpg",
+    description: "The Sri Lankan Giant Squirrel (Ratufa macroura) is a near-threatened species endemic to Sri Lanka. Known for its large size and striking color variations, it inhabits forests across the island. Due to habitat loss and hunting, conservation efforts are crucial for its survival.",
+    
+  
+},
   {
     title: "National Tree",
     name: "Na (Ironwood)",
-    image: "/images/ironwood-tree.jpg",
+    image: "/Images/national/naa.jpeg",
     description: "Mesua ferrea (Na tree) was declared the national tree of Sri Lanka in 1986. Its beautiful flowers are used in traditional medicine and religious offerings."
   },
   {
     title: "National Bird",
     name: "Sri Lanka Junglefowl",
-    image: "/images/junglefowl.jpg",
+    image: "/Images/national/kukula.jpg",
     description: "The colorful Sri Lanka junglefowl (Gallus lafayettii) is endemic to the island. The male's striking plumage features red, orange, yellow, and deep blue feathers."
   }
 ];
