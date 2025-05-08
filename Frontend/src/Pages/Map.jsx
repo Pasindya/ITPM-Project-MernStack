@@ -5,6 +5,15 @@ import 'leaflet/dist/leaflet.css';
 import './Map.css';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import axios from 'axios';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  FaMapMarkerAlt, FaRoute, FaStar, FaCloudSun, FaTemperatureHigh, 
+  FaWind, FaCloudRain, FaCamera, FaInfoCircle, FaHeart, FaShare, 
+  FaClock, FaCalendarAlt, FaUsers, FaCompass, FaSun, FaMoon, 
+  FaCloud, FaCloudShowersHeavy, FaSnowflake, FaBolt, FaPlay, FaPause, FaSearch, FaUtensils, FaLandmark, FaHandsHelping, FaArrowRight, FaChevronLeft, FaChevronRight, FaInfo, FaBookmark, FaShareAlt,
+  FaExpand, FaCompress, FaVolumeUp, FaVolumeMute, FaHistory
+} from 'react-icons/fa';
 
 const createCustomIcon = (type) => {
   const iconColors = {
@@ -28,49 +37,109 @@ const nationalSymbols = [
   {
     title: "National Flower",
     name: "Nil Manel (Blue Water Lily)",
+    scientific_name: "Nymphaea nouchali",
     image: "/Images/national/nil.jpg",
-    description: "The beautiful blue water lily was declared the national flower of Sri Lanka in 1986. It symbolizes truth, purity, and discipline in Buddhist philosophy."
+    description: "The beautiful blue water lily was declared the national flower of Sri Lanka in 1986. It symbolizes truth, purity, and discipline in Buddhist philosophy. The flower blooms in the morning and closes at night, representing the cycle of life.",
+    cultural_significance: "In Buddhist art, the blue water lily represents the purity of the mind and the path to enlightenment. It's often depicted in temple murals and sculptures.",
+    historical_background: "The flower has been revered in Sri Lanka for over 2,500 years, mentioned in ancient Buddhist texts and royal gardens."
   },
   {
     title: "National Gem",
     name: "Blue Sapphire",
+    scientific_name: "Corundum (Al₂O₃)",
     image: "/Images/national/manik.jpg",
-    description: "Sri Lanka's blue sapphires are world-renowned for their quality. The 400-carat 'Blue Giant of the Orient' found in Sri Lanka is one of the largest sapphires ever discovered."
+    description: "Sri Lanka's blue sapphires are world-renowned for their quality and brilliance. The 400-carat 'Blue Giant of the Orient' found in Sri Lanka is one of the largest sapphires ever discovered. The island is known as 'Ratna Dweepa' (Island of Gems).",
+    cultural_significance: "Sapphires are believed to bring wisdom, good fortune, and protection. They are often used in royal jewelry and religious artifacts.",
+    historical_background: "Sri Lanka has been a source of precious gems for over 2,000 years, with records of gem trading dating back to ancient times."
   },
   {
     title: "National Game",
     name: "Volleyball",
     image: "/Images/national/volley.jpg",
-    description: "Volleyball was declared the national sport of Sri Lanka in 1991. The country has a strong volleyball tradition, especially in rural areas."
+    description: "Volleyball was declared the national sport of Sri Lanka in 1991. The country has a strong volleyball tradition, especially in rural areas. The sport promotes teamwork and physical fitness across all communities.",
+    cultural_significance: "Volleyball brings together people from different ethnic and social backgrounds, promoting unity and sportsmanship.",
+    historical_background: "Introduced during the British colonial period, volleyball quickly became popular in schools and villages across the island."
   },
   {
     title: "National Flag",
     name: "Lion Flag",
     image: "/Images/national/flag.jpg",
-    description: "The flag features a golden lion holding a sword, representing the Sinhalese ethnicity and the nation's strength. The orange and green stripes represent Tamils and Moors."
+    description: "The flag features a golden lion holding a sword, representing the Sinhalese ethnicity and the nation's strength. The orange and green stripes represent Tamils and Moors, while the maroon background symbolizes the majority Sinhalese.",
+    cultural_significance: "The lion symbolizes bravery and strength, while the sword represents the sovereignty of the nation. The four Bo leaves at the corners represent the four virtues of Buddhism: loving-kindness, compassion, sympathetic joy, and equanimity.",
+    historical_background: "The flag's design dates back to 1948 when Sri Lanka gained independence, incorporating elements from the ancient Kandyan kingdom's flag."
   },
   {
-    title: "National Animal ",
+    title: "National Animal",
     name: "Sri Lankan Giant Squirrel (දඬුලේනා)",
     scientific_name: "Ratufa macroura",
     image: "/Images/national/lena.jpg",
     description: "The Sri Lankan Giant Squirrel (Ratufa macroura) is a near-threatened species endemic to Sri Lanka. Known for its large size and striking color variations, it inhabits forests across the island. Due to habitat loss and hunting, conservation efforts are crucial for its survival.",
-    
-  
-},
+    cultural_significance: "The giant squirrel is considered a symbol of agility and adaptability in Sri Lankan folklore. It's often featured in traditional stories and art.",
+    historical_background: "This species has been part of Sri Lanka's ecosystem for thousands of years, adapting to various forest types across the island."
+  },
   {
     title: "National Tree",
     name: "Na (Ironwood)",
+    scientific_name: "Mesua ferrea",
     image: "/Images/national/naa.jpeg",
-    description: "Mesua ferrea (Na tree) was declared the national tree of Sri Lanka in 1986. Its beautiful flowers are used in traditional medicine and religious offerings."
+    description: "Mesua ferrea (Na tree) was declared the national tree of Sri Lanka in 1986. Its beautiful flowers are used in traditional medicine and religious offerings. The tree is known for its hard, durable wood and fragrant flowers.",
+    cultural_significance: "The Na tree is considered sacred in Buddhist temples and is often planted in temple premises. Its flowers are used in religious ceremonies and traditional medicine.",
+    historical_background: "The tree has been valued for centuries for its medicinal properties and durable wood, used in traditional architecture."
   },
   {
     title: "National Bird",
     name: "Sri Lanka Junglefowl",
-    image: "/Images/national/kukula.jpeg",
-    description: "The colorful Sri Lanka junglefowl (Gallus lafayettii) is endemic to the island. The male's striking plumage features red, orange, yellow, and deep blue feathers."
+    scientific_name: "Gallus lafayettii",
+    image: "/Images/national/kukula.jpg",
+    description: "The colorful Sri Lanka junglefowl (Gallus lafayettii) is endemic to the island. The male's striking plumage features red, orange, yellow, and deep blue feathers. It's considered the ancestor of the domestic chicken.",
+    cultural_significance: "The junglefowl is featured in ancient Sinhalese art and is considered a symbol of natural beauty and resilience.",
+    historical_background: "This species has been part of Sri Lanka's ecosystem for millions of years, evolving uniquely on the island."
+  },
+  {
+    title: "National Dance",
+    name: "Kandyan Dance",
+    image: "/Images/national/dance.jpg",
+    description: "Kandyan dance is a classical dance form that originated in the central hills of Sri Lanka. It features elaborate costumes, rhythmic drumming, and acrobatic movements. The dance is performed during religious ceremonies and cultural events.",
+    cultural_significance: "The dance is deeply connected to Buddhist temple rituals and royal ceremonies. Each movement and costume element has symbolic meaning.",
+    historical_background: "Dating back to the Kandyan Kingdom (15th-19th centuries), this dance form has been preserved through generations of dedicated performers."
+  },
+  {
+    title: "National Instrument",
+    name: "Geta Beraya",
+    image: "/Images/national/beraya.jpg",
+    description: "The Geta Beraya is a traditional drum used in Kandyan dance performances. Made from wood and animal hide, it produces deep, resonant sounds that accompany dance movements.",
+    cultural_significance: "The drum is considered sacred and is used in temple ceremonies and cultural performances. Its rhythms are believed to have spiritual significance.",
+    historical_background: "The art of drum making and playing has been passed down through generations of craftsmen and musicians."
+  },
+  {
+    title: "National Costume",
+    name: "Osariya",
+    image: "/Images/national/osariya.jpg",
+    description: "The Osariya is the traditional Kandyan saree worn by women. It features intricate pleats and a distinctive drape that creates an elegant silhouette. The costume is worn during special occasions and cultural events.",
+    cultural_significance: "The Osariya represents Sri Lankan femininity and cultural identity. Its design and wearing style are unique to Sri Lanka.",
+    historical_background: "The costume evolved during the Kandyan period, incorporating elements from various cultural influences while maintaining its distinct Sri Lankan character."
+  },
+  {
+    title: "National Martial Art",
+    name: "Angampora",
+    image: "/Images/national/angampora.jpg",
+    description: "Angampora is an ancient martial art that combines combat techniques, meditation, and traditional medicine. It includes both armed and unarmed combat, with a strong emphasis on spiritual development.",
+    cultural_significance: "Angampora is not just a fighting style but a complete system of physical and mental training, deeply connected to Buddhist philosophy.",
+    historical_background: "This martial art has been practiced for over 3,000 years, with its techniques preserved through oral tradition and dedicated training schools."
+  },
+  {
+    title: "National Architecture",
+    name: "Stupa Architecture",
+    image: "/Images/national/stupa.jpg",
+    description: "Sri Lankan stupa architecture represents the pinnacle of Buddhist architectural achievement. The massive white domes, decorated with intricate carvings and surrounded by elaborate moonstones, are unique to Sri Lanka.",
+    cultural_significance: "Stupas are not just architectural marvels but sacred monuments housing relics of the Buddha and important Buddhist monks.",
+    historical_background: "The development of stupa architecture in Sri Lanka spans over 2,000 years, with each period adding unique elements to the design."
   }
 ];
+
+// Weather API Configuration
+const API_KEY = '2e85719828517999c1ce073d01087421';
+const API_URL = 'https://api.openweathermap.org/data/2.5/forecast';
 
 function Map() {
   const [activeExperience, setActiveExperience] = useState(null);
@@ -80,7 +149,37 @@ function Map() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [carouselAutoPlay, setCarouselAutoPlay] = useState(true);
+  const [weatherData, setWeatherData] = useState(null);
+  const [currentLocation, setCurrentLocation] = useState('Colombo');
   const mapRef = useRef(null);
+  const [activeSymbol, setActiveSymbol] = useState(null);
+  const [showSymbolDetails, setShowSymbolDetails] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
+  const [viewedSymbols, setViewedSymbols] = useState([]);
+
+  // Fetch weather data
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        const response = await axios.get(API_URL, {
+          params: {
+            q: currentLocation,
+            appid: API_KEY,
+            units: 'metric',
+          },
+        });
+        setWeatherData(response.data);
+      } catch (error) {
+        console.error('Error fetching weather:', error);
+      }
+    };
+
+    fetchWeather();
+    const interval = setInterval(fetchWeather, 300000); // Update every 5 minutes
+    return () => clearInterval(interval);
+  }, [currentLocation]);
 
   const authenticExperiences = [
     // Central Province
@@ -147,6 +246,7 @@ function Map() {
 
   const handleMarkerClick = (experience) => {
     setActiveExperience(experience);
+    setCurrentLocation(experience.location); // Update weather location
     if (mapRef.current) {
       mapRef.current.flyTo(experience.coords, 12, {
         duration: 1
@@ -158,16 +258,413 @@ function Map() {
     setIsSidebarCollapsed(!isSidebarCollapsed);
   };
 
+  const getWeatherIcon = (weatherCondition) => {
+    const iconMap = {
+      Clear: <FaSun className="weather-icon sun" />,
+      Clouds: <FaCloud className="weather-icon cloud" />,
+      Rain: <FaCloudShowersHeavy className="weather-icon rain" />,
+      Snow: <FaSnowflake className="weather-icon snow" />,
+      Thunderstorm: <FaBolt className="weather-icon thunder" />,
+      Drizzle: <FaCloudRain className="weather-icon drizzle" />,
+      Mist: <FaCloud className="weather-icon mist" />,
+    };
+    return iconMap[weatherCondition] || <FaSun className="weather-icon sun" />;
+  };
+
+  const handleSymbolClick = (symbol) => {
+    setActiveSymbol(symbol);
+    setShowSymbolDetails(true);
+    // Add to viewed symbols history
+    setViewedSymbols(prev => {
+      const newHistory = [symbol, ...prev.filter(s => s.name !== symbol.name)].slice(0, 5);
+      return newHistory;
+    });
+  };
+
+  const toggleFullscreen = () => {
+    setIsFullscreen(!isFullscreen);
+  };
+
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
+  };
+
   return (
     <div className="map-app">
+      {/* Enhanced National Symbols Section */}
+      <motion.div 
+        className={`national-symbols-section ${isFullscreen ? 'fullscreen' : ''}`}
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className="section-header">
+          <div className="header-content">
+            <motion.h3 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              Sri Lanka National Symbols
+            </motion.h3>
+            <motion.p 
+              className="section-subtitle"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              Discover the rich cultural heritage of Sri Lanka through its national symbols
+            </motion.p>
+          </div>
+          <div className="section-controls">
+            <button 
+              className="control-btn history"
+              onClick={() => setShowHistory(!showHistory)}
+              title="View History"
+            >
+              <FaHistory />
+            </button>
+            <button 
+              className="control-btn audio"
+              onClick={toggleMute}
+              title={isMuted ? "Unmute" : "Mute"}
+            >
+              {isMuted ? <FaVolumeMute /> : <FaVolumeUp />}
+            </button>
+            <button 
+              className="control-btn fullscreen"
+              onClick={toggleFullscreen}
+              title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
+            >
+              {isFullscreen ? <FaCompress /> : <FaExpand />}
+            </button>
+            <button 
+              className="control-btn play"
+              onClick={() => setCarouselAutoPlay(!carouselAutoPlay)}
+              title={carouselAutoPlay ? "Pause Slideshow" : "Play Slideshow"}
+            >
+              {carouselAutoPlay ? <FaPause /> : <FaPlay />}
+            </button>
+          </div>
+        </div>
+
+        {/* Recently Viewed Symbols */}
+        <AnimatePresence>
+          {showHistory && (
+            <motion.div 
+              className="viewed-symbols"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+            >
+              <h4>Recently Viewed</h4>
+              <div className="viewed-symbols-grid">
+                {viewedSymbols.map((symbol, index) => (
+                  <motion.div 
+                    key={index}
+                    className="viewed-symbol-card"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.1 }}
+                    onClick={() => handleSymbolClick(symbol)}
+                  >
+                    <img src={symbol.image} alt={symbol.name} />
+                    <div className="card-overlay">
+                      <h5>{symbol.name}</h5>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <div className="symbols-container">
+          <Carousel
+            autoPlay={carouselAutoPlay}
+            interval={5000}
+            infiniteLoop
+            showThumbs={false}
+            showStatus={false}
+            showArrows={true}
+            showIndicators={true}
+            className="national-symbols-carousel"
+            renderArrowPrev={(onClickHandler, hasPrev, label) => (
+              <motion.button
+                className="carousel-arrow prev"
+                onClick={onClickHandler}
+                title={label}
+                disabled={!hasPrev}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <FaChevronLeft />
+              </motion.button>
+            )}
+            renderArrowNext={(onClickHandler, hasNext, label) => (
+              <motion.button
+                className="carousel-arrow next"
+                onClick={onClickHandler}
+                title={label}
+                disabled={!hasNext}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <FaChevronRight />
+              </motion.button>
+            )}
+          >
+            {nationalSymbols.map((symbol, index) => (
+              <motion.div 
+                key={index} 
+                className="symbol-slide"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+                onClick={() => handleSymbolClick(symbol)}
+              >
+                <div className="symbol-image">
+                  <img src={symbol.image} alt={symbol.name} />
+                  <div className="symbol-overlay">
+                    <div className="overlay-content">
+                      <motion.h4
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.2 }}
+                      >
+                        {symbol.title}
+                      </motion.h4>
+                      <motion.h5
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3 }}
+                      >
+                        {symbol.name}
+                      </motion.h5>
+                      {symbol.scientific_name && (
+                        <motion.p 
+                          className="scientific-name"
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.4 }}
+                        >
+                          {symbol.scientific_name}
+                        </motion.p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className="symbol-info">
+                  <motion.p 
+                    className="description"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                  >
+                    {symbol.description}
+                  </motion.p>
+                  <div className="symbol-actions">
+                    <motion.button 
+                      className="action-btn info"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <FaInfo /> Learn More
+                    </motion.button>
+                    <motion.button 
+                      className="action-btn bookmark"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <FaBookmark /> Save
+                    </motion.button>
+                    <motion.button 
+                      className="action-btn share"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <FaShareAlt /> Share
+                    </motion.button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </Carousel>
+        </div>
+
+        {/* Enhanced Symbol Details Modal */}
+        <AnimatePresence>
+          {showSymbolDetails && activeSymbol && (
+            <motion.div 
+              className="symbol-details-modal"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <motion.div 
+                className="modal-content"
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+              >
+                <button 
+                  className="close-modal"
+                  onClick={() => setShowSymbolDetails(false)}
+                >
+                  ×
+                </button>
+                <div className="modal-header">
+                  <motion.h3
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                  >
+                    {activeSymbol.title}
+                  </motion.h3>
+                  <motion.h4
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 }}
+                  >
+                    {activeSymbol.name}
+                  </motion.h4>
+                  {activeSymbol.scientific_name && (
+                    <motion.p 
+                      className="scientific-name"
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      {activeSymbol.scientific_name}
+                    </motion.p>
+                  )}
+                </div>
+                <div className="modal-body">
+                  <motion.div 
+                    className="modal-image"
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    <img src={activeSymbol.image} alt={activeSymbol.name} />
+                  </motion.div>
+                  <motion.div 
+                    className="modal-info"
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    <p className="description">{activeSymbol.description}</p>
+                    <div className="additional-info">
+                      <div className="info-section">
+                        <h5>Cultural Significance</h5>
+                        <p>{activeSymbol.cultural_significance}</p>
+                      </div>
+                      <div className="info-section">
+                        <h5>Historical Background</h5>
+                        <p>{activeSymbol.historical_background}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+                <motion.div 
+                  className="modal-footer"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <motion.button 
+                    className="action-btn primary"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <FaBookmark /> Save to Collection
+                  </motion.button>
+                  <motion.button 
+                    className="action-btn secondary"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <FaShareAlt /> Share Symbol
+                  </motion.button>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+
       <div className="map-container">
         <div className="map-controls">
           <div className="header-section">
-            <h1>Sri Lanka Authentic Experiences</h1>
-            <p className="subtitle">Discover the island's rich culture, cuisine, and traditions</p>
+            <motion.h1 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              Sri Lanka Authentic Experiences
+            </motion.h1>
+            <motion.p 
+              className="subtitle"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              Discover the island's rich culture, cuisine, and traditions
+            </motion.p>
           </div>
-          
-          <div className="search-filter-section">
+
+          {/* Weather Widget */}
+          {weatherData && (
+            <motion.div 
+              className="weather-widget"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="weather-header">
+                <div className="location-info">
+                  <FaMapMarkerAlt className="location-icon" />
+                  <h3>{weatherData.city.name}</h3>
+                </div>
+                <span className="last-updated">
+                  <FaClock /> {new Date().toLocaleTimeString()}
+                </span>
+              </div>
+              <div className="weather-content">
+                <div className="current-weather">
+                  <div className="temperature">
+                    <div className="temp-main">
+                      {getWeatherIcon(weatherData.list[0].weather[0].main)}
+                      <span className="temp-value">
+                        {Math.round(weatherData.list[0].main.temp)}°C
+                      </span>
+                    </div>
+                    <span className="feels-like">
+                      Feels like: {Math.round(weatherData.list[0].main.feels_like)}°C
+                    </span>
+                  </div>
+                  <div className="weather-details">
+                    <div className="detail">
+                      <FaWind /> {weatherData.list[0].wind.speed} m/s
+                    </div>
+                    <div className="detail">
+                      <FaCloudRain /> {weatherData.list[0].main.humidity}%
+                    </div>
+                    <div className="detail">
+                      <FaCompass /> {weatherData.list[0].wind.deg}°
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Search and Filters */}
+          <motion.div 
+            className="search-filter-section"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
             <div className="search-box">
               <input
                 type="text"
@@ -175,37 +672,45 @@ function Map() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <i className="fas fa-search"></i>
+              <FaSearch className="search-icon" />
             </div>
             
             <div className="filters">
               <div className="filter-group">
                 <label>Experience Type:</label>
                 <div className="filter-buttons">
-                  <button 
+                  <motion.button 
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     className={filter === 'all' ? 'active' : ''}
                     onClick={() => setFilter('all')}
                   >
                     All
-                  </button>
-                  <button 
+                  </motion.button>
+                  <motion.button 
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     className={filter === 'food' ? 'active' : ''}
                     onClick={() => setFilter('food')}
                   >
-                    <i className="fas fa-utensils"></i> Food
-                  </button>
-                  <button 
+                    <FaUtensils /> Food
+                  </motion.button>
+                  <motion.button 
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     className={filter === 'place' ? 'active' : ''}
                     onClick={() => setFilter('place')}
                   >
-                    <i className="fas fa-landmark"></i> Places
-                  </button>
-                  <button 
+                    <FaLandmark /> Places
+                  </motion.button>
+                  <motion.button 
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     className={filter === 'thing' ? 'active' : ''}
                     onClick={() => setFilter('thing')}
                   >
-                    <i className="fas fa-hands-helping"></i> Activities
-                  </button>
+                    <FaHandsHelping /> Activities
+                  </motion.button>
                 </div>
               </div>
               
@@ -223,9 +728,10 @@ function Map() {
                 </select>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
+        {/* Map Content */}
         <div className="map-content">
           <MapContainer 
             center={[7.8731, 80.7718]} 
@@ -256,14 +762,19 @@ function Map() {
                 }}
               >
                 <Popup className="custom-popup">
-                  <div className="popup-content">
+                  <motion.div 
+                    className="popup-content"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     <h4>{experience.name}</h4>
                     <div className="popup-meta">
                       <span className={`tag ${experience.type}`}>
                         {experience.type.charAt(0).toUpperCase() + experience.type.slice(1)}
                       </span>
                       <span className="location">
-                        <i className="fas fa-map-marker-alt"></i> {experience.location}, {experience.province}
+                        <FaMapMarkerAlt /> {experience.location}, {experience.province}
                       </span>
                     </div>
                     <div className="popup-image">
@@ -276,25 +787,29 @@ function Map() {
                       />
                     </div>
                     <p className="popup-description">{getExperienceDescription(experience.name)}</p>
-                    <button 
+                    <motion.button 
                       className="popup-more-btn"
                       onClick={() => handleMarkerClick(experience)}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      Learn More <i className="fas fa-arrow-right"></i>
-                    </button>
-                  </div>
+                      Learn More <FaArrowRight />
+                    </motion.button>
+                  </motion.div>
                 </Popup>
               </Marker>
             ))}
           </MapContainer>
-
-          <div className={`experience-sidebar ${isSidebarCollapsed ? 'collapsed' : ''}`}>
+          
+          {/* Experience Sidebar */}
+          <motion.div 
+            className={`experience-sidebar ${isSidebarCollapsed ? 'collapsed' : ''}`}
+            initial={{ x: 100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
             <button className="sidebar-toggle" onClick={toggleSidebar}>
-              {isSidebarCollapsed ? (
-                <i className="fas fa-chevron-left"></i>
-              ) : (
-                <i className="fas fa-chevron-right"></i>
-              )}
+              {isSidebarCollapsed ? <FaChevronLeft /> : <FaChevronRight />}
             </button>
             
             {!isSidebarCollapsed && (
@@ -345,37 +860,6 @@ function Map() {
                   </div>
                 ) : (
                   <div className="welcome-message">
-                    <div className="national-symbols-carousel">
-                      <h4>Sri Lanka National Symbols</h4>
-                      <div className="carousel-controls">
-                        <button onClick={() => setCarouselAutoPlay(!carouselAutoPlay)}>
-                          {carouselAutoPlay ? (
-                            <i className="fas fa-pause"></i>
-                          ) : (
-                            <i className="fas fa-play"></i>
-                          )}
-                        </button>
-                      </div>
-                      <Carousel 
-                        autoPlay={carouselAutoPlay} 
-                        interval={5000} 
-                        infiniteLoop 
-                        showThumbs={false}
-                        showStatus={false}
-                      >
-                        {nationalSymbols.map((symbol, index) => (
-                          <div key={index} className="symbol-card">
-                            <img src={symbol.image} alt={symbol.name} />
-                            <div className="symbol-info">
-                              <h5>{symbol.title}</h5>
-                              <h6>{symbol.name}</h6>
-                              <p>{symbol.description}</p>
-                            </div>
-                          </div>
-                        ))}
-                      </Carousel>
-                    </div>
-                    
                     <div className="welcome-content">
                       <img src="/images/sri-lanka-welcome.jpg" alt="Sri Lanka" />
                       <p>Explore authentic Sri Lankan experiences by clicking on markers or using the filters above.</p>
@@ -402,37 +886,7 @@ function Map() {
                 )}
               </div>
             )}
-          </div>
-        </div>
-      </div>
-      
-      <div className="app-footer">
-        <div className="footer-content">
-          <div className="footer-section">
-            <h5>About This Project</h5>
-            <p>Discover Sri Lanka's authentic cultural experiences, from ancient temples to local cuisine and traditional crafts.</p>
-          </div>
-          <div className="footer-section">
-            <h5>Quick Links</h5>
-            <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">All Experiences</a></li>
-              <li><a href="#">Travel Tips</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>
-          </div>
-          <div className="footer-section">
-            <h5>Connect With Us</h5>
-            <div className="social-icons">
-              <a href="#"><i className="fab fa-facebook"></i></a>
-              <a href="#"><i className="fab fa-instagram"></i></a>
-              <a href="#"><i className="fab fa-twitter"></i></a>
-              <a href="#"><i className="fab fa-youtube"></i></a>
-            </div>
-          </div>
-        </div>
-        <div className="copyright">
-          <p>&copy; {new Date().getFullYear()} Sri Lanka Authentic Experiences. All rights reserved.</p>
+          </motion.div>
         </div>
       </div>
     </div>
