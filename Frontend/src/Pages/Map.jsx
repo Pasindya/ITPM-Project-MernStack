@@ -1157,7 +1157,7 @@ function Map() {
                 ) : (
                   <div className="welcome-message">
                     <div className="welcome-content">
-                      <img src="/images/sri-lanka-welcome.jpg" alt="Sri Lanka" />
+                      <img src="/Images/temple/srilanka.jpg" alt="Sri Lanka" />
                       <p>Explore authentic Sri Lankan experiences by clicking on markers or using the filters above.</p>
                     </div>
                     
