@@ -267,6 +267,96 @@ const locationPhotos = {
     "/Images/activities/gem-cutting-1.jpg",
     "/Images/activities/gem-cutting-2.jpg",
     "/Images/activities/gem-cutting-3.jpg"
+  ],
+  "Peradeniya Royal Botanical Gardens": [
+    "/Images/places/peradeniya-1.jpg",
+    "/Images/places/peradeniya-2.jpg",
+    "/Images/places/peradeniya-3.jpg"
+  ],
+  "Dambulla Cave Temple": [
+    "/Images/places/dambulla-1.jpg",
+    "/Images/places/dambulla-2.jpg",
+    "/Images/places/dambulla-3.jpg"
+  ],
+  "Kelaniya Temple": [
+    "/Images/temple/kelaniya-1.jpg",
+    "/Images/temple/kelaniya-2.jpg",
+    "/Images/temple/kelaniya-3.jpg"
+  ],
+  "Seema Malaka Temple": [
+    "/Images/temple/seema-malaka-1.jpg",
+    "/Images/temple/seema-malaka-2.jpg",
+    "/Images/temple/seema-malaka-3.jpg"
+  ],
+  "Mulkirigala Rock Temple": [
+    "/Images/temple/mulkirigala-1.jpg",
+    "/Images/temple/mulkirigala-2.jpg",
+    "/Images/temple/mulkirigala-3.jpg"
+  ],
+  "Weligama Bay": [
+    "/Images/places/weligama-1.jpg",
+    "/Images/places/weligama-2.jpg",
+    "/Images/places/weligama-3.jpg"
+  ],
+  "Nagadeepa Temple": [
+    "/Images/temple/nagadeepa-1.jpg",
+    "/Images/temple/nagadeepa-2.jpg",
+    "/Images/temple/nagadeepa-3.jpg"
+  ],
+  "Jaffna Fort": [
+    "/Images/places/jaffna-fort-1.jpg",
+    "/Images/places/jaffna-fort-2.jpg",
+    "/Images/places/jaffna-fort-3.jpg"
+  ],
+  "Koneswaram Temple": [
+    "/Images/temple/koneswaram-1.jpg",
+    "/Images/temple/koneswaram-2.jpg",
+    "/Images/temple/koneswaram-3.jpg"
+  ],
+  "Pasikudah Beach": [
+    "/Images/places/pasikudah-1.jpg",
+    "/Images/places/pasikudah-2.jpg",
+    "/Images/places/pasikudah-3.jpg"
+  ],
+  "Anuradhapura Sacred City": [
+    "/Images/places/anuradhapura-1.jpg",
+    "/Images/places/anuradhapura-2.jpg",
+    "/Images/places/anuradhapura-3.jpg"
+  ],
+  "Mihintale Temple": [
+    "/Images/temple/mihintale-1.jpg",
+    "/Images/temple/mihintale-2.jpg",
+    "/Images/temple/mihintale-3.jpg"
+  ],
+  "Yapahuwa Rock Fortress": [
+    "/Images/places/yapahuwa-1.jpg",
+    "/Images/places/yapahuwa-2.jpg",
+    "/Images/places/yapahuwa-3.jpg"
+  ],
+  "Panduwasnuwara": [
+    "/Images/places/panduwasnuwara-1.jpg",
+    "/Images/places/panduwasnuwara-2.jpg",
+    "/Images/places/panduwasnuwara-3.jpg"
+  ],
+  "Bogoda Wooden Bridge": [
+    "/Images/places/bogoda-1.jpg",
+    "/Images/places/bogoda-2.jpg",
+    "/Images/places/bogoda-3.jpg"
+  ],
+  "Diyaluma Falls": [
+    "/Images/places/diyaluma-1.jpg",
+    "/Images/places/diyaluma-2.jpg",
+    "/Images/places/diyaluma-3.jpg"
+  ],
+  "Sinharaja Rain Forest": [
+    "/Images/places/sinharaja-1.jpg",
+    "/Images/places/sinharaja-2.jpg",
+    "/Images/places/sinharaja-3.jpg"
+  ],
+  "Belihuloya": [
+    "/Images/places/belihuloya-1.jpg",
+    "/Images/places/belihuloya-2.jpg",
+    "/Images/places/belihuloya-3.jpg"
   ]
 };
 
@@ -315,46 +405,64 @@ function Map() {
     { name: "Temple of the Tooth", location: "Kandy", province: "Central", type: "place", coords: [7.2939, 80.6414] },
     { name: "Kandyan Dancers", location: "Kandy", province: "Central", type: "thing", coords: [7.2939, 80.6414] },
     { name: "Ambul Thiyal", location: "Kandy", province: "Central", type: "food", coords: [7.294, 80.640] },
+    { name: "Peradeniya Royal Botanical Gardens", location: "Kandy", province: "Central", type: "place", coords: [7.2733, 80.5957] },
+    { name: "Dambulla Cave Temple", location: "Dambulla", province: "Central", type: "place", coords: [7.8567, 80.6492] },
 
     // Western Province
     { name: "Colombo Street Food", location: "Colombo", province: "Western", type: "food", coords: [6.9271, 79.8612] },
     { name: "Gangaramaya Temple", location: "Colombo", province: "Western", type: "place", coords: [6.9157, 79.8560] },
     { name: "Beeralu Lace Making", location: "Moratuwa", province: "Western", type: "thing", coords: [6.767, 79.882] },
+    { name: "Kelaniya Temple", location: "Kelaniya", province: "Western", type: "place", coords: [6.9556, 79.9222] },
+    { name: "Seema Malaka Temple", location: "Colombo", province: "Western", type: "place", coords: [6.9167, 79.8500] },
 
     // Southern Province
     { name: "Galle Fort Walk", location: "Galle", province: "Southern", type: "place", coords: [6.0273, 80.2179] },
     { name: "Kottu Roti", location: "Matara", province: "Southern", type: "food", coords: [5.9485, 80.5353] },
     { name: "Traditional Mask Making", location: "Ambalangoda", province: "Southern", type: "thing", coords: [6.2359, 80.0538] },
+    { name: "Mulkirigala Rock Temple", location: "Mulkirigala", province: "Southern", type: "place", coords: [6.2333, 80.7667] },
+    { name: "Weligama Bay", location: "Weligama", province: "Southern", type: "place", coords: [5.9667, 80.4167] },
 
     // Northern Province
     { name: "Nallur Kovil", location: "Jaffna", province: "Northern", type: "place", coords: [9.6659, 80.0255] },
     { name: "Jaffna Crab Curry", location: "Jaffna", province: "Northern", type: "food", coords: [9.6685, 80.0074] },
     { name: "Palmyrah Crafts", location: "Jaffna", province: "Northern", type: "thing", coords: [9.6618, 80.0251] },
+    { name: "Nagadeepa Temple", location: "Jaffna", province: "Northern", type: "place", coords: [9.5000, 79.7333] },
+    { name: "Jaffna Fort", location: "Jaffna", province: "Northern", type: "place", coords: [9.6667, 80.0167] },
 
     // Eastern Province
     { name: "Arugam Bay Surfing", location: "Arugam Bay", province: "Eastern", type: "place", coords: [6.8431, 81.8350] },
     { name: "Batticaloa Fish Curry", location: "Batticaloa", province: "Eastern", type: "food", coords: [7.7102, 81.6924] },
     { name: "Fishing Catamaran", location: "Trincomalee", province: "Eastern", type: "thing", coords: [8.5874, 81.2152] },
+    { name: "Koneswaram Temple", location: "Trincomalee", province: "Eastern", type: "place", coords: [8.5833, 81.2333] },
+    { name: "Pasikudah Beach", location: "Pasikudah", province: "Eastern", type: "place", coords: [7.9167, 81.5500] },
 
     // North Central Province
     { name: "Sigiriya Rock Fortress", location: "Sigiriya", province: "North Central", type: "place", coords: [7.9575, 80.7603] },
     { name: "Polonnaruwa Rice & Curry", location: "Polonnaruwa", province: "North Central", type: "food", coords: [7.9403, 81.0188] },
     { name: "Stone Carvings", location: "Anuradhapura", province: "North Central", type: "thing", coords: [8.3114, 80.4037] },
+    { name: "Anuradhapura Sacred City", location: "Anuradhapura", province: "North Central", type: "place", coords: [8.3333, 80.3833] },
+    { name: "Mihintale Temple", location: "Mihintale", province: "North Central", type: "place", coords: [8.3500, 80.5167] },
 
     // North Western Province
     { name: "Munneswaram Temple", location: "Chilaw", province: "North Western", type: "place", coords: [7.5734, 79.7946] },
     { name: "Puttalam Lagoon Crab", location: "Puttalam", province: "North Western", type: "food", coords: [8.0334, 79.8415] },
     { name: "Toddy Tapping", location: "Wennappuwa", province: "North Western", type: "thing", coords: [7.3166, 79.8582] },
+    { name: "Yapahuwa Rock Fortress", location: "Yapahuwa", province: "North Western", type: "place", coords: [7.8333, 80.3667] },
+    { name: "Panduwasnuwara", location: "Kurunegala", province: "North Western", type: "place", coords: [7.4667, 80.1000] },
 
     // Uva Province
     { name: "Train to Ella", location: "Ella", province: "Uva", type: "place", coords: [6.8606, 81.0463] },
     { name: "Hoppers (Appa)", location: "Badulla", province: "Uva", type: "food", coords: [6.9897, 81.0550] },
     { name: "Tea Picking", location: "Bandarawela", province: "Uva", type: "thing", coords: [6.8296, 80.9875] },
+    { name: "Bogoda Wooden Bridge", location: "Badulla", province: "Uva", type: "place", coords: [7.1167, 81.0667] },
+    { name: "Diyaluma Falls", location: "Badulla", province: "Uva", type: "place", coords: [6.8333, 81.0000] },
 
     // Sabaragamuwa Province
     { name: "Ratnapura Gem Mines", location: "Ratnapura", province: "Sabaragamuwa", type: "place", coords: [6.6828, 80.3992] },
     { name: "Weli Thalapa", location: "Kegalle", province: "Sabaragamuwa", type: "food", coords: [7.2513, 80.3464] },
     { name: "Gem Cutting", location: "Ratnapura", province: "Sabaragamuwa", type: "thing", coords: [6.683, 80.399] },
+    { name: "Sinharaja Rain Forest", location: "Ratnapura", province: "Sabaragamuwa", type: "place", coords: [6.4167, 80.5000] },
+    { name: "Belihuloya", location: "Ratnapura", province: "Sabaragamuwa", type: "place", coords: [6.7167, 80.7667] }
   ];
 
   const provinces = [...new Set(authenticExperiences.map(exp => exp.province))];
@@ -1110,6 +1218,24 @@ function getExperienceDescription(name) {
     "Ratnapura Gem Mines": "Sri Lanka's gem capital with active mines. Visit small-scale operations where miners sift through river gravel for sapphires, rubies, and cat's eyes.",
     "Weli Thalapa": "A sweet coconut and jaggery treat wrapped in fragrant screwpine leaves. This traditional sweet has a distinctive pandan aroma and sticky, chewy texture.",
     "Gem Cutting": "Crafting precious stones into brilliant gems. Watch master cutters in Ratnapura transform rough stones into faceted jewels using techniques passed down for generations.",
+    "Peradeniya Royal Botanical Gardens": "A serene and beautiful botanical garden in Kandy. It's home to a wide variety of plants and trees, making it a perfect spot for nature lovers.",
+    "Dambulla Cave Temple": "A sacred Buddhist temple in Dambulla with intricate rock carvings and a large Buddha statue. It's a must-visit for its spiritual significance and stunning architecture.",
+    "Kelaniya Temple": "A beautiful and serene Buddhist temple in Kelaniya. It's known for its intricate stone carvings and peaceful atmosphere.",
+    "Seema Malaka Temple": "A beautiful and serene Buddhist temple in Colombo. It's known for its intricate stone carvings and peaceful atmosphere.",
+    "Mulkirigala Rock Temple": "A sacred Buddhist temple in Mulkirigala with stunning rock carvings and a large Buddha statue. It's a must-visit for its spiritual significance and stunning architecture.",
+    "Weligama Bay": "A beautiful and serene bay in Weligama. It's known for its calm waters and beautiful sunsets, making it a perfect spot for relaxation and photography.",
+    "Nagadeepa Temple": "A sacred Buddhist temple in Jaffna with stunning rock carvings and a large Buddha statue. It's a must-visit for its spiritual significance and stunning architecture.",
+    "Jaffna Fort": "A historic fort in Jaffna with a rich history and stunning views. It's a must-visit for its historical significance and beautiful architecture.",
+    "Koneswaram Temple": "A beautiful and serene Buddhist temple in Trincomalee. It's known for its intricate stone carvings and peaceful atmosphere.",
+    "Pasikudah Beach": "A beautiful and serene beach in Pasikudah. It's known for its calm waters and beautiful sunsets, making it a perfect spot for relaxation and photography.",
+    "Anuradhapura Sacred City": "An ancient city in Anuradhapura with a rich history and stunning architecture. It's a must-visit for its historical significance and beautiful architecture.",
+    "Mihintale Temple": "A sacred Buddhist temple in Mihintale with stunning rock carvings and a large Buddha statue. It's a must-visit for its spiritual significance and stunning architecture.",
+    "Yapahuwa Rock Fortress": "A historic rock fortress in Yapahuwa with a rich history and stunning views. It's a must-visit for its historical significance and beautiful architecture.",
+    "Panduwasnuwara": "A beautiful and serene village in Kurunegala with a rich history and beautiful architecture. It's a must-visit for its historical significance and beautiful architecture.",
+    "Bogoda Wooden Bridge": "A beautiful wooden bridge in Badulla with a rich history and beautiful architecture. It's a must-visit for its historical significance and beautiful architecture.",
+    "Diyaluma Falls": "A beautiful waterfall in Badulla with a rich history and beautiful architecture. It's a must-visit for its historical significance and beautiful architecture.",
+    "Sinharaja Rain Forest": "A lush and beautiful rain forest in Ratnapura with a rich history and beautiful architecture. It's a must-visit for its historical significance and beautiful architecture.",
+    "Belihuloya": "A beautiful and serene village in Ratnapura with a rich history and beautiful architecture. It's a must-visit for its historical significance and beautiful architecture."
   };
   return descriptions[name] || "An unforgettable Sri Lankan experience awaits you. This authentic encounter offers deep insight into the island's rich culture, history, and traditions.";
 }
