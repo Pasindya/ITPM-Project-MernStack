@@ -199,68 +199,61 @@ body {
 
 /* Popup Styles */
 .custom-popup .leaflet-popup-content-wrapper {
-  border-radius: 8px;
   padding: 0;
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 .custom-popup .leaflet-popup-content {
   margin: 0;
-  width: 300px;
+  width: 320px !important;
 }
 
 .popup-content {
-  padding: 1rem;
+  padding: 0;
 }
 
-.popup-content h4 {
-  margin-bottom: 0.5rem;
-  color: var(--primary-color);
+.popup-header {
+  padding: 1rem;
+  background: var(--primary-color);
+  color: white;
+}
+
+.popup-header h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
 }
 
 .popup-meta {
   display: flex;
-  align-items: center;
   gap: 0.5rem;
-  margin-bottom: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.tag {
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: capitalize;
-  color: white;
-}
-
-.tag.food {
-  background-color: var(--food-color);
-}
-
-.tag.place {
-  background-color: var(--place-color);
-}
-
-.tag.thing {
-  background-color: var(--thing-color);
-}
-
-.location {
-  font-size: 0.85rem;
-  color: #7f8c8d;
-  display: flex;
   align-items: center;
-  gap: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.popup-gallery {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.popup-carousel {
+  width: 100%;
+  height: 100%;
+}
+
+.popup-carousel .carousel .slider-wrapper {
+  height: 100%;
+}
+
+.popup-carousel .carousel .slider {
+  height: 100%;
 }
 
 .popup-image {
   width: 100%;
-  height: 150px;
-  overflow: hidden;
-  border-radius: 4px;
-  margin-bottom: 0.75rem;
+  height: 200px;
 }
 
 .popup-image img {
@@ -270,33 +263,150 @@ body {
 }
 
 .popup-description {
-  font-size: 0.85rem;
-  color: #333;
-  margin-bottom: 0.75rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  padding: 1rem;
+  margin: 0;
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
 }
 
-.popup-more-btn {
-  width: 100%;
-  padding: 0.5rem;
-  background-color: var(--secondary-color);
-  color: white;
+.popup-actions {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-top: 1px solid #eee;
+}
+
+.popup-more-btn,
+.popup-directions-btn {
+  flex: 1;
+  padding: 0.75rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
   cursor: pointer;
-  font-weight: 600;
-  transition: var(--transition);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  transition: all 0.3s ease;
 }
 
-.popup-more-btn:hover {
-  background-color: #2980b9;
+.popup-more-btn {
+  background: var(--primary-color);
+  color: white;
+}
+
+.popup-directions-btn {
+  background: #f8f9fa;
+  color: var(--primary-color);
+  border: 1px solid #ddd;
+}
+
+/* Experience Gallery Styles */
+.experience-gallery {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.experience-carousel {
+  width: 100%;
+  height: 100%;
+}
+
+.experience-carousel .carousel .slider-wrapper {
+  height: 100%;
+}
+
+.experience-carousel .carousel .slider {
+  height: 100%;
+}
+
+.gallery-image {
+  width: 100%;
+  height: 300px;
+}
+
+.gallery-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Enhanced Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.btn-directions,
+.btn-save,
+.btn-share {
+  flex: 1;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-directions {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-save {
+  background: #f8f9fa;
+  color: var(--primary-color);
+  border: 1px solid #ddd;
+}
+
+.btn-share {
+  background: #f8f9fa;
+  color: var(--primary-color);
+  border: 1px solid #ddd;
+}
+
+/* Carousel Navigation Enhancements */
+.carousel .control-arrow {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1rem;
+}
+
+.carousel .control-arrow:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.carousel .thumbs-wrapper {
+  margin: 1rem 0;
+}
+
+.carousel .thumb {
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.carousel .thumb.selected {
+  border-color: var(--primary-color);
 }
 
 /* Sidebar Styles */
@@ -422,45 +532,6 @@ body {
   font-size: 0.95rem;
   color: #333;
   line-height: 1.5;
-}
-
-.action-buttons {
-  display: flex;
-  gap: 0.75rem;
-  margin-top: 0.5rem;
-}
-
-.btn-directions, .btn-save {
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.btn-directions {
-  background-color: var(--secondary-color);
-  color: white;
-  border: none;
-  flex-grow: 1;
-}
-
-.btn-directions:hover {
-  background-color: #2980b9;
-}
-
-.btn-save {
-  background-color: white;
-  color: var(--primary-color);
-  border: 1px solid #ddd;
-}
-
-.btn-save:hover {
-  background-color: #f8f9fa;
 }
 
 /* Welcome Message */
@@ -945,6 +1016,30 @@ body {
     width: 100%;
     justify-content: center;
   }
+
+  .custom-popup .leaflet-popup-content {
+    width: 280px !important;
+  }
+  
+  .popup-gallery,
+  .popup-image {
+    height: 160px;
+  }
+  
+  .experience-gallery,
+  .gallery-image {
+    height: 240px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .btn-directions,
+  .btn-save,
+  .btn-share {
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1145,7 +1240,7 @@ body {
     flex-direction: column;
   }
   
-  .btn-directions, .btn-save {
+  .btn-directions, .btn-save, .btn-share {
     width: 100%;
     justify-content: center;
   }

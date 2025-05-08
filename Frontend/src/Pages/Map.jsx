@@ -24,12 +24,12 @@ const createCustomIcon = (type) => {
 
   return L.divIcon({
     className: 'custom-icon',
-    html: `<div style="background-color: ${iconColors[type]}; width: 24px; height: 24px; border-radius: 50%; border: 2px solid white; display: flex; justify-content: center; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
-             <span style="font-size: 12px; color: white;">${type.charAt(0).toUpperCase()}</span>
+    html: `<div style="background-color: ${iconColors[type]}; width: 32px; height: 32px; border-radius: 50%; border: 3px solid white; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+             <span style="font-size: 14px; color: white; font-weight: bold;">${type.charAt(0).toUpperCase()}</span>
            </div>`,
-    iconSize: [24, 24],
-    iconAnchor: [12, 12],
-    popupAnchor: [0, -12]
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, -16]
   });
 };
 
@@ -140,6 +140,135 @@ const nationalSymbols = [
 // Weather API Configuration
 const API_KEY = '2e85719828517999c1ce073d01087421';
 const API_URL = 'https://api.openweathermap.org/data/2.5/forecast';
+
+// Add photo gallery data
+const locationPhotos = {
+  "Temple of the Tooth": [
+    "/Images/temple/temple-1.jpg",
+    "/Images/temple/temple-2.jpg",
+    "/Images/temple/temple-3.jpg"
+  ],
+  "Galle Fort Walk": [
+    "/Images/galle/galle-1.jpg",
+    "/Images/galle/galle-2.jpg",
+    "/Images/galle/galle-3.jpg"
+  ],
+  "Sigiriya Rock Fortress": [
+    "/Images/places/sigiriya-1.jpg",
+    "/Images/places/sigiriya-2.jpg",
+    "/Images/places/sigiriya-3.jpg"
+  ],
+  "Kandyan Dancers": [
+    "/Images/activities/dance-1.jpg",
+    "/Images/activities/dance-2.jpg",
+    "/Images/activities/dance-3.jpg"
+  ],
+  "Kottu Roti": [
+    "/Images/food/kottu-1.jpg",
+    "/Images/food/kottu-2.jpg",
+    "/Images/food/kottu-3.jpg"
+  ],
+  "Colombo Street Food": [
+    "/Images/food/street-food-1.jpg",
+    "/Images/food/street-food-2.jpg",
+    "/Images/food/street-food-3.jpg"
+  ],
+  "Gangaramaya Temple": [
+    "/Images/temple/gangaramaya-1.jpg",
+    "/Images/temple/gangaramaya-2.jpg",
+    "/Images/temple/gangaramaya-3.jpg"
+  ],
+  "Beeralu Lace Making": [
+    "/Images/activities/lace-1.jpg",
+    "/Images/activities/lace-2.jpg",
+    "/Images/activities/lace-3.jpg"
+  ],
+  "Traditional Mask Making": [
+    "/Images/activities/mask-1.jpg",
+    "/Images/activities/mask-2.jpg",
+    "/Images/activities/mask-3.jpg"
+  ],
+  "Nallur Kovil": [
+    "/Images/temple/nallur-1.jpg",
+    "/Images/temple/nallur-2.jpg",
+    "/Images/temple/nallur-3.jpg"
+  ],
+  "Jaffna Crab Curry": [
+    "/Images/food/crab-1.jpg",
+    "/Images/food/crab-2.jpg",
+    "/Images/food/crab-3.jpg"
+  ],
+  "Arugam Bay Surfing": [
+    "/Images/activities/surfing-1.jpg",
+    "/Images/activities/surfing-2.jpg",
+    "/Images/activities/surfing-3.jpg"
+  ],
+  "Batticaloa Fish Curry": [
+    "/Images/food/fish-curry-1.jpg",
+    "/Images/food/fish-curry-2.jpg",
+    "/Images/food/fish-curry-3.jpg"
+  ],
+  "Fishing Catamaran": [
+    "/Images/activities/catamaran-1.jpg",
+    "/Images/activities/catamaran-2.jpg",
+    "/Images/activities/catamaran-3.jpg"
+  ],
+  "Polonnaruwa Rice & Curry": [
+    "/Images/food/rice-curry-1.jpg",
+    "/Images/food/rice-curry-2.jpg",
+    "/Images/food/rice-curry-3.jpg"
+  ],
+  "Stone Carvings": [
+    "/Images/places/carvings-1.jpg",
+    "/Images/places/carvings-2.jpg",
+    "/Images/places/carvings-3.jpg"
+  ],
+  "Munneswaram Temple": [
+    "/Images/temple/munneswaram-1.jpg",
+    "/Images/temple/munneswaram-2.jpg",
+    "/Images/temple/munneswaram-3.jpg"
+  ],
+  "Puttalam Lagoon Crab": [
+    "/Images/food/lagoon-crab-1.jpg",
+    "/Images/food/lagoon-crab-2.jpg",
+    "/Images/food/lagoon-crab-3.jpg"
+  ],
+  "Toddy Tapping": [
+    "/Images/activities/toddy-1.jpg",
+    "/Images/activities/toddy-2.jpg",
+    "/Images/activities/toddy-3.jpg"
+  ],
+  "Train to Ella": [
+    "/Images/places/train-1.jpg",
+    "/Images/places/train-2.jpg",
+    "/Images/places/train-3.jpg"
+  ],
+  "Hoppers (Appa)": [
+    "/Images/food/hoppers-1.jpg",
+    "/Images/food/hoppers-2.jpg",
+    "/Images/food/hoppers-3.jpg"
+  ],
+  "Tea Picking": [
+    "/Images/activities/tea-1.jpg",
+    "/Images/activities/tea-2.jpg",
+    "/Images/activities/tea-3.jpg"
+  ],
+  "Ratnapura Gem Mines": [
+    "/Images/places/gem-1.jpg",
+    "/Images/places/gem-2.jpg",
+    "/Images/places/gem-3.jpg"
+  ],
+  "Weli Thalapa": [
+    "/Images/food/weli-1.jpg",
+    "/Images/food/weli-2.jpg",
+    "/Images/food/weli-3.jpg"
+  ],
+  "Gem Cutting": [
+    "/Images/activities/gem-cutting-1.jpg",
+    "/Images/activities/gem-cutting-2.jpg",
+    "/Images/activities/gem-cutting-3.jpg"
+  ]
+};
 
 function Map() {
   const [activeExperience, setActiveExperience] = useState(null);
@@ -768,33 +897,57 @@ function Map() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <h4>{experience.name}</h4>
-                    <div className="popup-meta">
-                      <span className={`tag ${experience.type}`}>
-                        {experience.type.charAt(0).toUpperCase() + experience.type.slice(1)}
-                      </span>
-                      <span className="location">
-                        <FaMapMarkerAlt /> {experience.location}, {experience.province}
-                      </span>
+                    <div className="popup-header">
+                      <h4>{experience.name}</h4>
+                      <div className="popup-meta">
+                        <span className={`tag ${experience.type}`}>
+                          {experience.type.charAt(0).toUpperCase() + experience.type.slice(1)}
+                        </span>
+                        <span className="location">
+                          <FaMapMarkerAlt /> {experience.location}, {experience.province}
+                        </span>
+                      </div>
                     </div>
-                    <div className="popup-image">
-                      <img 
-                        src={`/images/${experience.name.replace(/\s+/g, '-').toLowerCase()}.jpg`} 
-                        alt={experience.name}
-                        onError={(e) => {
-                          e.target.src = '/images/default-experience.jpg';
-                        }}
-                      />
-                    </div>
+                    
+                    {locationPhotos[experience.name] && (
+                      <div className="popup-gallery">
+                        <Carousel
+                          showThumbs={false}
+                          showStatus={false}
+                          showArrows={true}
+                          infiniteLoop={true}
+                          autoPlay={true}
+                          interval={3000}
+                          className="popup-carousel"
+                        >
+                          {locationPhotos[experience.name].map((photo, idx) => (
+                            <div key={idx} className="popup-image">
+                              <img src={photo} alt={`${experience.name} - Photo ${idx + 1}`} />
+                            </div>
+                          ))}
+                        </Carousel>
+                      </div>
+                    )}
+                    
                     <p className="popup-description">{getExperienceDescription(experience.name)}</p>
-                    <motion.button 
-                      className="popup-more-btn"
-                      onClick={() => handleMarkerClick(experience)}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      Learn More <FaArrowRight />
-                    </motion.button>
+                    
+                    <div className="popup-actions">
+                      <motion.button 
+                        className="popup-more-btn"
+                        onClick={() => handleMarkerClick(experience)}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        Learn More <FaArrowRight />
+                      </motion.button>
+                      <motion.button 
+                        className="popup-directions-btn"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        <FaRoute /> Get Directions
+                      </motion.button>
+                    </div>
                   </motion.div>
                 </Popup>
               </Marker>
@@ -825,17 +978,37 @@ function Map() {
                 
                 {activeExperience ? (
                   <div className="experience-details">
-                    <div className="experience-image">
-                      <img 
-                        src={`/images/${activeExperience.name.replace(/\s+/g, '-').toLowerCase()}.jpg`} 
-                        alt={activeExperience.name}
-                        onError={(e) => {
-                          e.target.src = '/images/default-experience.jpg';
-                        }}
-                      />
+                    <div className="experience-gallery">
+                      {locationPhotos[activeExperience.name] ? (
+                        <Carousel
+                          showThumbs={true}
+                          showStatus={false}
+                          showArrows={true}
+                          infiniteLoop={true}
+                          autoPlay={true}
+                          interval={4000}
+                          className="experience-carousel"
+                        >
+                          {locationPhotos[activeExperience.name].map((photo, idx) => (
+                            <div key={idx} className="gallery-image">
+                              <img src={photo} alt={`${activeExperience.name} - Photo ${idx + 1}`} />
+                            </div>
+                          ))}
+                        </Carousel>
+                      ) : (
+                        <div className="experience-image">
+                          <img 
+                            src={`/images/${activeExperience.name.replace(/\s+/g, '-').toLowerCase()}.jpg`} 
+                            alt={activeExperience.name}
+                            onError={(e) => {
+                              e.target.src = '/images/default-experience.jpg';
+                            }}
+                          />
+                        </div>
+                      )}
                       <div className="image-overlay">
                         <span>
-                          <i className="fas fa-map-marker-alt"></i> {activeExperience.location}, {activeExperience.province}
+                          <FaMapMarkerAlt /> {activeExperience.location}, {activeExperience.province}
                         </span>
                       </div>
                     </div>
@@ -843,18 +1016,33 @@ function Map() {
                     <div className="detail-section">
                       <div className="detail-row">
                         <span className="detail-label">
-                          <i className="fas fa-info-circle"></i> Description:
+                          <FaInfoCircle /> Description:
                         </span>
                         <p className="detail-value">{getExperienceDescription(activeExperience.name)}</p>
                       </div>
                       
                       <div className="action-buttons">
-                        <button className="btn-directions">
-                          <i className="fas fa-directions"></i> Get Directions
-                        </button>
-                        <button className="btn-save">
-                          <i className="fas fa-bookmark"></i> Save
-                        </button>
+                        <motion.button 
+                          className="btn-directions"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <FaRoute /> Get Directions
+                        </motion.button>
+                        <motion.button 
+                          className="btn-save"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <FaBookmark /> Save
+                        </motion.button>
+                        <motion.button 
+                          className="btn-share"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <FaShareAlt /> Share
+                        </motion.button>
                       </div>
                     </div>
                   </div>
