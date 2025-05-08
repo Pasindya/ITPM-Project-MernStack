@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './Map.css';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const createCustomIcon = (type) => {
   const iconColors = {
@@ -22,11 +24,63 @@ const createCustomIcon = (type) => {
   });
 };
 
+const nationalSymbols = [
+  {
+    title: "National Flower",
+    name: "Nil Manel (Blue Water Lily)",
+    image: "/Images/national/nil.jpg",
+    description: "The beautiful blue water lily was declared the national flower of Sri Lanka in 1986. It symbolizes truth, purity, and discipline in Buddhist philosophy."
+  },
+  {
+    title: "National Gem",
+    name: "Blue Sapphire",
+    image: "/Images/national/manik.jpg",
+    description: "Sri Lanka's blue sapphires are world-renowned for their quality. The 400-carat 'Blue Giant of the Orient' found in Sri Lanka is one of the largest sapphires ever discovered."
+  },
+  {
+    title: "National Game",
+    name: "Volleyball",
+    image: "/Images/national/volley.jpg",
+    description: "Volleyball was declared the national sport of Sri Lanka in 1991. The country has a strong volleyball tradition, especially in rural areas."
+  },
+  {
+    title: "National Flag",
+    name: "Lion Flag",
+    image: "/Images/national/flag.jpg",
+    description: "The flag features a golden lion holding a sword, representing the Sinhalese ethnicity and the nation's strength. The orange and green stripes represent Tamils and Moors."
+  },
+  {
+    title: "National Animal ",
+    name: "Sri Lankan Giant Squirrel (දඬුලේනා)",
+    scientific_name: "Ratufa macroura",
+    image: "/Images/national/lena.jpg",
+    description: "The Sri Lankan Giant Squirrel (Ratufa macroura) is a near-threatened species endemic to Sri Lanka. Known for its large size and striking color variations, it inhabits forests across the island. Due to habitat loss and hunting, conservation efforts are crucial for its survival.",
+    
+  
+},
+  {
+    title: "National Tree",
+    name: "Na (Ironwood)",
+    image: "/Images/national/naa.jpeg",
+    description: "Mesua ferrea (Na tree) was declared the national tree of Sri Lanka in 1986. Its beautiful flowers are used in traditional medicine and religious offerings."
+  },
+  {
+    title: "National Bird",
+    name: "Sri Lanka Junglefowl",
+    image: "/Images/national/kukula.jpeg",
+    description: "The colorful Sri Lanka junglefowl (Gallus lafayettii) is endemic to the island. The male's striking plumage features red, orange, yellow, and deep blue feathers."
+  }
+];
+
 function Map() {
   const [activeExperience, setActiveExperience] = useState(null);
   const [geoJsonData, setGeoJsonData] = useState(null);
   const [filter, setFilter] = useState('all');
   const [provinceFilter, setProvinceFilter] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [carouselAutoPlay, setCarouselAutoPlay] = useState(true);
+  const mapRef = useRef(null);
 
   const authenticExperiences = [
     // Central Province
@@ -84,130 +138,301 @@ function Map() {
   }, []);
 
   const filteredExperiences = authenticExperiences.filter(exp => {
+    const matchesSearch = exp.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                         exp.location.toLowerCase().includes(searchQuery.toLowerCase());
     return (filter === 'all' || exp.type === filter) && 
-           (provinceFilter === 'all' || exp.province === provinceFilter);
+           (provinceFilter === 'all' || exp.province === provinceFilter) &&
+           matchesSearch;
   });
 
+  const handleMarkerClick = (experience) => {
+    setActiveExperience(experience);
+    if (mapRef.current) {
+      mapRef.current.flyTo(experience.coords, 12, {
+        duration: 1
+      });
+    }
+  };
+
+  const toggleSidebar = () => {
+    setIsSidebarCollapsed(!isSidebarCollapsed);
+  };
+
   return (
-    <div className="map-container">
-      <div className="map-controls">
-        <h2>Sri Lanka Authentic Experiences</h2>
-        <div className="filters">
-          <div className="filter-group">
-            <label>Experience Type:</label>
-            <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-              <option value="all">All Types</option>
-              <option value="food">Food</option>
-              <option value="place">Places</option>
-              <option value="thing">Activities</option>
-            </select>
+    <div className="map-app">
+      <div className="map-container">
+        <div className="map-controls">
+          <div className="header-section">
+            <h1>Sri Lanka Authentic Experiences</h1>
+            <p className="subtitle">Discover the island's rich culture, cuisine, and traditions</p>
           </div>
-          <div className="filter-group">
-            <label>Province:</label>
-            <select value={provinceFilter} onChange={(e) => setProvinceFilter(e.target.value)}>
-              <option value="all">All Provinces</option>
-              {provinces.map((province, index) => (
-                <option key={index} value={province}>{province}</option>
-              ))}
-            </select>
+          
+          <div className="search-filter-section">
+            <div className="search-box">
+              <input
+                type="text"
+                placeholder="Search experiences..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <i className="fas fa-search"></i>
+            </div>
+            
+            <div className="filters">
+              <div className="filter-group">
+                <label>Experience Type:</label>
+                <div className="filter-buttons">
+                  <button 
+                    className={filter === 'all' ? 'active' : ''}
+                    onClick={() => setFilter('all')}
+                  >
+                    All
+                  </button>
+                  <button 
+                    className={filter === 'food' ? 'active' : ''}
+                    onClick={() => setFilter('food')}
+                  >
+                    <i className="fas fa-utensils"></i> Food
+                  </button>
+                  <button 
+                    className={filter === 'place' ? 'active' : ''}
+                    onClick={() => setFilter('place')}
+                  >
+                    <i className="fas fa-landmark"></i> Places
+                  </button>
+                  <button 
+                    className={filter === 'thing' ? 'active' : ''}
+                    onClick={() => setFilter('thing')}
+                  >
+                    <i className="fas fa-hands-helping"></i> Activities
+                  </button>
+                </div>
+              </div>
+              
+              <div className="filter-group">
+                <label>Province:</label>
+                <select 
+                  value={provinceFilter} 
+                  onChange={(e) => setProvinceFilter(e.target.value)}
+                  className="province-select"
+                >
+                  <option value="all">All Provinces</option>
+                  {provinces.map((province, index) => (
+                    <option key={index} value={province}>{province}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="map-content">
+          <MapContainer 
+            center={[7.8731, 80.7718]} 
+            zoom={7} 
+            style={{ height: '100%', width: '100%', borderRadius: '8px' }}
+            ref={mapRef}
+          >
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; OpenStreetMap contributors'
+            />
+            {geoJsonData && <GeoJSON 
+              data={geoJsonData} 
+              style={{ 
+                color: '#555', 
+                weight: 1, 
+                fillOpacity: 0.1,
+                fillColor: '#f8f9fa'
+              }} 
+            />}
+            {filteredExperiences.map((experience, index) => (
+              <Marker
+                key={index}
+                position={experience.coords}
+                icon={createCustomIcon(experience.type)}
+                eventHandlers={{
+                  click: () => handleMarkerClick(experience),
+                }}
+              >
+                <Popup className="custom-popup">
+                  <div className="popup-content">
+                    <h4>{experience.name}</h4>
+                    <div className="popup-meta">
+                      <span className={`tag ${experience.type}`}>
+                        {experience.type.charAt(0).toUpperCase() + experience.type.slice(1)}
+                      </span>
+                      <span className="location">
+                        <i className="fas fa-map-marker-alt"></i> {experience.location}, {experience.province}
+                      </span>
+                    </div>
+                    <div className="popup-image">
+                      <img 
+                        src={`/images/${experience.name.replace(/\s+/g, '-').toLowerCase()}.jpg`} 
+                        alt={experience.name}
+                        onError={(e) => {
+                          e.target.src = '/images/default-experience.jpg';
+                        }}
+                      />
+                    </div>
+                    <p className="popup-description">{getExperienceDescription(experience.name)}</p>
+                    <button 
+                      className="popup-more-btn"
+                      onClick={() => handleMarkerClick(experience)}
+                    >
+                      Learn More <i className="fas fa-arrow-right"></i>
+                    </button>
+                  </div>
+                </Popup>
+              </Marker>
+            ))}
+          </MapContainer>
+
+          <div className={`experience-sidebar ${isSidebarCollapsed ? 'collapsed' : ''}`}>
+            <button className="sidebar-toggle" onClick={toggleSidebar}>
+              {isSidebarCollapsed ? (
+                <i className="fas fa-chevron-left"></i>
+              ) : (
+                <i className="fas fa-chevron-right"></i>
+              )}
+            </button>
+            
+            {!isSidebarCollapsed && (
+              <div className="sidebar-content">
+                <div className="sidebar-header">
+                  <h3>{activeExperience ? activeExperience.name : 'Select an Experience'}</h3>
+                  {activeExperience && (
+                    <span className={`tag ${activeExperience.type}`}>
+                      {activeExperience.type.charAt(0).toUpperCase() + activeExperience.type.slice(1)}
+                    </span>
+                  )}
+                </div>
+                
+                {activeExperience ? (
+                  <div className="experience-details">
+                    <div className="experience-image">
+                      <img 
+                        src={`/images/${activeExperience.name.replace(/\s+/g, '-').toLowerCase()}.jpg`} 
+                        alt={activeExperience.name}
+                        onError={(e) => {
+                          e.target.src = '/images/default-experience.jpg';
+                        }}
+                      />
+                      <div className="image-overlay">
+                        <span>
+                          <i className="fas fa-map-marker-alt"></i> {activeExperience.location}, {activeExperience.province}
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <div className="detail-section">
+                      <div className="detail-row">
+                        <span className="detail-label">
+                          <i className="fas fa-info-circle"></i> Description:
+                        </span>
+                        <p className="detail-value">{getExperienceDescription(activeExperience.name)}</p>
+                      </div>
+                      
+                      <div className="action-buttons">
+                        <button className="btn-directions">
+                          <i className="fas fa-directions"></i> Get Directions
+                        </button>
+                        <button className="btn-save">
+                          <i className="fas fa-bookmark"></i> Save
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="welcome-message">
+                    <div className="national-symbols-carousel">
+                      <h4>Sri Lanka National Symbols</h4>
+                      <div className="carousel-controls">
+                        <button onClick={() => setCarouselAutoPlay(!carouselAutoPlay)}>
+                          {carouselAutoPlay ? (
+                            <i className="fas fa-pause"></i>
+                          ) : (
+                            <i className="fas fa-play"></i>
+                          )}
+                        </button>
+                      </div>
+                      <Carousel 
+                        autoPlay={carouselAutoPlay} 
+                        interval={5000} 
+                        infiniteLoop 
+                        showThumbs={false}
+                        showStatus={false}
+                      >
+                        {nationalSymbols.map((symbol, index) => (
+                          <div key={index} className="symbol-card">
+                            <img src={symbol.image} alt={symbol.name} />
+                            <div className="symbol-info">
+                              <h5>{symbol.title}</h5>
+                              <h6>{symbol.name}</h6>
+                              <p>{symbol.description}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </Carousel>
+                    </div>
+                    
+                    <div className="welcome-content">
+                      <img src="/images/sri-lanka-welcome.jpg" alt="Sri Lanka" />
+                      <p>Explore authentic Sri Lankan experiences by clicking on markers or using the filters above.</p>
+                    </div>
+                    
+                    <div className="legend">
+                      <h5>Map Legend</h5>
+                      <div className="legend-items">
+                        <div className="legend-item">
+                          <div className="legend-icon food"></div>
+                          <span>Food & Drink</span>
+                        </div>
+                        <div className="legend-item">
+                          <div className="legend-icon place"></div>
+                          <span>Places</span>
+                        </div>
+                        <div className="legend-item">
+                          <div className="legend-icon thing"></div>
+                          <span>Activities</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
-
-      <div className="map-content">
-        <MapContainer 
-          center={[7.8731, 80.7718]} 
-          zoom={7} 
-          style={{ height: '600px', width: '100%', borderRadius: '8px', boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}
-        >
-          <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            attribution='&copy; OpenStreetMap contributors'
-          />
-          {geoJsonData && <GeoJSON 
-            data={geoJsonData} 
-            style={{ 
-              color: '#555', 
-              weight: 1, 
-              fillOpacity: 0.1,
-              fillColor: '#f8f9fa'
-            }} 
-          />}
-          {filteredExperiences.map((experience, index) => (
-            <Marker
-              key={index}
-              position={experience.coords}
-              icon={createCustomIcon(experience.type)}
-              eventHandlers={{
-                click: () => setActiveExperience(experience),
-              }}
-            >
-              <Popup>
-                <div className="popup-content">
-                  <h4>{experience.name}</h4>
-                  <div className="popup-meta">
-                    <span className={`tag ${experience.type}`}>{experience.type}</span>
-                    <span className="location">{experience.location}, {experience.province}</span>
-                  </div>
-                  <p className="popup-description">{getExperienceDescription(experience.name)}</p>
-                </div>
-              </Popup>
-            </Marker>
-          ))}
-        </MapContainer>
-
-        <div className="experience-sidebar">
-          <div className="sidebar-header">
-            <h3>{activeExperience ? activeExperience.name : 'Select an Experience'}</h3>
-            {activeExperience && (
-              <span className={`tag ${activeExperience.type}`}>
-                {activeExperience.type}
-              </span>
-            )}
+      
+      <div className="app-footer">
+        <div className="footer-content">
+          <div className="footer-section">
+            <h5>About This Project</h5>
+            <p>Discover Sri Lanka's authentic cultural experiences, from ancient temples to local cuisine and traditional crafts.</p>
           </div>
-          {activeExperience ? (
-            <div className="experience-details">
-              <div className="detail-row">
-                <span className="detail-label">Location:</span>
-                <span className="detail-value">{activeExperience.location}, {activeExperience.province}</span>
-              </div>
-              <div className="detail-row">
-                <span className="detail-label">Category:</span>
-                <span className="detail-value">{activeExperience.type}</span>
-              </div>
-              <div className="description">
-                <p>{getExperienceDescription(activeExperience.name)}</p>
-              </div>
-              <div className="experience-image">
-                <img 
-                  src={`/images/${activeExperience.name.replace(/\s+/g, '-').toLowerCase()}.jpg`} 
-                  alt={activeExperience.name}
-                  onError={(e) => {
-                    e.target.src = '/images/default-experience.jpg';
-                  }}
-                />
-              </div>
+          <div className="footer-section">
+            <h5>Quick Links</h5>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">All Experiences</a></li>
+              <li><a href="#">Travel Tips</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          <div className="footer-section">
+            <h5>Connect With Us</h5>
+            <div className="social-icons">
+              <a href="#"><i className="fab fa-facebook"></i></a>
+              <a href="#"><i className="fab fa-instagram"></i></a>
+              <a href="#"><i className="fab fa-twitter"></i></a>
+              <a href="#"><i className="fab fa-youtube"></i></a>
             </div>
-          ) : (
-            <div className="welcome-message">
-              <img src="/images/sri-lanka-welcome.jpg" alt="Sri Lanka" />
-              <p>Explore authentic Sri Lankan experiences by clicking on markers or using the filters above.</p>
-              <div className="legend">
-                <div className="legend-item">
-                  <div className="legend-icon food"></div>
-                  <span>Food & Drink</span>
-                </div>
-                <div className="legend-item">
-                  <div className="legend-icon place"></div>
-                  <span>Places</span>
-                </div>
-                <div className="legend-item">
-                  <div className="legend-icon thing"></div>
-                  <span>Activities</span>
-                </div>
-              </div>
-            </div>
-          )}
+          </div>
+        </div>
+        <div className="copyright">
+          <p>&copy; {new Date().getFullYear()} Sri Lanka Authentic Experiences. All rights reserved.</p>
         </div>
       </div>
     </div>
