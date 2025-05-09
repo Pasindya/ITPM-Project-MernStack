@@ -259,7 +259,7 @@ const locationPhotos = {
     "/Images/places/gem-3.jpg"
   ],
   "Weli Thalapa": [
-    "/Images/food/weli-1.jpg",
+    "/Images/food/weli-1.jpeg",
     "/Images/food/weli-2.jpg",
     "/Images/food/weli-3.jpg"
   ],
