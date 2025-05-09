@@ -336,7 +336,7 @@ const locationPhotos = {
   "Panduwasnuwara": [
     "/Images/places/panduwasnuwara-1.jpg",
     "/Images/places/panduwasnuwara-2.jpg",
-    "/Images/places/panduwasnuwara-3.jpg"
+    "/Images/places/panduwasnuwara-3.jpeg"
   ],
   "Bogoda Wooden Bridge": [
     "/Images/places/bogoda-1.jpg",
