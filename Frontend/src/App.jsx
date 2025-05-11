@@ -16,6 +16,11 @@ import UpdateEvent from './Event/UpdateEvent';
 import Taskboard from './Event/Taskboard';
 import EventCharts from './Event/EventCharts'; // Import the EventCharts component
 import Calender from './Pages/Calender';
+import EmergencyService from './Pages/EmergencyService';
+import SriLankaSpecial from './Pages/SriLankaSpecial';
+
+
+
 
 
 
@@ -31,6 +36,9 @@ import UpdateVehicle from './Pages/Transport CRUD/UpdateVehicle';
 import TransportSummary from './Pages/Transport CRUD/TransportSummary';
 import TransportHome from './Pages/TransportHome';
 import TransportDetails from './Pages/Transport CRUD/TransportDetails';
+import BookingConfirmation from './Pages/Transport CRUD/BookingConfirmation';
+
+
 
 
 
@@ -94,7 +102,7 @@ const App = () => {
   // Define routes where Navbar and Footer should be hidden
 
   const hideNavbarFooterRoutes = ['/dashboard', '/adminpkg', '/dashNav','/packnav','/viewbooking','/packdetails','/updatepbook/PBK_12837','/updatepbook/PBK_48926','/updatepbook/PBK_54806','/packreport','/packsummary','/hoteladmin','/hotelnav','/hoteldetails','/TransportNav','/vehicleadmin','/vehiclebooking','/addbooking','/updatevehicle','/transportsummary','/hoteldetails','/viewhotel'
-    ,'/hotelsummary','/taskboard','/transportdetails'
+    ,'/hotelsummary','/taskboard','/transportdetails','/guiderdashboard','/adds','/all','/guidertak'
   ];
 
 
@@ -126,6 +134,9 @@ const App = () => {
         <Route path="/allGuiders" element={<AllGuiders />} />
       */}
         <Route path="/dashNav" element={<DashNav />} />
+        <Route path="/emergency" element={<EmergencyService />} />
+        <Route path="/srilankaspecial" element={<SriLankaSpecial />} />
+       
         
 
        
@@ -142,6 +153,9 @@ const App = () => {
         <Route path="/transportsummary" element={<TransportSummary />} />
         <Route path="/transporthome" element={<TransportHome />} />
         <Route path="/transportdetails" element={<TransportDetails />} />
+        <Route path="/bookingconfirmation" element={<BookingConfirmation />} />
+        
+        
        
        
       

@@ -20,11 +20,6 @@ function UpdateVehicle() {
     });
 
     const [errors, setErrors] = useState({});
-    const [inputValidity, setInputValidity] = useState({
-        name: true,
-        mobile: true,
-        passportNumber: true
-    });
 
     useEffect(() => {
         if (booking) {
@@ -34,103 +29,14 @@ function UpdateVehicle() {
 
     const today = new Date().toISOString().split("T")[0];
 
-    const handleKeyPress = (e) => {
-        // Prevent invalid characters based on field type
-        switch (e.target.name) {
-            case 'name':
-                // Only allow letters and spaces
-                if (!/^[A-Za-z\s]$/.test(e.key)) {
-                    e.preventDefault();
-                }
-                break;
-            case 'mobile':
-                // Only allow numbers
-                if (!/^\d$/.test(e.key)) {
-                    e.preventDefault();
-                }
-                break;
-            case 'passportNumber':
-                // Only allow letters for first 2 characters, then digits
-                const currentValue = e.target.value;
-                if (currentValue.length < 2) {
-                    if (!/^[A-Za-z]$/.test(e.key)) {
-                        e.preventDefault();
-                    }
-                } else {
-                    if (!/^\d$/.test(e.key)) {
-                        e.preventDefault();
-                    }
-                }
-                break;
-        }
-    };
-
     const handleChange = (e) => {
         const { name, value } = e.target;
-        let updatedValue = value;
-
-        // Format passport number to uppercase automatically and enforce format
-        if (name === 'passportNumber') {
-            // Remove any non-alphanumeric characters
-            updatedValue = value.replace(/[^A-Za-z0-9]/g, '');
-            
-            // Convert first 2 characters to uppercase
-            if (updatedValue.length > 2) {
-                updatedValue = updatedValue.substring(0, 2).toUpperCase() + 
-                               updatedValue.substring(2);
-            } else {
-                updatedValue = updatedValue.toUpperCase();
-            }
-            
-            // Limit to 12 characters (2 letters + 10 digits)
-            if (updatedValue.length > 12) {
-                updatedValue = updatedValue.substring(0, 12);
-            }
-        }
-
-        setFormData({ ...formData, [name]: updatedValue });
-
-        // Clear error when user starts typing
-        if (errors[name]) {
-            setErrors({ ...errors, [name]: "" });
-            setInputValidity({ ...inputValidity, [name]: true });
-        }
-    };
-
-    const validatePassportNumber = (passportNumber) => {
-        // Strict validation: exactly 2 letters followed by exactly 10 digits
-        const strictPattern = /^[A-Za-z]{2}\d{10}$/;
-        return strictPattern.test(passportNumber);
+        setFormData({ ...formData, [name]: value });
     };
 
     const validate = () => {
         let tempErrors = {};
         let isValid = true;
-
-        // Name validation (only alphabetic and spaces)
-        if (!/^[A-Za-z\s]+$/.test(formData.name)) {
-            tempErrors.name = "Name must contain only letters and spaces.";
-            isValid = false;
-            setInputValidity(prev => ({ ...prev, name: false }));
-        }
-
-        // Mobile number validation (exactly 10 digits)
-        if (!/^\d{10}$/.test(formData.mobile)) {
-            tempErrors.mobile = "Mobile must be exactly 10 digits (0-9).";
-            isValid = false;
-            setInputValidity(prev => ({ ...prev, mobile: false }));
-        }
-
-        // Enhanced Passport number validation
-        if (!formData.passportNumber.trim()) {
-            tempErrors.passportNumber = "Passport Number is required";
-            isValid = false;
-            setInputValidity(prev => ({ ...prev, passportNumber: false }));
-        } else if (!validatePassportNumber(formData.passportNumber)) {
-            tempErrors.passportNumber = "Passport must be 2 letters followed by 10 digits (e.g., AB1234567890)";
-            isValid = false;
-            setInputValidity(prev => ({ ...prev, passportNumber: false }));
-        }
 
         // Date validations
         if (formData.bookingdate < today) {
@@ -163,7 +69,7 @@ function UpdateVehicle() {
         }
     };
 
-    // Styles (same as before)
+    // Styles
     const containerStyle = {
         maxWidth: "600px",
         margin: "2rem auto",
@@ -202,10 +108,11 @@ function UpdateVehicle() {
         boxSizing: "border-box"
     };
 
-    const validInputStyle = {
+    const disabledInputStyle = {
         ...baseInputStyle,
-        borderColor: "#3498db",
-        boxShadow: "0 0 0 2px rgba(52, 152, 219, 0.2)"
+        backgroundColor: "#f5f5f5",
+        color: "#666",
+        cursor: "not-allowed"
     };
 
     const invalidInputStyle = {
@@ -250,9 +157,7 @@ function UpdateVehicle() {
                         type="text"
                         name="vehicleType"
                         value={formData.vehicleType}
-                        onChange={handleChange}
-                        style={baseInputStyle}
-                        required
+                        style={disabledInputStyle}
                         disabled
                     />
                 </div>
@@ -264,12 +169,9 @@ function UpdateVehicle() {
                         type="text"
                         name="name"
                         value={formData.name}
-                        onChange={handleChange}
-                        onKeyPress={handleKeyPress}
-                        style={inputValidity.name ? validInputStyle : invalidInputStyle}
-                        required
+                        style={disabledInputStyle}
+                        disabled
                     />
-                    <div style={errorStyle}>{errors.name}</div>
                 </div>
 
                 {/* Mobile */}
@@ -279,13 +181,9 @@ function UpdateVehicle() {
                         type="text"
                         name="mobile"
                         value={formData.mobile}
-                        onChange={handleChange}
-                        onKeyPress={handleKeyPress}
-                        maxLength="10"
-                        style={inputValidity.mobile ? validInputStyle : invalidInputStyle}
-                        required
+                        style={disabledInputStyle}
+                        disabled
                     />
-                    <div style={errorStyle}>{errors.mobile}</div>
                 </div>
 
                 {/* Passport Number */}
@@ -295,14 +193,9 @@ function UpdateVehicle() {
                         type="text"
                         name="passportNumber"
                         value={formData.passportNumber}
-                        onChange={handleChange}
-                        onKeyPress={handleKeyPress}
-                        maxLength="12"
-                        placeholder="AB1234567890"
-                        style={inputValidity.passportNumber ? validInputStyle : invalidInputStyle}
-                        required
+                        style={disabledInputStyle}
+                        disabled
                     />
-                    <div style={errorStyle}>{errors.passportNumber}</div>
                 </div>
 
                 {/* Expected Days */}
@@ -312,10 +205,8 @@ function UpdateVehicle() {
                         type="number"
                         name="expectedDays"
                         value={formData.expectedDays}
-                        onChange={handleChange}
-                        min="1"
-                        style={baseInputStyle}
-                        required
+                        style={disabledInputStyle}
+                        disabled
                     />
                 </div>
 
@@ -361,7 +252,6 @@ function UpdateVehicle() {
                         step="0.01"
                         style={baseInputStyle}
                         required
-                        disabled
                     />
                 </div>
 
