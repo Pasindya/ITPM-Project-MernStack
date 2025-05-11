@@ -67,7 +67,7 @@ function Navbar() {
             )}
           </div>
         </li>
-        <li><Link to="/translate">Translate</Link></li>
+        <li><Link to="/translate"></Link></li>
       </ul>
     </nav>
   );
