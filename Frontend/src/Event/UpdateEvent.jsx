@@ -26,7 +26,18 @@ function UpdateEvent() {
     const fetchHandler = async () => {
       try {
         const res = await axios.get(`http://localhost:5000/events/${id}`);
-        setInputs(res.data.event || {});
+        setInputs({
+          FirstName: res.data.event?.FirstName || "",
+          LastName: res.data.event?.LastName || "",
+          City: res.data.event?.City || "",
+          Number: res.data.event?.Number || "",
+          Gmail: res.data.event?.Gmail || "",
+          NumberAdult: res.data.event?.NumberAdult || "",
+          Date: res.data.event?.Date || "",
+          Time: res.data.event?.Time || "",
+          Location: res.data.event?.Location || "",
+          EventCategory: res.data.event?.EventCategory || "",
+        });
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching event data:", error);
@@ -36,36 +47,22 @@ function UpdateEvent() {
     fetchHandler();
   }, [id]);
 
-  const formatPhoneNumber = (value) => {
-    if (!value) return value;
-    
-    // Remove all non-digit characters
-    const phoneNumber = value.replace(/[^\d]/g, '');
-    const phoneNumberLength = phoneNumber.length;
-    
-    if (phoneNumberLength < 4) return phoneNumber;
-    if (phoneNumberLength < 7) {
-      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
-    }
-    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
-  };
+  // You can now delete this function if not used elsewhere
+  const formatPhoneNumber = (value) => value;
 
   const validateForm = () => {
     const newErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^\(\d{3}\) \d{3}-\d{4}$|^\d{10,15}$/;
     const nameRegex = /^[A-Za-z\s]+$/;
     const currentDateTime = new Date();
     const selectedDateTime = inputs.Date && inputs.Time ? 
       new Date(`${inputs.Date}T${inputs.Time}`) : null;
 
-    // Required fields validation
     if (!inputs.FirstName.trim()) newErrors.FirstName = "First name is required";
     if (!inputs.LastName.trim()) newErrors.LastName = "Last name is required";
     if (!inputs.Date) newErrors.Date = "Date is required";
     if (!inputs.Time) newErrors.Time = "Time is required";
 
-    // Name fields validation - letters only
     if (inputs.FirstName.trim() && !nameRegex.test(inputs.FirstName)) {
       newErrors.FirstName = "Only letters and spaces allowed";
     }
@@ -73,7 +70,6 @@ function UpdateEvent() {
       newErrors.LastName = "Only letters and spaces allowed";
     }
 
-    // City and Location validation
     if (inputs.City && /[^a-zA-Z0-9\s\-,.()]/.test(inputs.City)) {
       newErrors.City = "Only letters, numbers, spaces, and basic punctuation (-,.) allowed";
     }
@@ -81,24 +77,11 @@ function UpdateEvent() {
       newErrors.Location = "Only letters, numbers, spaces, and basic punctuation (-,.) allowed";
     }
 
-    // Email validation
     if (inputs.Gmail && !emailRegex.test(inputs.Gmail)) {
       newErrors.Gmail = "Please enter a valid email address";
     }
+    // Phone number validation removed
 
-    // Phone number validation
-    if (inputs.Number) {
-      const cleanNumber = inputs.Number.replace(/[^\d]/g, '');
-      if (!phoneRegex.test(inputs.Number)) {
-        newErrors.Number = "Please enter a valid phone number (10 digits)";
-      } else if (cleanNumber.length < 10) {
-        newErrors.Number = "Phone number must be at least 10 digits";
-      } else if (cleanNumber.length > 15) {
-        newErrors.Number = "Phone number cannot exceed 15 digits";
-      }
-    }
-
-    // Number of adults validation
     if (inputs.NumberAdult) {
       const numAdults = Number(inputs.NumberAdult);
       if (isNaN(numAdults)) {
@@ -112,7 +95,6 @@ function UpdateEvent() {
       newErrors.NumberAdult = "Number of adults is required";
     }
 
-    // Date and Time validation
     if (selectedDateTime) {
       if (selectedDateTime < currentDateTime) {
         newErrors.Date = "Date and time cannot be in the past";
@@ -131,8 +113,6 @@ function UpdateEvent() {
         const now = new Date();
         const selectedTime = new Date(`1970-01-01T${inputs.Time}`);
         const currentTime = new Date(`1970-01-01T${now.getHours()}:${now.getMinutes()}`);
-        
-        // Only validate time if date is today
         if (inputs.Date === new Date().toISOString().split('T')[0] && selectedTime < currentTime) {
           newErrors.Time = "Time cannot be in the past for today's date";
         }
@@ -145,9 +125,7 @@ function UpdateEvent() {
 
   const sendRequest = async () => {
     try {
-      // Clean phone number before sending
       const cleanNumber = inputs.Number.replace(/[^\d]/g, '');
-      
       await axios.put(`http://localhost:5000/events/${id}`, {
         FirstName: inputs.FirstName.trim(),
         LastName: inputs.LastName.trim(),
@@ -169,18 +147,11 @@ function UpdateEvent() {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Special handling for phone number field
     if (name === "Number") {
-      // Only allow numbers and limit length to 15 characters
-      const numericValue = value.replace(/[^0-9]/g, '');
-      if (numericValue.length > 15) return; // Don't update if too long
-      
       setInputs(prev => ({
         ...prev,
-        [name]: formatPhoneNumber(numericValue)
+        [name]: value
       }));
-      
-      // Clear error if exists
       if (errors.Number) {
         setErrors(prev => {
           const newErrors = {...prev};
@@ -191,18 +162,13 @@ function UpdateEvent() {
       return;
     }
 
-    // Special handling for NumberAdult field
     if (name === "NumberAdult") {
-      // Only allow numbers and limit to 3 digits
       const numericValue = value.replace(/[^0-9]/g, '');
       if (numericValue.length > 3) return;
-      
       setInputs(prev => ({
         ...prev,
         [name]: numericValue
       }));
-      
-      // Clear error if exists
       if (errors.NumberAdult) {
         setErrors(prev => {
           const newErrors = {...prev};
@@ -213,9 +179,7 @@ function UpdateEvent() {
       return;
     }
 
-    // Special handling for name fields (FirstName, LastName)
     if (name === "FirstName" || name === "LastName") {
-      // Only allow letters and spaces
       if (value && !/^[A-Za-z\s]*$/.test(value)) {
         setErrors(prev => ({
           ...prev,
@@ -223,13 +187,10 @@ function UpdateEvent() {
         }));
         return;
       }
-      
       setInputs(prev => ({
         ...prev,
         [name]: value
       }));
-
-      // Clear error if exists
       if (errors[name]) {
         setErrors(prev => {
           const newErrors = {...prev};
@@ -240,13 +201,11 @@ function UpdateEvent() {
       return;
     }
 
-    // For other fields
     setInputs(prev => ({
       ...prev,
       [name]: value
     }));
 
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => {
         const newErrors = {...prev};
@@ -438,8 +397,6 @@ function UpdateEvent() {
               placeholder=" "
               value={inputs.Number}
               onChange={handleChange}
-              pattern="[0-9]{10,15}"
-              inputMode="numeric"
               style={{
                 width: '100%',
                 padding: '1.2rem 1.5rem',
@@ -461,7 +418,7 @@ function UpdateEvent() {
               pointerEvents: 'none',
               fontSize: inputs.Number ? '0.9rem' : '1rem'
             }}>
-              Phone Number (e.g., (123) 456-7890)
+              Phone Number
             </label>
             {getError('Number')}
           </div>
@@ -573,83 +530,141 @@ function UpdateEvent() {
             {getError('Time')}
           </div>
 
-          {/* Other fields (City, Email, Location, EventCategory) remain the same */}
-          {/* ... */}
-          <div style={{ position: 'relative' }}>
-                        <input
-                            type="text"
-                            name="Location"
-                            placeholder=" "
-                            value={inputs.Location}
-                            onChange={handleChange}
-                            required
-                            style={{
-                                width: '100%',
-                                padding: '1rem',
-                                border: '2px solid #e0e0e0',
-                                borderRadius: '10px',
-                                fontSize: '1rem',
-                                transition: 'all 0.3s ease',
-                                ':focus': {
-                                    borderColor: '#6a11cb',
-                                    outline: 'none',
-                                    boxShadow: '0 0 0 3px rgba(106, 17, 203, 0.2)'
-                                }
-                            }}
-                        />
-                        <label style={{
-                            position: 'absolute',
-                            left: '1rem',
-                            top: inputs.Location ? '0' : '1rem',
-                            transform: inputs.Location ? 'translateY(-50%) scale(0.9)' : 'none',
-                            background: inputs.Location ? 'white' : 'transparent',
-                            padding: inputs.Location ? '0 0.5rem' : '0',
-                            color: inputs.Location ? '#6a11cb' : '#757575',
-                            transition: 'all 0.2s ease',
-                            pointerEvents: 'none',
-                            fontSize: inputs.Location ? '0.9rem' : '1rem'
-                        }}>
-                            Location
-                        </label>
-                    </div>
+          {/* City */}
+          <div style={{ position: 'relative', marginBottom: '1.5rem' }}>
+            <input
+              type="text"
+              name="City"
+              placeholder=" "
+              value={inputs.City}
+              onChange={handleChange}
+              style={{
+                width: '100%',
+                padding: '1.2rem 1.5rem',
+                border: errors.City ? '2px solid #dc3545' : '2px solid #e0e0e0',
+                borderRadius: '12px',
+                fontSize: '1.1rem',
+                transition: 'all 0.3s ease',
+              }}
+            />
+            <label style={{
+              position: 'absolute',
+              left: '1.5rem',
+              top: inputs.City ? '0' : '1.2rem',
+              transform: inputs.City ? 'translateY(-50%) scale(0.9)' : 'none',
+              background: inputs.City ? 'white' : 'transparent',
+              padding: inputs.City ? '0 0.5rem' : '0',
+              color: errors.City ? '#dc3545' : (inputs.City ? '#6a11cb' : '#757575'),
+              transition: 'all 0.2s ease',
+              pointerEvents: 'none',
+              fontSize: inputs.City ? '0.9rem' : '1rem'
+            }}>
+              City
+            </label>
+            {getError('City')}
+          </div>
 
-                    <div style={{ position: 'relative' }}>
-                        <input
-                            type="text"
-                            name="EventCategory"
-                            placeholder=" "
-                            value={inputs.EventCategory}
-                            onChange={handleChange}
-                            required
-                            style={{
-                                width: '100%',
-                                padding: '1rem',
-                                border: '2px solid #e0e0e0',
-                                borderRadius: '10px',
-                                fontSize: '1rem',
-                                transition: 'all 0.3s ease',
-                                ':focus': {
-                                    borderColor: '#6a11cb',
-                                    outline: 'none',
-                                    boxShadow: '0 0 0 3px rgba(106, 17, 203, 0.2)'
-                                }
-                            }}
-                        />
-                        <label style={{
-                            position: 'absolute',
-                            left: '1rem',
-                            top: inputs.EventCategory ? '0' : '1rem',
-                            transform: inputs.EventCategory ? 'translateY(-50%) scale(0.9)' : 'none',
-                            background: inputs.EventCategory ? 'white' : 'transparent',
-                            padding: inputs.EventCategory ? '0 0.5rem' : '0',
-                            color: inputs.EventCategory ? '#6a11cb' : '#757575',
-                            transition: 'all 0.2s ease',
-                            pointerEvents: 'none',
-                            fontSize: inputs.EventCategory ? '0.9rem' : '1rem'
-                        }}>
-                            Event Category
-                        </label>
-                    </div>
+          {/* Email */}
+          <div style={{ position: 'relative', marginBottom: '1.5rem' }}>
+            <input
+              type="email"
+              name="Gmail"
+              placeholder=" "
+              value={inputs.Gmail}
+              onChange={handleChange}
+              style={{
+                width: '100%',
+                padding: '1.2rem 1.5rem',
+                border: errors.Gmail ? '2px solid #dc3545' : '2px solid #e0e0e0',
+                borderRadius: '12px',
+                fontSize: '1.1rem',
+                transition: 'all 0.3s ease',
+              }}
+            />
+            <label style={{
+              position: 'absolute',
+              left: '1.5rem',
+              top: inputs.Gmail ? '0' : '1.2rem',
+              transform: inputs.Gmail ? 'translateY(-50%) scale(0.9)' : 'none',
+              background: inputs.Gmail ? 'white' : 'transparent',
+              padding: inputs.Gmail ? '0 0.5rem' : '0',
+              color: errors.Gmail ? '#dc3545' : (inputs.Gmail ? '#6a11cb' : '#757575'),
+              transition: 'all 0.2s ease',
+              pointerEvents: 'none',
+              fontSize: inputs.Gmail ? '0.9rem' : '1rem'
+            }}>
+              Email
+            </label>
+            {getError('Gmail')}
+          </div>
+
+          {/* Location */}
+          <div style={{ position: 'relative', marginBottom: '1.5rem' }}>
+            <input
+              type="text"
+              name="Location"
+              placeholder=" "
+              value={inputs.Location}
+              onChange={handleChange}
+              style={{
+                width: '100%',
+                padding: '1.2rem 1.5rem',
+                border: errors.Location ? '2px solid #dc3545' : '2px solid #e0e0e0',
+                borderRadius: '12px',
+                fontSize: '1.1rem',
+                transition: 'all 0.3s ease',
+              }}
+            />
+            <label style={{
+              position: 'absolute',
+              left: '1.5rem',
+              top: inputs.Location ? '0' : '1.2rem',
+              transform: inputs.Location ? 'translateY(-50%) scale(0.9)' : 'none',
+              background: inputs.Location ? 'white' : 'transparent',
+              padding: inputs.Location ? '0 0.5rem' : '0',
+              color: errors.Location ? '#dc3545' : (inputs.Location ? '#6a11cb' : '#757575'),
+              transition: 'all 0.2s ease',
+              pointerEvents: 'none',
+              fontSize: inputs.Location ? '0.9rem' : '1rem'
+            }}>
+              Location
+            </label>
+            {getError('Location')}
+          </div>
+
+          {/* Event Category */}
+          <div style={{ position: 'relative', marginBottom: '1.5rem' }}>
+            <input
+              type="text"
+              name="EventCategory"
+              placeholder=" "
+              value={inputs.EventCategory}
+              onChange={handleChange}
+              style={{
+                width: '100%',
+                padding: '1.2rem 1.5rem',
+                border: errors.EventCategory ? '2px solid #dc3545' : '2px solid #e0e0e0',
+                borderRadius: '12px',
+                fontSize: '1.1rem',
+                transition: 'all 0.3s ease',
+              }}
+            />
+            <label style={{
+              position: 'absolute',
+              left: '1.5rem',
+              top: inputs.EventCategory ? '0' : '1.2rem',
+              transform: inputs.EventCategory ? 'translateY(-50%) scale(0.9)' : 'none',
+              background: inputs.EventCategory ? 'white' : 'transparent',
+              padding: inputs.EventCategory ? '0 0.5rem' : '0',
+              color: errors.EventCategory ? '#dc3545' : (inputs.EventCategory ? '#6a11cb' : '#757575'),
+              transition: 'all 0.2s ease',
+              pointerEvents: 'none',
+              fontSize: inputs.EventCategory ? '0.9rem' : '1rem'
+            }}>
+              Event Category
+            </label>
+            {getError('EventCategory')}
+          </div>
 
           <div style={{ 
             gridColumn: '1 / -1', 
@@ -674,11 +689,7 @@ function UpdateEvent() {
                 boxShadow: '0 4px 15px rgba(106, 17, 203, 0.3)',
                 transition: 'all 0.3s ease',
                 position: 'relative',
-                overflow: 'hidden',
-                ':hover': !isUpdating && {
-                  boxShadow: '0 6px 20px rgba(106, 17, 203, 0.4)',
-                  transform: 'translateY(-2px)'
-                }
+                overflow: 'hidden'
               }}
             >
               {isUpdating ? (
@@ -699,8 +710,6 @@ function UpdateEvent() {
           </div>
         </form>
       </div>
-
-      {/* Inline CSS for animations */}
       <style>{`
         @keyframes fadeInUp {
           from {
