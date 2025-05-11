@@ -126,7 +126,6 @@ const ManageGuiders = () => {
 
   const validateForm = () => {
     const errors = {};
-    if (!currentGuider.nic) errors.nic = "NIC is required.";
     if (!currentGuider.name || !/^[a-zA-Z\s]*$/.test(currentGuider.name))
       errors.name = "Name must only contain letters and spaces.";
     if (!currentGuider.gender) errors.gender = "Gender is required.";
@@ -136,9 +135,29 @@ const ManageGuiders = () => {
       errors.email = "Invalid email address.";
     if (!currentGuider.location) errors.location = "Location is required.";
     if (!currentGuider.bio) errors.bio = "Bio is required.";
-    if (!currentGuider.languages) errors.languages = "Languages are required.";
-    if (!/^\d{9}[Vv]$/.test(currentGuider.nic) && !/^\d{12}$/.test(currentGuider.nic))
-      errors.nic = "NIC must be 9 digits followed by 'V' or 12 digits.";
+    
+    // Enhanced language validation
+    if (!currentGuider.languages) {
+      errors.languages = "Languages are required.";
+    } else {
+      // Split by commas and trim each language
+      const languageArray = currentGuider.languages.split(',').map(lang => lang.trim());
+      
+      // Check if any language is empty after splitting
+      if (languageArray.some(lang => lang === "")) {
+        errors.languages = "Empty language detected (check for extra commas)";
+      }
+      
+      // Check each language for valid characters (letters and spaces)
+      const invalidLanguages = languageArray.filter(
+        lang => !/^[a-zA-Z\s-]+$/.test(lang)
+      );
+      
+      if (invalidLanguages.length > 0) {
+        errors.languages = `Invalid characters in language(s): ${invalidLanguages.join(', ')}`;
+      }
+    }
+    
     if (!/^\d+$/.test(currentGuider.experience)) errors.experience = "Experience must be a number.";
 
     setFormErrors(errors);
@@ -150,14 +169,17 @@ const ManageGuiders = () => {
     if (!validateForm()) return;
 
     const formData = new FormData();
-    formData.append("nic", currentGuider.nic);
     formData.append("name", currentGuider.name);
     formData.append("gender", currentGuider.gender);
     formData.append("contactNumber", currentGuider.contactNumber);
     formData.append("email", currentGuider.email);
     formData.append("location", currentGuider.location);
     formData.append("experience", currentGuider.experience);
-    formData.append("languages", currentGuider.languages);
+    
+    // Convert comma-separated string back to array for the backend
+    const languagesArray = currentGuider.languages.split(',').map(lang => lang.trim());
+    formData.append("languages", JSON.stringify(languagesArray));
+    
     formData.append("bio", currentGuider.bio);
 
     if (selectedImage) {
@@ -607,6 +629,24 @@ const ManageGuiders = () => {
                 </div>
                 <form onSubmit={handleUpdate}>
                   <div style={{ marginBottom: '1rem' }}>
+                    <label style={{ display: 'block', marginBottom: '0.5rem' }}>NIC</label>
+                    <input
+                      type="text"
+                      name="nic"
+                      value={currentGuider.nic}
+                      readOnly
+                      style={{ 
+                        padding: '0.5rem', 
+                        width: '100%', 
+                        borderRadius: '4px', 
+                        border: '1px solid #ccc',
+                        backgroundColor: '#f5f5f5',
+                        cursor: 'not-allowed'
+                      }}
+                    />
+                    <p style={{ color: '#666', fontSize: '0.8rem' }}>NIC cannot be changed</p>
+                  </div>
+                  <div style={{ marginBottom: '1rem' }}>
                     <label style={{ display: 'block', marginBottom: '0.5rem' }}>Name</label>
                     <input
                       type="text"
@@ -621,22 +661,6 @@ const ManageGuiders = () => {
                       }}
                     />
                     {formErrors.name && <p style={{ color: 'red', fontSize: '0.8rem' }}>{formErrors.name}</p>}
-                  </div>
-                  <div style={{ marginBottom: '1rem' }}>
-                    <label style={{ display: 'block', marginBottom: '0.5rem' }}>NIC</label>
-                    <input
-                      type="text"
-                      name="nic"
-                      value={currentGuider.nic}
-                      onChange={handleChange}
-                      style={{ 
-                        padding: '0.5rem', 
-                        width: '100%', 
-                        borderRadius: '4px', 
-                        border: '1px solid #ccc' 
-                      }}
-                    />
-                    {formErrors.nic && <p style={{ color: 'red', fontSize: '0.8rem' }}>{formErrors.nic}</p>}
                   </div>
                   <div style={{ marginBottom: '1rem' }}>
                     <label style={{ display: 'block', marginBottom: '0.5rem' }}>Gender</label>
@@ -713,6 +737,7 @@ const ManageGuiders = () => {
                       name="languages"
                       value={currentGuider.languages}
                       onChange={handleChange}
+                      placeholder="Comma separated list (e.g., English, Sinhala, Tamil)"
                       style={{ 
                         padding: '0.5rem', 
                         width: '100%', 
