@@ -130,7 +130,7 @@ const nationalSymbols = [
   {
     title: "National Architecture",
     name: "Stupa Architecture",
-    image: "/Images/national/stupa.jpg",
+    image: "/Images/national/sthuupa.jpg",
     description: "Sri Lankan stupa architecture represents the pinnacle of Buddhist architectural achievement. The massive white domes, decorated with intricate carvings and surrounded by elaborate moonstones, are unique to Sri Lanka.",
     cultural_significance: "Stupas are not just architectural marvels but sacred monuments housing relics of the Buddha and important Buddhist monks.",
     historical_background: "The development of stupa architecture in Sri Lanka spans over 2,000 years, with each period adding unique elements to the design."
